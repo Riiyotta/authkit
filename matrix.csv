@@ -1,0 +1,20 @@
+section,category,templates,routes,AuthKit homepage (single route)
+chrome.hero-header,CHROME,1,1,x
+chrome.page-separator,CHROME,1,1,x
+chrome.hairline-grid,CHROME,1,1,x
+hero.wordmark,HERO,1,1,x
+hero.headline,HERO,1,1,x
+hero.auth-card-trio,HERO,1,1,x
+hero.light-switch,HERO,1,1,x
+hero.ambient-fx,HERO,1,1,x
+capability.feature-strip,CAPABILITY,1,1,x
+demo.dashboard,PRODUCT_DEMO,1,1,x
+demo.custom-ui-browser,PRODUCT_DEMO,1,1,x
+demo.customiser-pickers,PRODUCT_DEMO,1,1,x
+demo.radix,PRODUCT_DEMO,1,1,x
+demo.security-cards,PRODUCT_DEMO,1,1,x
+demo.complete-diagram,PRODUCT_DEMO,1,1,x
+proof.testimonials,PROOF,1,1,x
+conversion.cta-header,CONVERSION,1,1,x
+conversion.cta-boxes,CONVERSION,1,1,x
+ROUTE COUNT,,,1,1

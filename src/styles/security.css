@@ -1,0 +1,519 @@
+/* ============================================================================
+   security.css — CLONE_SPEC §2.6
+   Resting state + all transitions/keyframes. The `-active` / `-filled` classes,
+   `--step` and the dot-field canvas are the Animation agent's.
+   ========================================================================== */
+
+.security {
+  content-visibility: auto;
+  max-width: 1076px;
+  margin: 0 auto;
+  padding: 80px 16px;
+  position: relative;
+}
+@media (min-width: 940px) {
+  .security {
+    padding: 120px 16px;
+  }
+}
+.security::before {
+  content: '';
+  pointer-events: none;
+  z-index: 10;
+  background: radial-gradient(50% 38.81% at 50% 61.19%, #4b71fa14 0%, #05050b00 100%),
+    radial-gradient(50% 36.46% at 50% 36.46%, #4b71fa14 0%, #05050b00 100%);
+  position: absolute;
+  inset: 0;
+}
+.security .section-header {
+  margin-bottom: 56px;
+}
+.security .section-header-description {
+  max-width: 630px;
+}
+.security .section-header span {
+  display: block;
+}
+.security .section-header-title-h3 :last-child {
+  padding-top: 8px;
+}
+.security-cards {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  display: flex;
+}
+
+.security-card {
+  background: #bad6f703;
+  border-radius: 16px;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 320px;
+  height: 242px;
+  display: flex;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.security-card::before {
+  border: 1px solid var(--blue-6);
+  content: '';
+  border-radius: inherit;
+  pointer-events: none;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.security-card::after {
+  content: '';
+  pointer-events: none;
+  border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 1px 1px #c7d3ea1f, inset 0 24px 48px #c7d3ea0d;
+}
+.security-card-label {
+  text-align: center;
+  width: 100%;
+  color: var(--body-normal);
+  padding-bottom: 24px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.security-card-animation > * {
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+}
+.security-card-bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* --- 1. leaked password protection --------------------------------------- */
+.security-leaked-border {
+  border-radius: 18px;
+  width: 232px;
+  height: 88px;
+  position: absolute;
+  top: 49px;
+  left: 44px;
+  box-shadow: 0 0 16px #babcf752, inset 0 1px 0.5px #bad6f70f;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.6, 0.6, 0, 1);
+}
+.security-leaked-border::before {
+  border-radius: inherit;
+  content: '';
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  padding: 1px;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#bad6f700 0% 100%), linear-gradient(#8ebbff 0%, #bedefc 100%);
+}
+.security-leaked-border-active {
+  opacity: 1;
+}
+.security-leaked-line,
+.security-leaked-radar {
+  border-radius: 6px;
+  width: 208px;
+  height: 64px;
+  position: absolute;
+  top: 61px;
+  left: 56px;
+}
+.security-leaked-line {
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+}
+.security-leaked-line div {
+  background: conic-gradient(at 50% 51.35%, #b9d7f300 0deg 289.4deg, #b9d7f3 318.05deg 360deg),
+    conic-gradient(from 180deg at 50% 51.35%, #b9d7f300 0deg 287.46deg, #b9d7f3 325.02deg 360deg);
+  width: 300px;
+  height: 300px;
+  animation: 10s linear infinite security-leaked-line;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.security-leaked-text {
+  opacity: 0.3;
+  transition: opacity 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  position: absolute;
+  top: 83px;
+  left: 50%;
+  transform: translate(-50%);
+}
+.security-leaked-text-active {
+  opacity: 1;
+}
+.security-leaked-check {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 69px;
+  left: 136px;
+}
+.security-leaked-check img {
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.6, 0.6, 0, 1), opacity 0.6s cubic-bezier(0.6, 0.6, 0, 1);
+  transform: scale(0.9);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+}
+.security-leaked-check img:first-child {
+  transition-delay: 0.3s;
+}
+.security-leaked-check img:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.security-leaked-check img:nth-child(3) {
+  transition-delay: 0s;
+}
+.security-leaked-check img:nth-child(4) {
+  transition-delay: 0.2s;
+}
+.security-leaked-check-active img {
+  opacity: 1;
+  transform: scale(1);
+}
+.security-leaked-radar {
+  isolation: isolate;
+  overflow: hidden;
+}
+.security-leaked-radar-item {
+  opacity: 0.3;
+  width: 150px;
+  height: 64px;
+  position: absolute;
+  top: 0;
+}
+.security-leaked-radar-item:first-child {
+  background: linear-gradient(90deg, #bad6f700 0, #bad6f77a 25%, #bad6f700 25.1%);
+  left: -150px;
+}
+.security-leaked-radar-item:nth-child(2) {
+  background: linear-gradient(270deg, #bad6f700 0, #bad6f77a 25%, #bad6f700 25.1%);
+  right: -150px;
+}
+.security-leaked-radar-item-active {
+  transition: transform 3s cubic-bezier(0.6, 0.6, 0, 1);
+}
+.security-leaked-radar-item-active:first-child {
+  transform: translate(358px);
+}
+.security-leaked-radar-item-active:nth-child(2) {
+  transform: translate(-358px);
+}
+
+/* --- 2. role-based access control ---------------------------------------- */
+.security-rbac {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 32px;
+  display: flex;
+}
+.security-rbac__card-reader {
+  width: 100px;
+  height: 144px;
+  position: relative;
+}
+.security-rbac__display {
+  font-family: var(--font-dot-digital);
+  text-align: center;
+  letter-spacing: 1.5px;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #b6d9fc;
+  text-shadow: 0 0 4px #bbd0f7;
+  opacity: 0.4;
+  width: 100%;
+  padding-left: 4px;
+  font-size: 15px;
+  position: absolute;
+  top: 25px;
+}
+.security-rbac__buttons {
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  gap: 6px;
+  display: grid;
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+}
+.security-rbac__button {
+  position: relative;
+}
+.security-rbac__button-shape {
+  color: #bbd0f7;
+  filter: drop-shadow(0 0 4px #bbd0f7);
+  opacity: 0.4;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.security-rbac__card-container {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000, #000 50%, transparent);
+  mask-image: linear-gradient(90deg, #000, #000 50%, transparent);
+}
+.anim2 .security-rbac__card-container {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 20% 50%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 20% 50%, transparent);
+}
+.security-rbac__card {
+  position: absolute;
+  top: 65px;
+  transform: translate(-100%);
+}
+.security-rbac__card-light {
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  left: -37px;
+}
+.security-rbac__dots {
+  transform-origin: 0 0;
+  opacity: 0;
+  width: 40%;
+  height: 150%;
+  position: absolute;
+  top: 7%;
+  left: 15%;
+  transform: scale(0.5);
+  -webkit-mask-image: radial-gradient(farthest-side at 100%, #000, transparent);
+  mask-image: radial-gradient(farthest-side at 100%, #000, transparent);
+}
+.security-rbac__dots canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+/* --- 3. password strength validation ------------------------------------- */
+.security-password-border {
+  opacity: 0;
+  border-radius: 18px;
+  width: 232px;
+  height: 108px;
+  transition: opacity 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  position: absolute;
+  top: 38px;
+  left: 44px;
+  box-shadow: 0 0 16px #c8fdd752, inset 0 1px 0.5px #bad6f70f;
+}
+.security-password-border::before {
+  border-radius: inherit;
+  content: '';
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  background: linear-gradient(#c9ffd5 0%, #caf1fd 100%);
+  padding: 1px;
+  position: absolute;
+  inset: 0;
+}
+.security-password-border-active {
+  opacity: 1;
+}
+.security-password-text {
+  width: 208px;
+  height: 64px;
+  position: absolute;
+  top: 50px;
+  left: 56px;
+  -webkit-mask-image: linear-gradient(transparent, #fff, transparent);
+  mask-image: linear-gradient(transparent, #fff, transparent);
+}
+.security-password-text img {
+  transform: translateY(calc(22px + var(--step) * -28px));
+  transition: transform 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+}
+.security-password-bars {
+  z-index: 1;
+  gap: 16px;
+  display: flex;
+  position: absolute;
+  top: 126px;
+  left: 60px;
+}
+.security-password-bars-item {
+  width: 38px;
+  height: 4px;
+}
+.security-password-bars-item div {
+  opacity: 0;
+  background: linear-gradient(90deg, #fe90be 0%, #ff9595 100%);
+  border-radius: 99px;
+  width: 0%;
+  height: 100%;
+  transition: width 1s cubic-bezier(0.6, 0.6, 0, 1), opacity 1s cubic-bezier(0.6, 0.6, 0, 1);
+  position: relative;
+  box-shadow: 0 0 6px #ff9a8c52;
+}
+.security-password-bars-item div::before,
+.security-password-bars-item div::after {
+  content: '';
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.6, 0.6, 0, 1);
+  position: absolute;
+  inset: 0;
+}
+.security-password-bars-item div::before {
+  background: linear-gradient(90deg, #fdd6ca 0%, #fff0c9 100%);
+}
+.security-password-bars-item div::after {
+  background: linear-gradient(90deg, #caf1fd 0%, #c9ffd5 100%);
+}
+.security-password-bars-item-active div {
+  opacity: 1;
+  width: 100%;
+}
+.security-password-bars-orange .security-password-bars-item-active div {
+  box-shadow: 0 0 6px #ffd18c52;
+}
+.security-password-bars-orange .security-password-bars-item-active div::before {
+  opacity: 1;
+}
+.security-password-bars-green .security-password-bars-item-active div {
+  box-shadow: 0 0 6px #c8fdd752;
+}
+.security-password-bars-green .security-password-bars-item-active div::after {
+  opacity: 1;
+}
+
+/* --- 4. automatic spam and bot detection -------------------------------- */
+.security-automatic-radar {
+  animation: 40s linear infinite security-automatic-radar;
+  position: absolute;
+  top: -146px;
+  left: 14px;
+}
+.security-automatic-dots div {
+  opacity: 0;
+  background: linear-gradient(#ed98ef33, #fde9ca33);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  box-shadow: 0 0 12px #ed98ef52;
+}
+.security-automatic-dots div::before {
+  border-radius: inherit;
+  content: '';
+  background: linear-gradient(#ed98ef, #fde9ca);
+  position: absolute;
+  inset: 4px;
+}
+.security-automatic-dots div:first-child {
+  animation: 40s linear infinite dot-animation-1;
+  top: 16px;
+  right: 34px;
+}
+.security-automatic-dots div:nth-child(2) {
+  animation: 40s linear infinite dot-animation-2;
+  top: 61px;
+  right: 96px;
+}
+.security-automatic-dots div:nth-child(3) {
+  animation: 40s linear infinite dot-animation-3;
+  top: 93px;
+  left: 127px;
+}
+.security-automatic-dots div:nth-child(4) {
+  animation: 40s linear infinite dot-animation-4;
+  top: 44px;
+  left: 105px;
+}
+.security-automatic-dots div:nth-child(5) {
+  animation: 40s linear infinite dot-animation-5;
+  top: 27px;
+  left: 39px;
+}
+
+/* --- 5. multi-factor authentication ------------------------------------- */
+.security-multi-box {
+  width: 220px;
+  height: 70px;
+  position: absolute;
+  top: 52px;
+  left: 50px;
+}
+.security-multi-box-inputs {
+  z-index: 1;
+  gap: 6px;
+  display: flex;
+  position: absolute;
+  top: 11px;
+  left: 11px;
+}
+.security-multi-box-inputs-item {
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 48px;
+  transition: box-shadow 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  display: flex;
+  position: relative;
+  box-shadow: inset 0 -6px 12px #c7d3ea0d, inset 0 1px 1px #c7d3ea1f;
+}
+.security-multi-box-inputs-item::before {
+  border-radius: inherit;
+  content: '';
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  background: linear-gradient(#8ebbff 0%, #bedefc 100%), linear-gradient(#bad7f71f, #bad7f71f);
+  padding: 1px;
+  transition: opacity 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  position: absolute;
+  inset: 0;
+}
+.security-multi-box-inputs-item div {
+  background: linear-gradient(#8ebbff 0%, #bedefc 100%);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  transition: opacity 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  box-shadow: 0 0 12px #bacff7b8, inset 0 1px 0.5px #bad6f70f;
+}
+.security-multi-box-inputs-item:not(.security-multi-box-inputs-item-active) {
+  box-shadow: inset 0 -6px 12px #c7d3ea00, inset 0 1px 1px #c7d3ea00;
+}
+.security-multi-box-inputs-item:not(.security-multi-box-inputs-item-active)::before,
+.security-multi-box-inputs-item:not(.security-multi-box-inputs-item-filled) div {
+  opacity: 0;
+}

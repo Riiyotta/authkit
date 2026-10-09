@@ -1,0 +1,324 @@
+/* ============================================================================
+   complete.css — CLONE_SPEC §2.7
+   ========================================================================== */
+
+.complete {
+  content-visibility: auto;
+  padding-top: 148px;
+  padding-bottom: 154px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding-inline: 16px;
+  display: flex;
+  position: relative;
+}
+.complete .section-header-description {
+  max-width: 560px;
+}
+.complete-inner {
+  width: 1440px;
+  min-width: 1440px;
+  height: 1072px;
+  min-height: 1072px;
+  margin: 0 auto 500px;
+  position: absolute;
+  top: 0;
+}
+.complete-inner::before {
+  content: '';
+  pointer-events: none;
+  z-index: 10000;
+  background: radial-gradient(50% 38.81% at 50% 61.19%, #4b71fa0f 0%, #05050b00 100%),
+    radial-gradient(50% 36.46% at 50% 36.46%, #4b71fa1f 0%, #05050b00 100%);
+  position: absolute;
+  inset: 0;
+}
+.complete-inner > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* --- the rotating halo --------------------------------------------------- */
+.complete-line {
+  pointer-events: none;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  position: absolute;
+  top: 426.5px;
+  left: 376px;
+}
+.complete-line div {
+  background: conic-gradient(at 50.12%, #9ac2ef00 0deg, #9ac2ef80 60deg, #9ac2ef00 60.1deg),
+    conic-gradient(at 50.12%, #9ac2ef00 190deg, #9ac2ef80 250deg, #9ac2ef00 250.1deg), #bbd7f70f;
+  width: 800px;
+  height: 800px;
+  animation: 30s linear infinite complete-line;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- badge chips --------------------------------------------------------- */
+.complete-badge {
+  font-size: 12px;
+  line-height: 16px;
+  color: #d1e4fa;
+  text-shadow: 0 -4px 6px #d1e4fa40;
+  background: #05060f;
+  border-radius: 6px;
+  padding: 4px 8px;
+  position: absolute;
+  box-shadow: inset -0.5px 0.5px 1px #c7d3ea1f, inset 0 0 96px #bad7f714;
+}
+.complete-badge::before {
+  border: 1px solid var(--blue-6);
+  content: '';
+  border-radius: inherit;
+  pointer-events: none;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.complete-badge:first-child {
+  top: 416px;
+  left: 525px;
+}
+.complete-badge:nth-child(2) {
+  top: 416px;
+  right: 541px;
+}
+.complete-badge:nth-child(3) {
+  top: 765px;
+  left: 480px;
+}
+.complete-badge:nth-child(4) {
+  top: 765px;
+  left: 669px;
+}
+.complete-badge:nth-child(5) {
+  top: 765px;
+  right: 488px;
+}
+.complete-button {
+  margin: 530px auto 0 !important;
+  display: block !important;
+}
+@media (max-width: 1199px) {
+  .complete {
+    padding-top: 88px;
+    padding-bottom: 78px;
+  }
+  .complete-inner::before {
+    background: radial-gradient(100.31% 38.81% at 50% 61.19%, #4b71fa0f 0%, #05050b00 100%),
+      radial-gradient(94.23% 36.46% at 50% 36.46%, #4b71fa1f 0%, #05050b00 100%);
+    width: 100vw;
+    height: 1008px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .complete-badge:first-child {
+    left: 561px;
+  }
+  .complete-badge:nth-child(2) {
+    right: 595px;
+  }
+  .complete-badge:nth-child(3) {
+    left: 548px;
+  }
+  .complete-badge:nth-child(4) {
+    left: 675px;
+  }
+  .complete-badge:nth-child(5) {
+    right: 554px;
+  }
+}
+
+/* --- user node ----------------------------------------------------------- */
+.complete-user {
+  position: absolute;
+  top: 517px;
+  left: 512px;
+}
+.complete-user-row {
+  align-items: flex-end;
+  gap: 26px;
+  height: 20px;
+  display: flex;
+}
+.complete-user-row:not(:last-child) {
+  margin-bottom: 10px;
+}
+.complete-user-progress {
+  background: #bacff7;
+  border-radius: 2px;
+  width: 4px;
+  transition: height 0.45s cubic-bezier(0.6, 0.6, 0, 1);
+  box-shadow: 0 0 6px #bacff752;
+}
+.complete-user-dots {
+  gap: 12px;
+  margin-bottom: 8px;
+  display: flex;
+}
+.complete-user-dots div {
+  background: #bacff7;
+  border-radius: 2px;
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 6px #bacff752;
+}
+
+/* --- social node --------------------------------------------------------- */
+.complete-social {
+  flex-wrap: wrap;
+  gap: 0 2px;
+  width: 100px;
+  display: flex;
+  position: absolute;
+  top: 513px;
+  left: 812px;
+}
+.complete-social img {
+  opacity: 0;
+  animation: 5s cubic-bezier(0.6, 0.6, 0, 1) infinite complete-social-breath;
+}
+.complete-social img:nth-child(n + 4) {
+  margin-top: -3px;
+}
+.complete-social img:first-child {
+  animation-delay: 0s;
+}
+.complete-social img:nth-child(2) {
+  animation-delay: 3s;
+}
+.complete-social img:nth-child(3) {
+  animation-delay: 3.75s;
+}
+.complete-social img:nth-child(4) {
+  animation-delay: 1.5s;
+}
+.complete-social img:nth-child(5) {
+  animation-delay: 0.75s;
+}
+.complete-social img:nth-child(6) {
+  animation-delay: 2.25s;
+}
+
+/* --- multi node ---------------------------------------------------------- */
+.complete-multi {
+  z-index: 1;
+  position: absolute;
+  top: 657px;
+  left: 483px;
+}
+.complete-multi-dots {
+  gap: 17px;
+  display: flex;
+}
+.complete-multi-dots div {
+  background: #bacff7;
+  border-radius: 2px;
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 6px #bacff752;
+}
+.complete-multi-line {
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  position: absolute;
+  top: -16.5px;
+  left: -11.5px;
+}
+.complete-multi-line::before {
+  content: '';
+  background: conic-gradient(from 5deg, transparent 280deg, #98c0ef 360deg, transparent 361deg);
+  width: 120px;
+  height: 120px;
+  animation: 5s linear infinite complete-multi-border;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-25%, -50%) rotate(225deg);
+}
+
+/* --- single node --------------------------------------------------------- */
+.complete-single {
+  z-index: 1;
+  position: absolute;
+  top: 643px;
+  left: 653px;
+}
+.complete-single-lines {
+  position: absolute;
+}
+.complete-single-lines:nth-child(2) {
+  transform: scaleX(-1) translate(-111%);
+}
+.complete-single-line {
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  position: absolute;
+  top: 6px;
+  left: 9px;
+}
+.complete-single-line:nth-child(2) {
+  filter: blur(10px);
+}
+.complete-single-line::before {
+  content: '';
+  background-image: linear-gradient(#98c0ef 0%, transparent 100%);
+  width: 50px;
+  height: 50px;
+  animation: 10s cubic-bezier(0.6, 0.6, 0, 1) infinite complete-single-line;
+  position: absolute;
+  transform: translate(50px, 50px) rotate(-45deg);
+}
+.complete-single-overlay {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 136.5px;
+  height: 61.5px;
+}
+
+/* --- directory node ------------------------------------------------------ */
+.complete-directory {
+  z-index: 1;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: 44px;
+  width: 89px;
+  height: 49px;
+  padding: 1px;
+  position: absolute;
+  top: 637px;
+  left: 858px;
+}
+.complete-directory::before {
+  content: '';
+  background: conic-gradient(from 5deg, transparent 280deg, #98c0ef 360deg, transparent 361deg);
+  width: 100px;
+  height: 100px;
+  animation: 5s linear infinite complete-directory;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,140 @@
+/* ============================================================================
+   testimonials.css — CLONE_SPEC §2.8
+   Note: the base `.testimonials-list-item` padding carries !important, so the
+   ≤996px 32px/24px override never wins — the measured 48px/40px is replicated.
+   ========================================================================== */
+
+.testimonials {
+  content-visibility: auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-block: 80px;
+  padding-inline: 16px;
+  position: relative;
+}
+@media (min-width: 640px) {
+  .testimonials {
+    padding-block: 160px 80px;
+  }
+}
+
+.testimonials-list {
+  max-width: 996px;
+  color: var(--body-loud);
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+.testimonials-list-item {
+  flex-direction: column;
+  width: 50%;
+  height: 384px;
+  align-items: unset !important;
+  padding: 48px 40px !important;
+  display: flex !important;
+}
+.testimonials-list-item svg,
+.testimonials-list-item-logo {
+  filter: drop-shadow(0 2px 16px #aecff23d);
+  margin-bottom: 56px;
+}
+.testimonials-list-item-content {
+  flex: 1;
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.testimonials-list-item-author {
+  align-items: center;
+  gap: 20px;
+  display: flex;
+  font-size: 14px;
+  line-height: 20px;
+}
+.testimonials-list-item-author-avatar {
+  border-radius: 50%;
+}
+.testimonials-list-item-author-title {
+  color: var(--body-muted);
+}
+
+@media (min-width: 996px) {
+  .testimonials-list-borders div {
+    position: absolute;
+  }
+  .testimonials-list-borders div:first-child,
+  .testimonials-list-borders div:nth-child(2) {
+    background: linear-gradient(90deg, #bacff700 0%, #bacff714 25% 75%, #bacff700 100%);
+    width: 100%;
+    height: 1px;
+    left: 0;
+  }
+  .testimonials-list-borders div:first-child {
+    top: 0;
+  }
+  .testimonials-list-borders div:nth-child(2) {
+    bottom: 0;
+  }
+  .testimonials-list-borders div:nth-child(3),
+  .testimonials-list-borders div:nth-child(4),
+  .testimonials-list-borders div:nth-child(5) {
+    background: linear-gradient(#bacff700 0%, #bacff714 25% 75%, #bacff700 100%);
+    width: 1px;
+    height: 100%;
+    top: 0;
+  }
+  .testimonials-list-borders div:nth-child(3) {
+    left: 0;
+  }
+  .testimonials-list-borders div:nth-child(4) {
+    left: 50%;
+  }
+  .testimonials-list-borders div:nth-child(5) {
+    right: 0;
+  }
+}
+@media (max-width: 996px) {
+  .testimonials-list {
+    flex-direction: column;
+    max-width: 668px;
+  }
+  .testimonials-list-item {
+    width: 100%;
+    height: auto;
+    padding: 32px 24px;
+  }
+  .testimonials-list-borders div {
+    position: absolute;
+  }
+  .testimonials-list-borders div:first-child,
+  .testimonials-list-borders div:nth-child(2),
+  .testimonials-list-borders div:nth-child(3) {
+    background: linear-gradient(90deg, #bacff700 0%, #bacff714 25% 75%, #bacff700 100%);
+    width: 486px;
+    height: 1px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .testimonials-list-borders div:first-child {
+    top: 0;
+  }
+  .testimonials-list-borders div:nth-child(2) {
+    top: 50%;
+  }
+  .testimonials-list-borders div:nth-child(3) {
+    bottom: 0;
+  }
+  .testimonials-list-borders div:nth-child(4),
+  .testimonials-list-borders div:nth-child(5) {
+    background: linear-gradient(#bacff700 0%, #bacff714 25% 75%, #bacff700 100%);
+    width: 1px;
+    height: 100%;
+    top: 0;
+  }
+  .testimonials-list-borders div:nth-child(4) {
+    left: 0;
+  }
+  .testimonials-list-borders div:nth-child(5) {
+    right: 0;
+  }
+}

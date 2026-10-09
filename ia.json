@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "source": "https://www.authkit.com/ — local pixel-fidelity clone at /Users/riyaghosh/V3/authkit (React 18 + Vite + Tailwind v3). Structure derived from the clone's own source (src/App.jsx SECTIONS array + the nine section components), cross-checked against CLONE_SPEC.md §2.",
+    "status": "measured-from-codebase",
+    "totalRoutes": 1,
+    "totalTemplates": 1,
+    "notes": "Single-route site. Verified against the live original: no sitemap.xml, no robots.txt, every href is off-domain, and 15 probed candidate routes (/docs /pricing /blog /about /login /signup /features /security /changelog /legal /privacy /terms /contact /customers /enterprise) all return 404. Only / returns 200. The IA's value here is the section-and-component inventory, not route coverage."
+  },
+  "categories": {
+    "CHROME": "Structural furniture that frames content rather than being content: the static header, the inter-section rule, the hero's hairline grid tracks.",
+    "HERO": "Above-the-fold identity and product-preview blocks living inside the hero's 17x14 hairline grid.",
+    "CAPABILITY": "Compact enumeration of product capabilities as icon+label tiles.",
+    "PRODUCT_DEMO": "Full-width animated demonstrations of a product behaviour, each driven by an IntersectionObserver sequence.",
+    "PROOF": "Third-party credibility blocks — customer quotes and logos.",
+    "CONVERSION": "Closing call-to-action blocks."
+  },
+  "sections": {
+    "chrome.hero-header": {
+      "category": "CHROME",
+      "description": "Static top bar inside the hero grid: WorkOS mark, 'powered by' wordmark and a GitHub link. Deliberately position:static with no scroll behaviour, no blur and no sticky state.",
+      "scope": "The single homepage template. There is no <nav> element on this site.",
+      "implementedBy": "Hero.jsx (.hero__header) + icons.jsx > PoweredByWordmark, HeroMarkIcon, GithubIcon"
+    },
+    "chrome.page-separator": {
+      "category": "CHROME",
+      "description": "1px --blue-6 horizontal rule placed between sections. Rendered before radix, security, complete and testimonials only — four of the nine section boundaries carry it.",
+      "scope": "Emitted by the App shell at 4 of 8 inter-section boundaries on the homepage template.",
+      "implementedBy": "primitives.jsx > PageSeparator (driven by separatorBefore in App.jsx SECTIONS)"
+    },
+    "chrome.hairline-grid": {
+      "category": "CHROME",
+      "description": "The hero's visible 1px grid tracks: six vertical lines, horizontal lines, wide lines and two cross marks. Reproduces the original's track bug verbatim — the stylesheet declares areas vs-line-1/2 while the DOM uses v-line-5/6, so two lines auto-place.",
+      "scope": "Hero only, on the homepage template.",
+      "implementedBy": "Hero.jsx (.hero__vlines, .hero__hline, .hero__wlines, .hero__cross)"
+    },
+    "hero.wordmark": {
+      "category": "HERO",
+      "description": "The AuthKit logotype in a 512x135 outlined box, 476x106 SVG inside.",
+      "scope": "Hero only.",
+      "implementedBy": "Hero.jsx (.hero__logo) + primitives.jsx > OutlineBox"
+    },
+    "hero.headline": {
+      "category": "HERO",
+      "description": "'Introducing' eyebrow plus the 512x87 headline block in an outlined box.",
+      "scope": "Hero only.",
+      "implementedBy": "Hero.jsx (.hero__introducing, .hero__headline) + primitives.jsx > Eyebrow, OutlineBox"
+    },
+    "hero.auth-card-trio": {
+      "category": "HERO",
+      "description": "Three staggered sign-in card previews (344x386, 392x459, 344x386) at x=100/444/836, each wrapped in a JS-driven tilt hook. Rendered from one shared card component, not three copies.",
+      "scope": "Hero only — but the same component also renders the customiser preview, giving 4 instances site-wide.",
+      "implementedBy": "AuthCard.jsx (mapped over CARDS in Hero.jsx)"
+    },
+    "hero.light-switch": {
+      "category": "HERO",
+      "description": "Role=switch light/dark toggle. Flips data-state and adds .light to the card subtree, swapping card/button/input appearances via the class cascade rather than forked components. Thumb travels translateX(116px) over 0.6s cubic-bezier(.165,.84,.44,1); enters on a 2.1s delay.",
+      "scope": "Hero only. The one piece of real stateful UI outside the customiser.",
+      "implementedBy": "Hero.jsx (.hero__light-switch) + icons.jsx > MoonIcon, SunIcon"
+    },
+    "hero.ambient-fx": {
+      "category": "HERO",
+      "description": "Non-interactive atmosphere: three spotlights with per-instance --rotate/--scale/--duration, a one-shot 2.669s flare video (740x300, no loop), and a 1280x1222 particle canvas at opacity .5.",
+      "scope": "Hero only. The sole prefers-reduced-motion carve-out in the original covers the spotlights.",
+      "implementedBy": "Hero.jsx (.hero__spotlights, .hero__video, .hero__canvas)"
+    },
+    "capability.feature-strip": {
+      "category": "CAPABILITY",
+      "description": "Six 48x48 icon+label tiles (SSO, Password, Multi-Factor Auth, Social Login, RBAC, Magic Auth) in a 788x80 strip. One-shot entrance with a 1.2s stagger step via --delay:calc(var(--i)*1.2s), gated by --play-state until first intersection. Not a carousel.",
+      "scope": "Its own section on the homepage template, directly below the hero.",
+      "implementedBy": "FeaturesSlider.jsx + primitives.jsx > FeatureTile"
+    },
+    "demo.dashboard": {
+      "category": "PRODUCT_DEMO",
+      "description": "1032px-tall node diagram in a 1440 wrapper: application, auth, work, user, events and database nodes joined by five masked connector lines. Nine database bars at 2px resting; per-dot typewriter delays of 0.2s + 0.1s x index.",
+      "scope": "One of five product-demo sections on the homepage template.",
+      "implementedBy": "Dashboard.jsx"
+    },
+    "demo.custom-ui-browser": {
+      "category": "PRODUCT_DEMO",
+      "description": "1040x1248 section with a 992px faux-browser chrome containing a live auth-card preview, plus its own canvas and five decorative opacity:.75 PNG cards.",
+      "scope": "Homepage template. Hosts the customiser pickers.",
+      "implementedBy": "CustomUI.jsx"
+    },
+    "demo.customiser-pickers": {
+      "category": "PRODUCT_DEMO",
+      "description": "Twelve interactive buttons in three pickers driving the card preview: 4 colour swatches to --brand-color (#663AF3 default), 4 radii (0/3px/6/9999px) to --brand-radius, and a 4-up logo picker to --i, which offsets a single SVG sprite via object-position:calc(32px * var(--i) * -1).",
+      "scope": "Inside the custom-UI section only. The second of two genuinely stateful widgets on the site.",
+      "implementedBy": "CustomUI.jsx (.color-picker__colors, .border-radius__items, .logo-picker__items)"
+    },
+    "demo.radix": {
+      "category": "PRODUCT_DEMO",
+      "description": "1177x399 component-kit image above a 560x833 layered logo reveal (stroke, main, blender, three masked line items). Carries desktop and mobile heading variants — the only section that does.",
+      "scope": "Homepage template.",
+      "implementedBy": "Radix.jsx + primitives.jsx > SectionHeader, BetweenLines, GlowingButton"
+    },
+    "demo.security-cards": {
+      "category": "PRODUCT_DEMO",
+      "description": "1044x492 grid of four 320x242 animated cards — leaked-password radar, password-strength bars, automatic-detection radar, and the multi/RBAC box with its dot-matrix readout. Each has its own observer-driven -active sequence.",
+      "scope": "Homepage template.",
+      "implementedBy": "Security.jsx + primitives.jsx > SectionHeader"
+    },
+    "demo.complete-diagram": {
+      "category": "PRODUCT_DEMO",
+      "description": "Composite diagram with masked halo, multi and single line overlays, a directory block, social row, and a six-dot user progress column.",
+      "scope": "Homepage template.",
+      "implementedBy": "Complete.jsx + primitives.jsx > SectionHeader, GlowingButton"
+    },
+    "proof.testimonials": {
+      "category": "PROOF",
+      "description": "Two 498x384 quote cells in a 996px bordered row, each with a company mark, quote body and a 40x40 circular avatar with name and role.",
+      "scope": "Homepage template. The only third-party-content section.",
+      "implementedBy": "Testimonials.jsx + primitives.jsx > OutlineBox"
+    },
+    "conversion.cta-header": {
+      "category": "CONVERSION",
+      "description": "Closing gradient h2 with description, using the shared section-header type scale.",
+      "scope": "CTA section on the homepage template.",
+      "implementedBy": "Cta.jsx (.cta-header) + primitives.jsx > SectionHeader"
+    },
+    "conversion.cta-boxes": {
+      "category": "CONVERSION",
+      "description": "Two 442x332 dotted outline boxes (hosted AuthKit and the GitHub/X links) above a 450x100 action row of glowing buttons. All destination hrefs are deliberately inert.",
+      "scope": "CTA section on the homepage template.",
+      "implementedBy": "Cta.jsx (.cta-boxes, .cta-actions) + primitives.jsx > OutlineBox, GlowingButton + icons.jsx > XGlyph"
+    }
+  },
+  "templates": [
+    {
+      "id": "template.homepage",
+      "name": "AuthKit homepage (single route)",
+      "routeCount": 1,
+      "routes": ["/"],
+      "routePattern": null,
+      "chrome": "minimal-static",
+      "sections": [
+        "chrome.hairline-grid",
+        "chrome.hero-header",
+        "hero.wordmark",
+        "hero.headline",
+        "hero.auth-card-trio",
+        "hero.light-switch",
+        "hero.ambient-fx",
+        "capability.feature-strip",
+        "demo.dashboard",
+        "demo.custom-ui-browser",
+        "demo.customiser-pickers",
+        "chrome.page-separator",
+        "demo.radix",
+        "demo.security-cards",
+        "demo.complete-diagram",
+        "proof.testimonials",
+        "conversion.cta-header",
+        "conversion.cta-boxes"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+/* ============================================================================
+   index.css — single source for: @font-face, the :root design tokens,
+   @property, every @keyframes (all 29 from the original stylesheet), and the
+   two shared glow primitives (.glowing-button / .card-animated).
+   Nothing in src/styles/*.css redefines a colour, a timing or a keyframe.
+   Token values are mirrored in tailwind.config.js.
+   ========================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- substitute faces, self-hosted from public/fonts (CLONE_SPEC §0) -------
+   Inter → Untitled Sans (UI), Instrument Sans → aeonikPro (display),
+   Share Tech Mono → Enhanced Dot Digital-7 (the 15px RBAC readout).
+   The three commercial originals are deliberately not shipped. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/share-tech-mono-latin.woff2') format('woff2');
+}
+
+/* metric-override fallbacks, copied verbatim from the original (§0) — these
+   keep the substitutes from shifting layout vs. the commercial faces. */
+@font-face {
+  font-family: 'aeonikPro Fallback';
+  src: local(Arial);
+  ascent-override: 90.63%;
+  descent-override: 20.24%;
+  line-gap-override: 0%;
+  size-adjust: 103.71%;
+}
+@font-face {
+  font-family: 'dotDigital Fallback';
+  src: local(Arial);
+  ascent-override: 67.2%;
+  descent-override: 22.4%;
+  line-gap-override: 0%;
+  size-adjust: 111.61%;
+}
+
+/* --- design tokens (CLONE_SPEC §1) --------------------------------------- */
+:root {
+  --dark-background: #05060f;
+  --body-normal: #c8d4eac7;
+  --body-loud: #c7d3ea;
+  --body-muted: #c7d3eaa3;
+  --blue-loud: #232425;
+  --blue-6: #bad6f70f;
+  --blue-12: #bad7f71f;
+  --blue-24: #bad6f73d;
+  --blue-90: #bad6f7e6;
+  --gradient-background-6: linear-gradient(0deg, #d8ecf80f 0%, #98c0ef0f 100%);
+  --gradient-loud-100: linear-gradient(0deg, #d8ecf8 0%, #98c0ef 100%);
+  --gradient-subdued-12: linear-gradient(0deg, #d8ecf81f 0%, #98c0ef1f 100%);
+
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-display: 'Instrument Sans', 'aeonikPro Fallback', Arial, sans-serif;
+  --font-dot-digital: 'Share Tech Mono', 'dotDigital Fallback', Arial, monospace;
+
+  /* the house easings (§3.3) */
+  --ease-house: cubic-bezier(0.6, 0.6, 0, 1);
+  --ease-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@property --cta-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ============================================================================
+   Shared glow primitive 1 — .glowing-button (§3.1)
+   Used 5x: hero Get-started, hero GitHub icon, radix, complete, cta.
+   ========================================================================== */
+.glowing-button {
+  --line-width: 1px;
+  --line-color: #c2ccff;
+  --line-opacity: 1;
+  --duration: 6s;
+  --easing: linear;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  position: relative;
+  background: radial-gradient(31.2% 40.91% at 50% 151.14%, #bad6f714 0%, #bad6f700 100%), #bad6f70f;
+  box-shadow: inset 0 0 0 1px #bad7f71f;
+  transition: all 0.2s ease-out, outline, outline-offset;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  isolation: isolate;
+}
+.glowing-button-medium {
+  --line-opacity: 0.2;
+  --duration: 16s;
+  height: 36px;
+  padding-inline: 16px;
+  font-size: 14px;
+  line-height: 36px;
+}
+.glowing-button-large {
+  height: 44px;
+  padding-inline: 32px;
+  font-size: 18px;
+  line-height: 44px;
+}
+/* travelling sparkle layer */
+.glowing-button::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  z-index: 10;
+  opacity: 0.5;
+  transition: opacity 1s ease-out;
+  pointer-events: none;
+  background: conic-gradient(from var(--angle), transparent 0%, var(--line-color) 40%, transparent 40%);
+  -webkit-mask-image: radial-gradient(#fff 3%, transparent 3%), radial-gradient(#ffffff80 3%, transparent 3%);
+  mask-image: radial-gradient(#fff 3%, transparent 3%), radial-gradient(#ffffff80 3%, transparent 3%);
+  -webkit-mask-position: 0 0, 15px 15px;
+  mask-position: 0 0, 15px 15px;
+  -webkit-mask-size: 30px 30px;
+  mask-size: 30px 30px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  animation: line-anim var(--duration, 6s) infinite, sky-anim 2s var(--easing) infinite;
+}
+/* bottom bloom, hover only */
+.glowing-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 10;
+  opacity: 0;
+  mix-blend-mode: hard-light;
+  transition: opacity 1s ease-out;
+  pointer-events: none;
+  background: radial-gradient(farthest-side at 50% 100%, var(--line-color), transparent);
+}
+/* note: at size-medium --line-opacity is .2, so the sparkle *dims* on hover.
+   That is the original's behaviour, not a bug. */
+.glowing-button:hover::after {
+  opacity: min(calc(var(--line-opacity) * 0.75), 0.5);
+}
+.glowing-button:hover::before {
+  opacity: var(--line-opacity);
+}
+.glowing-button:focus-visible {
+  outline: 2px solid #c2ccff4d;
+}
+/* the rotating border ring */
+.glowing-button .effect {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  filter: drop-shadow(0 0 5px var(--line-color));
+  pointer-events: none;
+}
+.glowing-button .effect::before,
+.glowing-button .effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--line-width);
+  background: conic-gradient(from var(--angle), transparent 0%, var(--line-color) 40%, transparent 45%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: line-anim var(--duration, 6s) var(--easing) infinite;
+  opacity: var(--line-opacity, 1);
+}
+.glowing-button .effect::before {
+  filter: blur(8px);
+  -webkit-mask: none;
+  mask: none;
+  opacity: max(calc(var(--line-opacity) * 0.1), 0.05);
+}
+.glowing-button .text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #d1e4fa;
+  background: linear-gradient(#98c0ef 0%, #d8ecf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================================
+   Shared glow primitive 2 — .card-animated (§3.1), the login-card border chase.
+   `--start-angle` and `--delay` are per-instance inline custom properties.
+   ========================================================================== */
+.card-animated .effect {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  filter: drop-shadow(0 0 10px var(--line-color));
+  pointer-events: none;
+}
+.card-animated .effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--line-width, 1px);
+  background: conic-gradient(
+    from calc(var(--angle) + var(--start-angle)),
+    transparent 0%,
+    var(--line-color) 20%,
+    transparent 25%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.card-animated-loop .effect,
+.card-animated-loop .effect::before {
+  opacity: 0.5;
+  animation: card-line-anim 12s linear infinite, line-opacity-loop 3s linear infinite;
+}
+.card-animated-intermittent .effect,
+.card-animated-intermittent .effect::before {
+  opacity: 0;
+  animation: card-line-anim 8s linear infinite, line-opacity 4s linear var(--delay);
+}
+
+/* ============================================================================
+   @keyframes — all 29 from the original stylesheet (§3).
+   `line-anim` exists twice there under two CSS-module scopes (glowing-button
+   and card); kept here as `line-anim` and `card-line-anim`.
+   ========================================================================== */
+
+@keyframes spotlight-opacity {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0.6;
+  }
+}
+@keyframes spotlight-scale {
+  0% {
+    transform: translateX(-50%) rotate(var(--rotate)) scale(var(--scale));
+  }
+  50% {
+    transform: translateX(-50%) rotate(calc(var(--rotate) * 1.2)) scale(calc(var(--scale) * 1.1));
+  }
+  to {
+    transform: translateX(-50%) rotate(var(--rotate)) scale(var(--scale));
+  }
+}
+@keyframes line-anim {
+  to {
+    --angle: 360deg;
+  }
+}
+@keyframes card-line-anim {
+  to {
+    --angle: 360deg;
+  }
+}
+@keyframes sky-anim {
+  to {
+    -webkit-mask-position: 0 -15px, 15px -45px;
+    mask-position: 0 -15px, 15px -45px;
+  }
+}
+@keyframes line-opacity {
+  0% {
+    opacity: 0;
+  }
+  20%,
+  70% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes line-opacity-loop {
+  0% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+@keyframes feature-intro {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes feature-separator-mask {
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+@keyframes feature-icon-shine {
+  10%,
+  20% {
+    filter: brightness(160%);
+  }
+  80% {
+    filter: brightness();
+  }
+}
+@keyframes dashboard-application-button-press {
+  0%,
+  to {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+}
+@keyframes dashboard-work-lights-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dashboard-events-spinner {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes dashboard-lines-spin {
+  0% {
+    transform: translate(-25%, -50%) rotate(var(--start-angle));
+  }
+  16.6667% {
+    transform: translate(-25%, -50%) rotate(calc(var(--start-angle) + (360deg - var(--start-angle)) / 2));
+  }
+  50% {
+    transform: translate(25%, -50%) rotate(360deg);
+  }
+  66.6667% {
+    transform: translate(25%, -50%) rotate(calc(360deg + var(--start-angle) / 2)) scale(1, 1.3);
+  }
+  to {
+    transform: translate(-25%, -50%) rotate(calc(360deg + var(--start-angle)));
+  }
+}
+@keyframes radix-logo-lines {
+  to {
+    transform: rotate(-1turn);
+  }
+}
+@keyframes security-leaked-line {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes security-automatic-radar {
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes dot-animation-1 {
+  0%,
+  8.05556%,
+  28.0556%,
+  to {
+    opacity: 0;
+  }
+  8.25556%,
+  27.8556% {
+    opacity: 1;
+  }
+}
+@keyframes dot-animation-2 {
+  0%,
+  19.1667%,
+  39.1667%,
+  to {
+    opacity: 0;
+  }
+  19.4167%,
+  38.9167% {
+    opacity: 1;
+  }
+}
+@keyframes dot-animation-3 {
+  0%,
+  33.8889%,
+  53.8889%,
+  to {
+    opacity: 0;
+  }
+  34.1389%,
+  53.6389% {
+    opacity: 1;
+  }
+}
+@keyframes dot-animation-4 {
+  0%,
+  42.2222%,
+  62.2222%,
+  to {
+    opacity: 0;
+  }
+  42.4722%,
+  61.9722% {
+    opacity: 1;
+  }
+}
+@keyframes dot-animation-5 {
+  0%,
+  50.2778%,
+  70.2778%,
+  to {
+    opacity: 0;
+  }
+  50.5278%,
+  70.0278% {
+    opacity: 1;
+  }
+}
+@keyframes complete-line {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes complete-social-breath {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+@keyframes complete-multi-border {
+  0% {
+    transform: translate(-25%, -50%) rotate(225deg);
+  }
+  16.6667% {
+    transform: translate(-25%, -50%) rotate(312.5deg);
+  }
+  50% {
+    transform: translate(25%, -50%) rotate(360deg);
+  }
+  66.6667% {
+    transform: translate(25%, -50%) rotate(472.5deg) scaleY(1.5);
+  }
+  to {
+    transform: translate(-25%, -50%) rotate(585deg);
+  }
+}
+@keyframes complete-single-line {
+  0% {
+    transform: translate(50px, 50px) rotate(-45deg);
+  }
+  60%,
+  to {
+    transform: translate(-200px, -200px) rotate(-45deg);
+  }
+}
+@keyframes complete-directory {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@keyframes cta-line-anim {
+  to {
+    --cta-angle: 360deg;
+  }
+}
+
+/* --- reduced motion (§3.5 — a deliberate improvement on the original) ----- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,157 @@
+/* ============================================================================
+   radix.css — CLONE_SPEC §2.5
+   ========================================================================== */
+
+.radix {
+  content-visibility: auto;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 120px 0 257px;
+  position: relative;
+}
+.radix::before {
+  content: '';
+  pointer-events: none;
+  z-index: 10000;
+  background: radial-gradient(50% 50%, #4b71fa29 0%, #05050b00 100%);
+  position: absolute;
+  inset: 0;
+}
+.radix .section-header {
+  margin-bottom: 100px;
+  padding-inline: 16px;
+}
+.radix .section-header-description {
+  max-width: 420px;
+}
+.radix-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+/* hook for the Animation agent's third particle field */
+.radix__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+.radix-main {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+.radix-border-overlay {
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  background: radial-gradient(50% 100% at 50% 0, #4b71fa0a 0%, #05050b00 100%), #05060f33;
+  width: 100%;
+  height: 236px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 -12px 32px #0203113d;
+}
+.radix-border-overlay::before {
+  z-index: 1;
+  content: '';
+  background: linear-gradient(90deg, #bacff700 0%, #bacff729 25% 75%, #bacff700 100%);
+  width: 1200px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+@media (max-width: 1199px) {
+  .radix {
+    padding: 100px 0 200px;
+  }
+  .radix .section-header {
+    margin-bottom: 32px;
+  }
+  .radix-background {
+    display: none;
+  }
+  .radix-border-overlay {
+    height: 179px;
+  }
+}
+
+/* --- the three stacked logo layers + rotating line masks ----------------- */
+.radix-logo {
+  pointer-events: none;
+  width: 560px;
+  height: 833px;
+  position: absolute;
+  top: -150px;
+  left: calc(50% - 280px);
+}
+.radix-logo > div {
+  position: absolute;
+  inset: 0;
+}
+.radix-logo > div > img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.radix-logo-main {
+  z-index: 11;
+}
+.radix-logo-blender {
+  z-index: 13;
+}
+.radix-logo-lines {
+  z-index: 15;
+  position: absolute;
+  inset: 0;
+}
+.radix-logo-lines-item {
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  position: absolute;
+  inset: 0;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+.radix-logo-lines-item:first-child div {
+  background-image: conic-gradient(from 180deg, transparent 0deg, #bad7f7 1deg, transparent 90deg);
+  top: -275px;
+  left: -300px;
+}
+.radix-logo-lines-item:nth-child(2) div {
+  background-image: conic-gradient(from 180deg, transparent 60deg, #bad7f7 61deg, transparent 150deg);
+  top: -275px;
+  left: -125px;
+}
+.radix-logo-lines-item:nth-child(3) div {
+  background-image: conic-gradient(from 180deg, transparent 80deg, #bad7f7 81deg, transparent 170deg);
+  top: 0;
+  left: -275px;
+}
+.radix-logo-lines-item div {
+  width: 1000px;
+  height: 1000px;
+  animation: 10s linear infinite radix-logo-lines;
+  position: absolute;
+}
+@media (max-width: 1199px) {
+  .radix-logo {
+    width: 420px;
+    height: 624.75px;
+    top: -70px;
+    left: calc(50% - 210px);
+  }
+}

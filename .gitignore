@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+
+# Full "Save page as" capture of the original site, including its compiled JS
+# bundles and stylesheets. Kept locally as the measurement source for recon;
+# nothing in src/ imports from it, and it is not redistributed.
+_source/
+
+# Playwright MCP scratch output from the recon/audit agents
+.playwright-mcp/
