@@ -1,0 +1,33 @@
+{
+  "note": "What is machine-enforced versus what is convention.",
+  "enforced": {
+    "assetRoleClosure": "schema + semantic_validate.py + verify_all.py",
+    "assetRolePinnedPolicies": "verify_all.py and semantic_validate.py check the EXACT value for 5 compliance-critical roles, not just enum membership",
+    "motionFieldClosure": "schema (additionalProperties false on the motion object)",
+    "motionEnums": "schema",
+    "brandColorDomain": "schema (closed enum)",
+    "brandRadiusDomain": "schema (closed enum)",
+    "routeAndTemplateClosure": "schema + semantic_validate.py",
+    "copyBudgets": "maxLength in the schema; maxWords in semantic_validate.py",
+    "inertHrefs": "schema (const '#') + semantic_validate.py",
+    "localAssetsOnly": "schema (assetRef pattern) + semantic_validate.py",
+    "allowlistParity": "extraction/verify_all.py",
+    "citationValidity": "extraction/verify_all.py",
+    "manifestCounts": "extraction/verify_all.py (recomputed from disk, not read back)"
+  },
+  "conventionOnly": {
+    "spacing": "There is NO uniform spacing scale on this site. Every section carries its own measured padding. tokens/00-foundation/spacing.json records the real inventory, and nothing machine-checks a generated instance against it, because a PageSpec carries no spacing field.",
+    "semanticRoleUsage": "A PageSpec has no per-instance style or token-override field at all \u2014 styling is fully owned by the section and component contracts. So there is no PageSpec-level token reference for a validator to check. This is recorded plainly rather than inventing a field in order to have something to validate.",
+    "responsiveBehaviour": "Each section contract carries a structured `responsive` block cited against real CSS, but a PageSpec cannot override it."
+  },
+  "rawValueRestrictions": {
+    "note": "Category keys here match the real catalog keys in token-catalog.json, not convenient human labels.",
+    "color": "forbidden \u2014 reference a palette or semanticRole id",
+    "gradient": "forbidden \u2014 reference a gradient id",
+    "fontSize": "forbidden \u2014 reference a scale id",
+    "fontFamily": "forbidden \u2014 reference a families id",
+    "radius": "restricted \u2014 only the closed brandRadius domain is settable per instance",
+    "easing": "restricted \u2014 only the 3 closed easing ids",
+    "breakpoint": "forbidden \u2014 responsive behaviour is contract-owned, not instance-owned"
+  }
+}

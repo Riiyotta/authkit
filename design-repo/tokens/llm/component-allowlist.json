@@ -1,0 +1,457 @@
+{
+  "version": "1.0.0",
+  "note": "The CLOSED set an LLM may instantiate and the CLOSED set of properties it may set. Entry ids are the `id` field of the real contract files in primitives/, components/ and sections/. extraction/verify_all.py enforces parity in BOTH directions: no allowlist entry without a contract file, and no contract file without an allowlist entry.",
+  "derivedFrom": "The settable-property lists below are derived from schema/pagespec.schema.json's own node branches, not hand-copied. verify_all.py re-derives and compares them.",
+  "primitives": [
+    "primitive.badge",
+    "primitive.between-lines",
+    "primitive.button",
+    "primitive.eyebrow",
+    "primitive.feature-tile",
+    "primitive.field",
+    "primitive.glowing-button",
+    "primitive.icon",
+    "primitive.inert-link",
+    "primitive.input",
+    "primitive.light-switch",
+    "primitive.outline-box",
+    "primitive.page-separator"
+  ],
+  "components": [
+    "component.auth-card",
+    "component.browser-frame",
+    "component.cta-box",
+    "component.dot-rows",
+    "component.masked-line",
+    "component.particle-canvas",
+    "component.picker-card",
+    "component.section-header",
+    "component.security-card",
+    "component.testimonial-cell"
+  ],
+  "sections": [
+    "capability.feature-strip",
+    "chrome.hairline-grid",
+    "chrome.hero-header",
+    "chrome.page-separator",
+    "conversion.cta-boxes",
+    "conversion.cta-header",
+    "demo.complete-diagram",
+    "demo.custom-ui-browser",
+    "demo.customiser-pickers",
+    "demo.dashboard",
+    "demo.radix",
+    "demo.security-cards",
+    "hero.ambient-fx",
+    "hero.auth-card-trio",
+    "hero.headline",
+    "hero.light-switch",
+    "hero.wordmark",
+    "proof.testimonials"
+  ],
+  "templates": [
+    "template.homepage"
+  ],
+  "routes": [
+    "/"
+  ],
+  "themes": {
+    "document": [
+      "theme.dark"
+    ],
+    "subtree": [
+      "theme.light"
+    ],
+    "note": "theme.light is SUBTREE-ONLY and may be set only on a node whose section contract sets supportsLightSubtree true."
+  },
+  "assetRoles": [
+    "brand.product-mark",
+    "brand.wordmark",
+    "customer.logo",
+    "font.self-hosted-substitute",
+    "motion.flare-video",
+    "person.headshot",
+    "ui.card-logo",
+    "ui.decorative-screenshot",
+    "ui.diagram-background",
+    "ui.diagram-mask",
+    "ui.feature-icon",
+    "ui.sprite-sheet"
+  ],
+  "settableNodeProperties": {
+    "chrome.hairline-grid": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [],
+      "requiredContentFields": []
+    },
+    "chrome.hero-header": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "companyHeading",
+        "iconActionLabel",
+        "poweredByWordmark",
+        "primaryActionLabel",
+        "productMark"
+      ],
+      "requiredContentFields": [
+        "companyHeading",
+        "iconActionLabel",
+        "poweredByWordmark",
+        "primaryActionLabel",
+        "productMark"
+      ]
+    },
+    "hero.wordmark": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "flareVideo",
+        "wordmark"
+      ],
+      "requiredContentFields": [
+        "wordmark"
+      ]
+    },
+    "hero.headline": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "eyebrow",
+        "titleLines"
+      ],
+      "requiredContentFields": [
+        "eyebrow",
+        "titleLines"
+      ]
+    },
+    "hero.auth-card-trio": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "cards"
+      ],
+      "requiredContentFields": [
+        "cards"
+      ]
+    },
+    "hero.light-switch": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "caption",
+        "switchLabel"
+      ],
+      "requiredContentFields": [
+        "caption",
+        "switchLabel"
+      ]
+    },
+    "hero.ambient-fx": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [],
+      "requiredContentFields": []
+    },
+    "capability.feature-strip": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "tiles"
+      ],
+      "requiredContentFields": [
+        "tiles"
+      ]
+    },
+    "demo.dashboard": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "background",
+        "connectorMasks",
+        "header"
+      ],
+      "requiredContentFields": [
+        "background",
+        "connectorMasks",
+        "header"
+      ]
+    },
+    "demo.custom-ui-browser": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "decorations",
+        "header",
+        "previewCard"
+      ],
+      "requiredContentFields": [
+        "decorations",
+        "header",
+        "previewCard"
+      ]
+    },
+    "demo.customiser-pickers": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "logoSprite",
+        "pickers"
+      ],
+      "requiredContentFields": [
+        "logoSprite",
+        "pickers"
+      ]
+    },
+    "chrome.page-separator": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [],
+      "requiredContentFields": []
+    },
+    "demo.radix": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "ctaLabel",
+        "header",
+        "kitImage",
+        "lineMasks",
+        "logoLayers"
+      ],
+      "requiredContentFields": [
+        "ctaLabel",
+        "header",
+        "kitImage",
+        "lineMasks",
+        "logoLayers"
+      ]
+    },
+    "demo.security-cards": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "cards",
+        "header"
+      ],
+      "requiredContentFields": [
+        "cards",
+        "header"
+      ]
+    },
+    "demo.complete-diagram": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "background",
+        "badges",
+        "ctaLabel",
+        "header",
+        "lineMasks",
+        "socialShapes"
+      ],
+      "requiredContentFields": [
+        "background",
+        "badges",
+        "ctaLabel",
+        "header",
+        "lineMasks",
+        "socialShapes"
+      ]
+    },
+    "proof.testimonials": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "cells"
+      ],
+      "requiredContentFields": [
+        "cells"
+      ]
+    },
+    "conversion.cta-header": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "heading"
+      ],
+      "requiredContentFields": [
+        "heading"
+      ]
+    },
+    "conversion.cta-boxes": {
+      "nodeLevel": [
+        "content",
+        "motion",
+        "occurrence",
+        "theme"
+      ],
+      "contentFields": [
+        "actionLabel",
+        "boxes"
+      ],
+      "requiredContentFields": [
+        "actionLabel",
+        "boxes"
+      ]
+    }
+  },
+  "settableMotionFields": [
+    "cycleMs",
+    "dampingRate",
+    "delayMs",
+    "durationMs",
+    "easing",
+    "evidence",
+    "loop",
+    "oneShot",
+    "pattern",
+    "reducedMotionFallback",
+    "stepMs",
+    "trigger"
+  ],
+  "requiredMotionFields": [
+    "evidence",
+    "pattern",
+    "reducedMotionFallback",
+    "trigger"
+  ],
+  "closedEnums": {
+    "motion.pattern": [
+      "armed-cycle",
+      "armed-node-cascade",
+      "card-border-chase",
+      "css-only-loop",
+      "dot-typewriter",
+      "equaliser-reroll",
+      "glow-ring-chase",
+      "glyph-decode",
+      "hairline-intro",
+      "hero-intro-fade",
+      "instant-token-write",
+      "masked-line-sweep",
+      "mount-cycle",
+      "mount-progress-fill",
+      "none",
+      "one-shot-flare",
+      "particle-drift",
+      "scroll-scrub-float",
+      "scroll-scrub-reveal",
+      "spotlight-breathe",
+      "staggered-entrance",
+      "static-tilt",
+      "switch-thumb-travel"
+    ],
+    "motion.trigger": [
+      "none",
+      "mount",
+      "intersection-threshold-0",
+      "scroll-scrub",
+      "user-input",
+      "paint-time-intro"
+    ],
+    "motion.reducedMotionFallback": [
+      "none",
+      "static-end-state",
+      "settle-to-resting-value",
+      "global-duration-clamp"
+    ],
+    "motion.evidence": [
+      "measured",
+      "inferred",
+      "unmeasured"
+    ],
+    "motion.easing": [
+      "ease.house",
+      "ease.quart",
+      "ease.linear"
+    ],
+    "motion.dampingRate": [
+      0.075,
+      0.0745,
+      0.0485,
+      0.105
+    ]
+  },
+  "forbidden": [
+    "inventing a route or a template (one real route, 15 probed candidates all 404)",
+    "adding a nav or footer section (the real site has neither element)",
+    "forking a `-light` primitive, component or section",
+    "creating a second auth-card implementation",
+    "emitting an absolute or external URL for an href or an asset",
+    "reproducing or fabricating a real company logo, a real person's photograph or likeness, a real person's name attached to a quote, or real proprietary marketing copy",
+    "recording a document height as a contract or fidelity value",
+    "repairing the hero's deliberately reproduced vs-line/v-line grid bug",
+    "inventing a trigger for the unused .anim2 RBAC mask variant",
+    "promoting an inferred motion value to 'measured'"
+  ]
+}

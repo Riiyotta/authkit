@@ -1,0 +1,62 @@
+{
+  "evidence": "measured",
+  "measuredFrom": "../src/index.css:13-57",
+  "licensingDeviation": {
+    "status": "accepted, licence-driven",
+    "statement": "The original uses Untitled Sans (Klim) and Aeonik Pro (CoType), both commercial. The clone self-hosts metric-matched substitutes together with the ORIGINAL's own local(Arial) metric-override @font-face blocks, so every numeric type value matches exactly and only glyph-level text-run widths differ (measured 0.1-13px).",
+    "swapGuidance": "A licence purchase is a TOKEN change only: replace the `family` in tokens/00-foundation/typography.json#families and the matching @font-face src. No component or section contract references a font file directly.",
+    "measuredTextRunDeltaPx": {
+      "min": 0.1,
+      "max": 13
+    }
+  },
+  "selfHosted": [
+    {
+      "family": "Inter",
+      "file": "public/fonts/inter-latin.woff2",
+      "weightRange": "100 900",
+      "replaces": "Untitled Sans",
+      "measuredFrom": "../src/index.css:17-23"
+    },
+    {
+      "family": "Instrument Sans",
+      "file": "public/fonts/instrument-sans-latin.woff2",
+      "weightRange": "400 700",
+      "replaces": "Aeonik Pro",
+      "measuredFrom": "../src/index.css:24-31"
+    },
+    {
+      "family": "Share Tech Mono",
+      "file": "public/fonts/share-tech-mono-latin.woff2",
+      "weightRange": "400",
+      "replaces": "Enhanced Dot Digital-7",
+      "measuredFrom": "../src/index.css:32-38"
+    }
+  ],
+  "metricOverrides": [
+    {
+      "family": "aeonikPro Fallback",
+      "src": "local(Arial)",
+      "ascentOverride": "90.63%",
+      "descentOverride": "20.24%",
+      "lineGapOverride": "0%",
+      "sizeAdjust": "103.71%",
+      "provenance": "copied verbatim from the original stylesheet",
+      "measuredFrom": "../src/index.css:42-49"
+    },
+    {
+      "family": "dotDigital Fallback",
+      "src": "local(Arial)",
+      "ascentOverride": "67.2%",
+      "descentOverride": "22.4%",
+      "lineGapOverride": "0%",
+      "sizeAdjust": "111.61%",
+      "provenance": "copied verbatim from the original stylesheet",
+      "measuredFrom": "../src/index.css:50-57"
+    }
+  ],
+  "noExternalRequests": {
+    "rule": "Every font is served from a local path under public/fonts/. No Google Fonts, no CDN. The clone renders fully offline.",
+    "measuredFrom": "../src/index.css:17-38"
+  }
+}

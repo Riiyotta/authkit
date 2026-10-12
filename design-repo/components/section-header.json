@@ -1,0 +1,123 @@
+{
+  "id": "component.section-header",
+  "name": "SectionHeader",
+  "className": ".section-header",
+  "purpose": "Give every product-demo and conversion section the same three-part opening (eyebrow / multi-line title / description) so the page reads as one document.",
+  "tags": [
+    "header",
+    "shared"
+  ],
+  "composes": [
+    "primitive.eyebrow"
+  ],
+  "props": {
+    "eyebrow": {
+      "type": "string",
+      "maxWords": 3
+    },
+    "title": {
+      "type": "array",
+      "itemType": "string",
+      "note": "An ARRAY of line strings, each rendered as its own <span>. Line breaks are authored, not reflowed."
+    },
+    "titleMobile": {
+      "type": "array",
+      "itemType": "string",
+      "note": "An art-directed alternate line split. Only ONE section ships this (demo.radix); the switch is at max-width:1200px."
+    },
+    "titleClass": {
+      "type": "string",
+      "enum": [
+        "section-header-title-h2",
+        "section-header-title-h3",
+        "section-header-title-h6"
+      ],
+      "default": "section-header-title-h3"
+    },
+    "titleTag": {
+      "type": "string",
+      "enum": [
+        "h2",
+        "h3",
+        "h6"
+      ],
+      "default": "h3"
+    },
+    "description": {
+      "type": "string",
+      "maxWords": 22
+    }
+  },
+  "copyBudget": {
+    "eyebrow": {
+      "maxWords": 3,
+      "measuredChars": [
+        20,
+        17,
+        17,
+        21
+      ]
+    },
+    "titleLines": {
+      "maxLines": 2,
+      "mobileMaxLines": 4,
+      "measuredCharsPerLine": [
+        [
+          32,
+          20
+        ],
+        [
+          32,
+          26
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          17,
+          20
+        ]
+      ],
+      "measuredMobileCharsPerLine": [
+        [
+          15,
+          16,
+          11,
+          14
+        ]
+      ]
+    },
+    "description": {
+      "maxWords": 22,
+      "measuredChars": [
+        108,
+        103,
+        98,
+        138
+      ],
+      "measuredWords": [
+        17,
+        17,
+        10,
+        21
+      ]
+    },
+    "note": "Budgets measured from the 4 real SectionHeader instances. The marketing copy itself is proprietary and deliberately not stored in this design-repo."
+  },
+  "descriptionMaxWidths": {
+    "dashboard": "440px",
+    "radix": "420px",
+    "security": "630px",
+    "complete": "560px"
+  },
+  "usedBy": [
+    "demo.dashboard",
+    "demo.radix",
+    "demo.security-cards",
+    "demo.complete-diagram",
+    "conversion.cta-boxes"
+  ],
+  "measuredFrom": "../src/components/primitives.jsx:101-134",
+  "evidence": "measured"
+}

@@ -1,0 +1,72 @@
+{
+  "id": "chrome.hairline-grid",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CHROME",
+  "name": "Hero hairline grid",
+  "purpose": "Make the hero read as a measured engineering drawing rather than a poster, by exposing the grid the hero's own content is placed on.",
+  "tags": [
+    "chrome",
+    "grid",
+    "hairline",
+    "hero-only"
+  ],
+  "uses": [],
+  "content": {
+    "fields": {},
+    "additionalProperties": false,
+    "note": "Zero content fields. This section is pure geometry \u2014 six vertical tracks, nine horizontal tracks and two cross marks, all placed by named grid areas."
+  },
+  "geometry": {
+    "verticalLines": 6,
+    "horizontalLines": {
+      "narrow": 6,
+      "wide": 9
+    },
+    "crossMarks": 2,
+    "wideColumns": 17,
+    "wideRows": 14,
+    "narrowColumns": 9,
+    "narrowRows": 14,
+    "firstHorizontalLineOpacity": 0.75,
+    "vline5and6Opacity": 0.5
+  },
+  "responsive": {
+    "below640": {
+      "columns": 9,
+      "areas": "h-line-1..6, v-line-1..4"
+    },
+    "from640": {
+      "columns": 17,
+      "areas": "h-line-1..9, v-line-1..4, vs-line-1, vs-line-2, cross-1, cross-2"
+    },
+    "at440": {
+      "change": "--logo-height 100px -> 120px only"
+    },
+    "measuredFrom": "../src/styles/hero.css:330-412"
+  },
+  "intentionalUpstreamBug": {
+    "severity": "deliberate, do not fix",
+    "statement": "The original's stylesheet declares grid areas `vs-line-1` and `vs-line-2`, while its DOM writes `v-line-5` and `v-line-6`. Those two names match nothing, so the two elements auto-place instead of landing in their declared tracks. The clone reproduces this verbatim, with a code comment.",
+    "verification": "src/styles/hero.css:412 declares 'vs-line-1' / 'vs-line-2'; src/components/Hero.jsx:116-118 writes gridArea v-line-${n} for n=1..6. Confirmed by direct grep.",
+    "cssMeasuredFrom": "../src/styles/hero.css:412",
+    "domMeasuredFrom": "../src/components/Hero.jsx:113-119",
+    "rule": "A generator MUST NOT 'repair' this. It is reproduced on purpose as part of pixel fidelity."
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hairline-intro"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "pattern": "The line tracks fade/scale in on a 3s transition off --intro-delay:0.1s, as part of the hero's paint-time intro.",
+    "measuredFrom": "../src/components/Hero.jsx:71-78"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true,
+    "mustBeFirst": true,
+    "note": "Node 0 of the template. The hero grid is declared before anything placed into it."
+  },
+  "measuredFrom": "../src/components/Hero.jsx:107-120"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "primitive.button",
+  "name": "Button",
+  "className": ".button",
+  "purpose": "The AuthCard's action control. One component for every variant; light mode is the `.light` ancestor cascade restyling the same classes in place.",
+  "tags": [
+    "control",
+    "form"
+  ],
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "outline",
+        "solid"
+      ],
+      "default": "outline"
+    },
+    "as": {
+      "type": "string",
+      "default": "button"
+    }
+  },
+  "realDomClasses": [
+    ".button-outline",
+    ".button-solid"
+  ],
+  "supersedes": "CLONE_SPEC says the hero card uses `.button-hero` / `.input-hero`. The real DOM uses `.button-outline` / `.input-solid`. Cite these.",
+  "rule": "There is NO `-light` button variant. Light appearance comes from a `.light` ancestor only.",
+  "measuredFrom": "../src/components/primitives.jsx:54-65",
+  "evidence": "measured"
+}

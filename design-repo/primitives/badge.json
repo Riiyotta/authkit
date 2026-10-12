@@ -1,0 +1,25 @@
+{
+  "id": "primitive.badge",
+  "name": "Badge",
+  "className": ".badge",
+  "purpose": "Carry a 2-3 word category label in gradient text at the top of a section.",
+  "tags": [
+    "label",
+    "eyebrow"
+  ],
+  "props": {
+    "gradient": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "type": {
+    "fontSize": "14px",
+    "fontWeight": 400,
+    "color": "#bad6f7cc",
+    "whiteSpace": "nowrap"
+  },
+  "measuredFrom": "../src/components/primitives.jsx:36-43",
+  "styleMeasuredFrom": "../src/styles/base.css:317-324",
+  "evidence": "measured"
+}

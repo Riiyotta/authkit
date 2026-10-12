@@ -1,0 +1,20 @@
+{
+  "id": "primitive.page-separator",
+  "name": "PageSeparator",
+  "className": ".page-separator",
+  "purpose": "The ONLY inter-section chrome on the entire site: a 1px --blue-6 rule spanning 100vw.",
+  "tags": [
+    "chrome",
+    "divider"
+  ],
+  "props": {},
+  "geometry": {
+    "height": "1px",
+    "borderBottom": "1px solid var(--blue-6)",
+    "width": "100vw"
+  },
+  "placementRule": "Emitted at exactly 4 of the 8 section boundaries \u2014 before radix, security, complete and testimonials. Not a uniform rhythm; do not add it at the other four.",
+  "measuredFrom": "../src/components/primitives.jsx:141-143",
+  "placementMeasuredFrom": "../src/App.jsx:18-28",
+  "evidence": "measured"
+}

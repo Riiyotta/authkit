@@ -1,0 +1,2289 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "authkit-design-repo/pagespec.schema.json",
+  "title": "AuthKit design-repo PageSpec",
+  "description": "The machine contract for a generated page composition. Closed everywhere: no additionalProperties is true anywhere in this document.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pageSpecVersion",
+    "route",
+    "basedOnTemplate",
+    "theme",
+    "nodes"
+  ],
+  "properties": {
+    "pageSpecVersion": {
+      "const": "1.0.0"
+    },
+    "route": {
+      "enum": [
+        "/"
+      ],
+      "description": "Closed to the single real route. 15 probed candidate routes on the original all return 404."
+    },
+    "basedOnTemplate": {
+      "enum": [
+        "template.homepage"
+      ]
+    },
+    "theme": {
+      "enum": [
+        "theme.dark"
+      ],
+      "description": "The only document-level theme. theme.light is SUBTREE-ONLY and is expressed per node, never here."
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 18,
+      "items": {
+        "$ref": "#/definitions/node"
+      }
+    }
+  },
+  "definitions": {
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pattern",
+        "trigger",
+        "reducedMotionFallback",
+        "evidence"
+      ],
+      "description": "CLOSED to the real, evidence-grounded field set. additionalProperties is false so an invented field cannot be smuggled through.",
+      "properties": {
+        "pattern": {
+          "enum": [
+            "armed-cycle",
+            "armed-node-cascade",
+            "card-border-chase",
+            "css-only-loop",
+            "dot-typewriter",
+            "equaliser-reroll",
+            "glow-ring-chase",
+            "glyph-decode",
+            "hairline-intro",
+            "hero-intro-fade",
+            "instant-token-write",
+            "masked-line-sweep",
+            "mount-cycle",
+            "mount-progress-fill",
+            "none",
+            "one-shot-flare",
+            "particle-drift",
+            "scroll-scrub-float",
+            "scroll-scrub-reveal",
+            "spotlight-breathe",
+            "staggered-entrance",
+            "static-tilt",
+            "switch-thumb-travel"
+          ]
+        },
+        "trigger": {
+          "enum": [
+            "none",
+            "mount",
+            "intersection-threshold-0",
+            "scroll-scrub",
+            "user-input",
+            "paint-time-intro"
+          ]
+        },
+        "reducedMotionFallback": {
+          "enum": [
+            "none",
+            "static-end-state",
+            "settle-to-resting-value",
+            "global-duration-clamp"
+          ]
+        },
+        "evidence": {
+          "enum": [
+            "measured",
+            "inferred",
+            "unmeasured"
+          ]
+        },
+        "easing": {
+          "enum": [
+            "ease.house",
+            "ease.quart",
+            "ease.linear"
+          ],
+          "description": "Closed to the real easings. The house curve is cubic-bezier(.6,.6,0,1); ease.quart (cubic-bezier(.165,.84,.44,1)) is used by the light-switch thumb only."
+        },
+        "durationMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "delayMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "stepMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cycleMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "oneShot": {
+          "type": "boolean"
+        },
+        "dampingRate": {
+          "enum": [
+            0.075,
+            0.0745,
+            0.0485,
+            0.105
+          ],
+          "description": "Closed to the four real measured/inferred per-frame rates. 0.105 is an INFERENCE \u2014 see docs/evidence-gaps.md."
+        }
+      }
+    },
+    "node": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "chrome.hairline-grid"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": [],
+              "description": "Zero content fields. Pure geometry."
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "chrome.hero-header"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "companyHeading": {
+                  "type": "string",
+                  "maxWords": 1,
+                  "maxLength": 16,
+                  "description": "Visually-hidden h2 carried for screen readers."
+                },
+                "poweredByWordmark": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "brand.wordmark"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "Parent-company wordmark."
+                },
+                "productMark": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "brand.product-mark"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "Square company mark."
+                },
+                "iconActionLabel": {
+                  "type": "string",
+                  "maxWords": 5,
+                  "maxLength": 32,
+                  "description": "aria-label on the icon-only button. Measured 21 chars."
+                },
+                "primaryActionLabel": {
+                  "type": "string",
+                  "maxWords": 2,
+                  "maxLength": 16,
+                  "description": "Measured 11 chars."
+                }
+              },
+              "required": [
+                "companyHeading",
+                "poweredByWordmark",
+                "productMark",
+                "iconActionLabel",
+                "primaryActionLabel"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "hero.wordmark"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "wordmark": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "brand.wordmark"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "476x106 product logotype."
+                },
+                "flareVideo": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "motion.flare-video"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "One-shot flare. The loop attribute is deliberately absent."
+                }
+              },
+              "required": [
+                "wordmark"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "hero.headline"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "eyebrow": {
+                  "type": "string",
+                  "maxWords": 1,
+                  "maxLength": 16,
+                  "description": "Measured 11 chars."
+                },
+                "titleLines": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxWords": 5,
+                    "maxLength": 32,
+                    "description": "Measured 27 and 26 chars."
+                  },
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "description": "Exactly two authored lines separated by an explicit <br>."
+                }
+              },
+              "required": [
+                "eyebrow",
+                "titleLines"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "hero.auth-card-trio"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "surface": {
+                        "enum": [
+                          "hero",
+                          "dark"
+                        ]
+                      },
+                      "size": {
+                        "enum": [
+                          "small",
+                          "medium",
+                          "large"
+                        ]
+                      },
+                      "brandColor": {
+                        "enum": [
+                          "#E46D4C",
+                          "#663AF3",
+                          "#027DEA",
+                          "#269684",
+                          "#EF6643",
+                          "#000"
+                        ],
+                        "description": "The 4 picker swatches plus the 2 per-instance hero literals. A generator may not invent a brand colour."
+                      },
+                      "brandRadius": {
+                        "enum": [
+                          "0px",
+                          "3px",
+                          "6px",
+                          "9999px",
+                          "4px",
+                          "999px",
+                          "2px"
+                        ],
+                        "description": "The 4 picker radii plus the 3 per-instance hero literals."
+                      },
+                      "animatedChase": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "startAngle": {
+                            "type": "string",
+                            "pattern": "^[0-9]+deg$"
+                          },
+                          "delayMs": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "startAngle",
+                          "delayMs"
+                        ]
+                      },
+                      "title": {
+                        "type": "string",
+                        "maxWords": 4,
+                        "maxLength": 24,
+                        "description": "Measured 19-21 chars."
+                      },
+                      "subtitle": {
+                        "type": "string",
+                        "maxWords": 9,
+                        "maxLength": 60,
+                        "description": "Measured 19 and 57 chars."
+                      },
+                      "logo": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "ui.card-logo"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "32x32 app mark standing in for a customer brand."
+                      },
+                      "logoBoxed": {
+                        "type": "boolean"
+                      },
+                      "fields": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "maxWords": 2,
+                              "maxLength": 16,
+                              "description": "Measured 5-13 chars."
+                            },
+                            "placeholder": {
+                              "type": "string",
+                              "maxWords": 3,
+                              "maxLength": 24,
+                              "description": "Measured 18-19 chars."
+                            },
+                            "type": {
+                              "enum": [
+                                "email",
+                                "password",
+                                "text"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "label",
+                            "type"
+                          ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 2
+                      },
+                      "otp": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "maxLength": 16,
+                            "description": ""
+                          },
+                          "length": {
+                            "const": 6
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "length"
+                        ]
+                      },
+                      "primaryLabel": {
+                        "type": "string",
+                        "maxWords": 1,
+                        "maxLength": 12,
+                        "description": "Measured 8 chars."
+                      },
+                      "primaryVariant": {
+                        "enum": [
+                          "outline",
+                          "solid"
+                        ]
+                      },
+                      "divider": {
+                        "type": "string",
+                        "maxWords": 1,
+                        "maxLength": 4,
+                        "description": "Measured 2 chars (\"OR\")."
+                      },
+                      "socials": {
+                        "type": "array",
+                        "items": {
+                          "enum": [
+                            "google",
+                            "microsoft"
+                          ]
+                        },
+                        "minItems": 0,
+                        "maxItems": 2
+                      },
+                      "footer": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "text": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "maxLength": 28,
+                            "description": "Measured 22 chars."
+                          },
+                          "linkLabel": {
+                            "type": "string",
+                            "maxWords": 4,
+                            "maxLength": 22,
+                            "description": "Measured 7 and 17 chars."
+                          }
+                        },
+                        "required": [
+                          "linkLabel"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "surface",
+                      "size",
+                      "title",
+                      "primaryLabel"
+                    ]
+                  },
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "description": "Three instances of the ONE shared auth-card contract. Forking the card is forbidden."
+                }
+              },
+              "required": [
+                "cards"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "hero.light-switch"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "switchLabel": {
+                  "type": "string",
+                  "maxWords": 6,
+                  "maxLength": 40,
+                  "description": "aria-label. Measured 27 chars."
+                },
+                "caption": {
+                  "type": "string",
+                  "maxWords": 5,
+                  "maxLength": 40,
+                  "description": "Measured 31 chars."
+                }
+              },
+              "required": [
+                "switchLabel",
+                "caption"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "hero.ambient-fx"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": [],
+              "description": "Non-interactive, zero content. Purely atmospheric."
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "capability.feature-strip"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "tiles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "maxWords": 4,
+                        "maxLength": 28,
+                        "description": "Measured 8-25 chars."
+                      },
+                      "mobileLabel": {
+                        "type": "string",
+                        "maxWords": 3,
+                        "maxLength": 20,
+                        "description": "Measured 4-17 chars."
+                      },
+                      "icon": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "ui.feature-icon"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "96x96 intrinsic, 48x48 displayed."
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "mobileLabel",
+                      "icon"
+                    ]
+                  },
+                  "minItems": 6,
+                  "maxItems": 6,
+                  "description": "Exactly 6 tiles. A static grid with a one-shot entrance \u2014 NOT a carousel."
+                }
+              },
+              "required": [
+                "tiles"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.dashboard"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "eyebrow": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "maxLength": 24,
+                      "description": "Measured range 17-21 chars across the 4 real instances."
+                    },
+                    "titleLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 10,
+                        "maxLength": 40,
+                        "description": "One authored line, rendered as its own span."
+                      },
+                      "minItems": 1,
+                      "maxItems": 2,
+                      "description": "Authored line breaks, not reflowed text. Max 2 lines on desktop."
+                    },
+                    "titleMobileLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 6,
+                        "maxLength": 20,
+                        "description": "One authored mobile line."
+                      },
+                      "minItems": 1,
+                      "maxItems": 4,
+                      "description": "Art-directed alternate line split. Only demo.radix ships this; the switch is at max-width 1200px."
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxWords": 22,
+                      "maxLength": 145,
+                      "description": "Measured range 98-138 chars across the 4 real instances."
+                    }
+                  },
+                  "required": [
+                    "eyebrow",
+                    "titleLines",
+                    "description"
+                  ]
+                },
+                "background": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "ui.diagram-background"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "Desktop 1440x1032 / mobile 697x506.5."
+                },
+                "connectorMasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "ui.diagram-mask"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "One connector path mask."
+                  },
+                  "minItems": 5,
+                  "maxItems": 5,
+                  "description": "Exactly 5. CLONE_SPEC says 4; the real DOM has 5."
+                }
+              },
+              "required": [
+                "header",
+                "background",
+                "connectorMasks"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.custom-ui-browser"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "eyebrow": {
+                      "type": "string",
+                      "maxWords": 2,
+                      "maxLength": 16,
+                      "description": "Measured 12 chars."
+                    },
+                    "title": {
+                      "type": "string",
+                      "maxWords": 4,
+                      "maxLength": 28,
+                      "description": "Measured 23 chars."
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxWords": 13,
+                      "maxLength": 88,
+                      "description": "Measured 78 chars."
+                    }
+                  },
+                  "required": [
+                    "eyebrow",
+                    "title",
+                    "description"
+                  ]
+                },
+                "previewCard": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "surface": {
+                      "enum": [
+                        "hero",
+                        "dark"
+                      ]
+                    },
+                    "size": {
+                      "enum": [
+                        "small",
+                        "medium",
+                        "large"
+                      ]
+                    },
+                    "brandColor": {
+                      "enum": [
+                        "#E46D4C",
+                        "#663AF3",
+                        "#027DEA",
+                        "#269684",
+                        "#EF6643",
+                        "#000"
+                      ],
+                      "description": "The 4 picker swatches plus the 2 per-instance hero literals. A generator may not invent a brand colour."
+                    },
+                    "brandRadius": {
+                      "enum": [
+                        "0px",
+                        "3px",
+                        "6px",
+                        "9999px",
+                        "4px",
+                        "999px",
+                        "2px"
+                      ],
+                      "description": "The 4 picker radii plus the 3 per-instance hero literals."
+                    },
+                    "animatedChase": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "startAngle": {
+                          "type": "string",
+                          "pattern": "^[0-9]+deg$"
+                        },
+                        "delayMs": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "required": [
+                        "startAngle",
+                        "delayMs"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "maxWords": 4,
+                      "maxLength": 24,
+                      "description": "Measured 19-21 chars."
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "maxWords": 9,
+                      "maxLength": 60,
+                      "description": "Measured 19 and 57 chars."
+                    },
+                    "logo": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "assetRole",
+                        "assetRef"
+                      ],
+                      "properties": {
+                        "assetRole": {
+                          "const": "ui.card-logo"
+                        },
+                        "assetRef": {
+                          "type": "string",
+                          "pattern": "^(?!https?://)[^\\s]+$",
+                          "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                        },
+                        "intrinsic": {
+                          "type": "string",
+                          "pattern": "^[0-9.]+x[0-9.]+$"
+                        },
+                        "alt": {
+                          "type": "string",
+                          "maxLength": 64
+                        }
+                      },
+                      "description": "32x32 app mark standing in for a customer brand."
+                    },
+                    "logoBoxed": {
+                      "type": "boolean"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "label": {
+                            "type": "string",
+                            "maxWords": 2,
+                            "maxLength": 16,
+                            "description": "Measured 5-13 chars."
+                          },
+                          "placeholder": {
+                            "type": "string",
+                            "maxWords": 3,
+                            "maxLength": 24,
+                            "description": "Measured 18-19 chars."
+                          },
+                          "type": {
+                            "enum": [
+                              "email",
+                              "password",
+                              "text"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "type"
+                        ]
+                      },
+                      "minItems": 0,
+                      "maxItems": 2
+                    },
+                    "otp": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "maxWords": 3,
+                          "maxLength": 16,
+                          "description": ""
+                        },
+                        "length": {
+                          "const": 6
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "length"
+                      ]
+                    },
+                    "primaryLabel": {
+                      "type": "string",
+                      "maxWords": 1,
+                      "maxLength": 12,
+                      "description": "Measured 8 chars."
+                    },
+                    "primaryVariant": {
+                      "enum": [
+                        "outline",
+                        "solid"
+                      ]
+                    },
+                    "divider": {
+                      "type": "string",
+                      "maxWords": 1,
+                      "maxLength": 4,
+                      "description": "Measured 2 chars (\"OR\")."
+                    },
+                    "socials": {
+                      "type": "array",
+                      "items": {
+                        "enum": [
+                          "google",
+                          "microsoft"
+                        ]
+                      },
+                      "minItems": 0,
+                      "maxItems": 2
+                    },
+                    "footer": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "maxWords": 4,
+                          "maxLength": 28,
+                          "description": "Measured 22 chars."
+                        },
+                        "linkLabel": {
+                          "type": "string",
+                          "maxWords": 4,
+                          "maxLength": 22,
+                          "description": "Measured 7 and 17 chars."
+                        }
+                      },
+                      "required": [
+                        "linkLabel"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "surface",
+                    "size",
+                    "title",
+                    "primaryLabel"
+                  ]
+                },
+                "decorations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "ui.decorative-screenshot"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "Non-interactive set dressing at opacity .75."
+                  },
+                  "minItems": 5,
+                  "maxItems": 5
+                }
+              },
+              "required": [
+                "header",
+                "previewCard",
+                "decorations"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.customiser-pickers"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "pickers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "maxWords": 2,
+                        "maxLength": 12,
+                        "description": "Measured 6-9 chars."
+                      },
+                      "optionCount": {
+                        "const": 4
+                      },
+                      "writes": {
+                        "enum": [
+                          "--brand-color",
+                          "--brand-radius",
+                          "--i"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "optionCount",
+                      "writes"
+                    ]
+                  },
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "description": "Exactly 3 pickers x 4 options = the 12 real buttons."
+                },
+                "logoSprite": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "ui.sprite-sheet"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "ONE sprite of 4 32px frames, selected via object-position."
+                }
+              },
+              "required": [
+                "pickers",
+                "logoSprite"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "chrome.page-separator"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": [],
+              "description": "Zero content fields. A 1px rule."
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.radix"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "eyebrow": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "maxLength": 24,
+                      "description": "Measured range 17-21 chars across the 4 real instances."
+                    },
+                    "titleLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 10,
+                        "maxLength": 40,
+                        "description": "One authored line, rendered as its own span."
+                      },
+                      "minItems": 1,
+                      "maxItems": 2,
+                      "description": "Authored line breaks, not reflowed text. Max 2 lines on desktop."
+                    },
+                    "titleMobileLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 6,
+                        "maxLength": 20,
+                        "description": "One authored mobile line."
+                      },
+                      "minItems": 1,
+                      "maxItems": 4,
+                      "description": "Art-directed alternate line split. Only demo.radix ships this; the switch is at max-width 1200px."
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxWords": 22,
+                      "maxLength": 145,
+                      "description": "Measured range 98-138 chars across the 4 real instances."
+                    }
+                  },
+                  "required": [
+                    "eyebrow",
+                    "titleLines",
+                    "description"
+                  ]
+                },
+                "kitImage": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "ui.diagram-background"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "1177x399 desktop / 883.5x299 mobile."
+                },
+                "logoLayers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "customer.logo"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "One layer of a third-party design-system mark. COMPLIANCE-CRITICAL."
+                  },
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "description": "stroke / main / blender. Must be ORIGINAL placeholder marks in generated output."
+                },
+                "lineMasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "ui.diagram-mask"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "One logo line mask."
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "ctaLabel": {
+                  "type": "string",
+                  "maxWords": 4,
+                  "maxLength": 28,
+                  "description": "Measured 22 chars."
+                }
+              },
+              "required": [
+                "header",
+                "kitImage",
+                "logoLayers",
+                "lineMasks",
+                "ctaLabel"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.security-cards"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "eyebrow": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "maxLength": 24,
+                      "description": "Measured range 17-21 chars across the 4 real instances."
+                    },
+                    "titleLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 10,
+                        "maxLength": 40,
+                        "description": "One authored line, rendered as its own span."
+                      },
+                      "minItems": 1,
+                      "maxItems": 2,
+                      "description": "Authored line breaks, not reflowed text. Max 2 lines on desktop."
+                    },
+                    "titleMobileLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 6,
+                        "maxLength": 20,
+                        "description": "One authored mobile line."
+                      },
+                      "minItems": 1,
+                      "maxItems": 4,
+                      "description": "Art-directed alternate line split. Only demo.radix ships this; the switch is at max-width 1200px."
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxWords": 22,
+                      "maxLength": 145,
+                      "description": "Measured range 98-138 chars across the 4 real instances."
+                    }
+                  },
+                  "required": [
+                    "eyebrow",
+                    "titleLines",
+                    "description"
+                  ]
+                },
+                "cards": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "maxWords": 5,
+                        "maxLength": 36,
+                        "description": "Measured 25-32 chars."
+                      },
+                      "mechanism": {
+                        "enum": [
+                          "leaked-password",
+                          "rbac",
+                          "password-strength",
+                          "automatic-detection",
+                          "multi-factor"
+                        ]
+                      },
+                      "background": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "ui.diagram-background"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "Card plate."
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "mechanism"
+                    ]
+                  },
+                  "minItems": 5,
+                  "maxItems": 5,
+                  "description": "Exactly 5 cards. ia.json says four; the real section renders five."
+                }
+              },
+              "required": [
+                "header",
+                "cards"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "demo.complete-diagram"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "header": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "eyebrow": {
+                      "type": "string",
+                      "maxWords": 3,
+                      "maxLength": 24,
+                      "description": "Measured range 17-21 chars across the 4 real instances."
+                    },
+                    "titleLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 10,
+                        "maxLength": 40,
+                        "description": "One authored line, rendered as its own span."
+                      },
+                      "minItems": 1,
+                      "maxItems": 2,
+                      "description": "Authored line breaks, not reflowed text. Max 2 lines on desktop."
+                    },
+                    "titleMobileLines": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxWords": 6,
+                        "maxLength": 20,
+                        "description": "One authored mobile line."
+                      },
+                      "minItems": 1,
+                      "maxItems": 4,
+                      "description": "Art-directed alternate line split. Only demo.radix ships this; the switch is at max-width 1200px."
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxWords": 22,
+                      "maxLength": 145,
+                      "description": "Measured range 98-138 chars across the 4 real instances."
+                    }
+                  },
+                  "required": [
+                    "eyebrow",
+                    "titleLines",
+                    "description"
+                  ]
+                },
+                "background": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "assetRole",
+                    "assetRef"
+                  ],
+                  "properties": {
+                    "assetRole": {
+                      "const": "ui.diagram-background"
+                    },
+                    "assetRef": {
+                      "type": "string",
+                      "pattern": "^(?!https?://)[^\\s]+$",
+                      "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                    },
+                    "intrinsic": {
+                      "type": "string",
+                      "pattern": "^[0-9.]+x[0-9.]+$"
+                    },
+                    "alt": {
+                      "type": "string",
+                      "maxLength": 64
+                    }
+                  },
+                  "description": "Composite diagram plate."
+                },
+                "badges": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxWords": 3,
+                    "maxLength": 20,
+                    "description": "Measured 12-17 chars."
+                  },
+                  "minItems": 5,
+                  "maxItems": 5
+                },
+                "socialShapes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "ui.diagram-background"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "28x33 shape."
+                  },
+                  "minItems": 6,
+                  "maxItems": 6
+                },
+                "lineMasks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "assetRole",
+                      "assetRef"
+                    ],
+                    "properties": {
+                      "assetRole": {
+                        "const": "ui.diagram-mask"
+                      },
+                      "assetRef": {
+                        "type": "string",
+                        "pattern": "^(?!https?://)[^\\s]+$",
+                        "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                      },
+                      "intrinsic": {
+                        "type": "string",
+                        "pattern": "^[0-9.]+x[0-9.]+$"
+                      },
+                      "alt": {
+                        "type": "string",
+                        "maxLength": 64
+                      }
+                    },
+                    "description": "Halo / multi / single mask."
+                  },
+                  "minItems": 1,
+                  "maxItems": 6
+                },
+                "ctaLabel": {
+                  "type": "string",
+                  "maxWords": 6,
+                  "maxLength": 44,
+                  "description": "Measured 39 chars."
+                }
+              },
+              "required": [
+                "header",
+                "background",
+                "badges",
+                "socialShapes",
+                "lineMasks",
+                "ctaLabel"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "proof.testimonials"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "cells": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "quote": {
+                        "type": "string",
+                        "maxWords": 32,
+                        "maxLength": 180,
+                        "description": "Measured 150 and 167 chars. MUST be original copy in generated output."
+                      },
+                      "authorName": {
+                        "type": "string",
+                        "maxWords": 2,
+                        "maxLength": 24,
+                        "description": "MUST be an original fictional name. Never a real person."
+                      },
+                      "authorTitle": {
+                        "type": "string",
+                        "maxWords": 3,
+                        "maxLength": 24,
+                        "description": "Measured 16-17 chars."
+                      },
+                      "avatar": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "person.headshot"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "40x40 circular. COMPLIANCE-CRITICAL: never a real person."
+                      },
+                      "companyLogo": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "customer.logo"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "COMPLIANCE-CRITICAL: never a real company mark."
+                      }
+                    },
+                    "required": [
+                      "quote",
+                      "authorName",
+                      "authorTitle",
+                      "avatar",
+                      "companyLogo"
+                    ]
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "required": [
+                "cells"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "conversion.cta-header"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "maxWords": 3,
+                  "maxLength": 28,
+                  "description": "Measured 20 chars."
+                }
+              },
+              "required": [
+                "heading"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "section",
+            "content",
+            "motion"
+          ],
+          "properties": {
+            "section": {
+              "const": "conversion.cta-boxes"
+            },
+            "theme": {
+              "enum": [
+                "theme.light"
+              ],
+              "description": "Subtree light appearance. Only permitted on sections whose contract sets supportsLightSubtree true; the semantic validator enforces that."
+            },
+            "occurrence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4,
+              "description": "Which occurrence of a repeatable section this is. Only chrome.page-separator is repeatable."
+            },
+            "content": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "boxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "maxWords": 4,
+                        "maxLength": 24,
+                        "description": "Measured 18-19 chars."
+                      },
+                      "description": {
+                        "type": "string",
+                        "maxWords": 5,
+                        "maxLength": 32,
+                        "description": "Measured 23-26 chars, 4-5 words across the 2 real instances."
+                      },
+                      "image": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "assetRole",
+                          "assetRef"
+                        ],
+                        "properties": {
+                          "assetRole": {
+                            "const": "ui.diagram-background"
+                          },
+                          "assetRef": {
+                            "type": "string",
+                            "pattern": "^(?!https?://)[^\\s]+$",
+                            "description": "A LOCAL path. Absolute/external URLs are rejected by pattern \u2014 the project has a hard no-external-requests constraint."
+                          },
+                          "intrinsic": {
+                            "type": "string",
+                            "pattern": "^[0-9.]+x[0-9.]+$"
+                          },
+                          "alt": {
+                            "type": "string",
+                            "maxLength": 64
+                          }
+                        },
+                        "description": "Tile graphic."
+                      },
+                      "href": {
+                        "const": "#",
+                        "description": "HARD CONSTRAINT: every outbound href is inert."
+                      }
+                    },
+                    "required": [
+                      "title",
+                      "description",
+                      "href"
+                    ]
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "actionLabel": {
+                  "type": "string",
+                  "maxWords": 3,
+                  "maxLength": 24,
+                  "description": "Measured 18 chars."
+                }
+              },
+              "required": [
+                "boxes",
+                "actionLabel"
+              ]
+            },
+            "motion": {
+              "$ref": "#/definitions/motion"
+            }
+          }
+        }
+      ],
+      "description": "A oneOf of 18 FULLY INDEPENDENT node schemas, each with its own complete properties/required/additionalProperties:false. Deliberately not a shared base plus allOf patches: draft-07 evaluates additionalProperties:false only against a schema's OWN properties, so a shared base cannot close properties a sibling branch adds."
+    }
+  }
+}

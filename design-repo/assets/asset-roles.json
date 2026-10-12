@@ -1,0 +1,172 @@
+{
+  "version": "1.0.0",
+  "evidence": "measured",
+  "note": "A CLOSED role vocabulary, built by reading the clone's real asset usage sites rather than by inventing categories. Every media field in schema/pagespec.schema.json references one of these ids and nothing else.",
+  "realAssetInventory": {
+    "totalFilesUnderPublic": 70,
+    "measurementMethod": "find public -type f | wc -l",
+    "note": "Counted on disk. No asset file itself is copied into this design-repo."
+  },
+  "noExternalRequests": {
+    "severity": "hard constraint",
+    "statement": "Every asset the clone loads resolves to a local file under public/. Fonts are self-hosted under public/fonts/. The clone runs fully offline \u2014 no Google Fonts, no CDN, no third-party request of any kind.",
+    "rule": "A generated instance MUST NOT introduce a remote asset URL."
+  },
+  "generationPolicyEnum": [
+    "may-generate-new",
+    "must-reuse-exact",
+    "must-not-fabricate",
+    "must-not-reproduce-real-entity"
+  ],
+  "generationPolicyMeaning": {
+    "may-generate-new": "A generator may create an original asset for this role.",
+    "must-reuse-exact": "A generator must reference the existing asset unchanged; it may not synthesise a replacement.",
+    "must-not-fabricate": "A generator may not invent an asset for this role at all; the field must be left for a human to fill or omitted where optional.",
+    "must-not-reproduce-real-entity": "COMPLIANCE-CRITICAL. A generator may neither reproduce the real asset nor fabricate a lookalike of any real company, product, trademark or identifiable person. It must emit an ORIGINAL placeholder that is clearly not a real entity."
+  },
+  "pinnedPolicyRoles": {
+    "note": "These roles are pinned to one specific policy value. Membership in the enum is NOT sufficient for them: changing any of these to a different-but-still-valid policy is a compliance regression, and extraction/verify_all.py enforces the exact value.",
+    "brand.wordmark": "must-not-reproduce-real-entity",
+    "brand.product-mark": "must-not-reproduce-real-entity",
+    "customer.logo": "must-not-reproduce-real-entity",
+    "person.headshot": "must-not-reproduce-real-entity",
+    "font.self-hosted-substitute": "must-reuse-exact"
+  },
+  "licensingContext": {
+    "severity": "load-bearing",
+    "statement": "The source is a real company's real, live marketing site. The clone ships, by explicit user decision, the real wordmarks, four real customer logos, two real identifiable people's photographs with their names, titles and quotes, and verbatim marketing copy. The repository holding it is PRIVATE and must stay private.",
+    "designRepoScope": "This design-repo deliberately captures STRUCTURE, TOKENS, GEOMETRY, MOTION and COPY BUDGETS only. It contains no marketing copy, no testimonial quotes, no real people's names, and no brand image files. Where a copy budget is needed, the measured character and line counts are recorded instead of the text.",
+    "publishingRule": "Do not publish this design-repo, and do not make any repository containing it public. Treat the source as commercially sensitive."
+  },
+  "roles": {
+    "brand.wordmark": {
+      "description": "The product logotype and the parent company's 'powered by' wordmark.",
+      "realUsage": [
+        "hero wordmark plate (476x106 SVG)",
+        "hero header powered-by link"
+      ],
+      "generationPolicy": "must-not-reproduce-real-entity",
+      "guidance": "Generate an original wordmark for a fictional product. Never reproduce or imitate the real wordmark.",
+      "measuredFrom": "../src/components/Hero.jsx:145"
+    },
+    "brand.product-mark": {
+      "description": "The small square company mark in the hero header.",
+      "realUsage": [
+        "hero header mark icon"
+      ],
+      "generationPolicy": "must-not-reproduce-real-entity",
+      "guidance": "Generate an original mark. Never reproduce or imitate the real one.",
+      "measuredFrom": "../src/components/Hero.jsx:132"
+    },
+    "customer.logo": {
+      "description": "A real third-party company's mark, used as social proof or as the design-system attribution.",
+      "realUsage": [
+        "2 testimonial company marks",
+        "the 3-layer design-system logo stack in demo.radix"
+      ],
+      "realCount": 4,
+      "generationPolicy": "must-not-reproduce-real-entity",
+      "guidance": "COMPLIANCE-CRITICAL. Generate original marks for fictional companies, at the same measured dimensions. Never reproduce, redraw, recolour or approximate a real company's logo, and never attribute a generated quote to a real company.",
+      "measuredFrom": "../src/components/Testimonials.jsx:9"
+    },
+    "person.headshot": {
+      "description": "A photograph of an identifiable real person, shown with their name, job title and a quote.",
+      "realUsage": [
+        "2 testimonial avatars, 40x40 circular"
+      ],
+      "realCount": 2,
+      "generationPolicy": "must-not-reproduce-real-entity",
+      "guidance": "COMPLIANCE-CRITICAL. Never reproduce a real person's photograph, and never generate a likeness of one. Never attach a real person's name to generated copy. Emit an original, clearly-placeholder avatar and an original fictional name and title.",
+      "measuredFrom": "../src/components/Testimonials.jsx:46"
+    },
+    "ui.feature-icon": {
+      "description": "A capability icon in the feature strip.",
+      "realUsage": [
+        "6 icons, 96x96 intrinsic, 48x48 displayed"
+      ],
+      "realCount": 6,
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate original icons at 96x96 intrinsic. Keep them non-representational of any real product.",
+      "measuredFrom": "../src/components/FeaturesSlider.jsx:19-26"
+    },
+    "ui.diagram-background": {
+      "description": "A rendered diagram plate or node graphic that a section animates on top of.",
+      "realUsage": [
+        "dashboard desktop/mobile backgrounds",
+        "radix kit image",
+        "radix background",
+        "complete background",
+        "complete social shapes",
+        "security card backgrounds",
+        "RBAC card / reader / light",
+        "dashboard work-inner and spinner"
+      ],
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate original artwork at the recorded intrinsic dimensions. These plates carry no third-party branding.",
+      "measuredFrom": "../src/components/Dashboard.jsx:58-69"
+    },
+    "ui.diagram-mask": {
+      "description": "A PNG alpha mask defining the path a travelling light sweeps along.",
+      "realUsage": [
+        "5 dashboard connectors",
+        "3 radix logo lines",
+        "complete halo / multi / single masks",
+        "dashboard events spinner"
+      ],
+      "generationPolicy": "may-generate-new",
+      "guidance": "Must be generated to the exact box recorded on the consuming element, since the mask box IS the geometry. See components/masked-line.json.",
+      "measuredFrom": "../src/components/Dashboard.jsx:14-20"
+    },
+    "ui.card-logo": {
+      "description": "The small 32x32 app logo in an AuthCard header, standing in for a customer's own brand.",
+      "realUsage": [
+        "3 hero card logos"
+      ],
+      "realCount": 3,
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate original 32x32 marks for fictional apps.",
+      "measuredFrom": "../src/components/Hero.jsx:28"
+    },
+    "ui.sprite-sheet": {
+      "description": "A single horizontally-tiled SVG sprite whose frame is selected by a custom property.",
+      "realUsage": [
+        "the customiser's 4-up logo picker"
+      ],
+      "realCount": 1,
+      "selectionMechanism": "object-position: calc(32px * var(--i) * -1) 0",
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate ONE sprite containing 4 original 32px frames. Do not split it into 4 files \u2014 the selection mechanism depends on a single sheet.",
+      "measuredFrom": "../src/components/CustomUI.jsx:12"
+    },
+    "ui.decorative-screenshot": {
+      "description": "A non-interactive product screenshot shown at opacity .75 purely as set dressing.",
+      "realUsage": [
+        "5 customiser decoration cards"
+      ],
+      "realCount": 5,
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate original, clearly-fictional UI screenshots at the recorded dimensions.",
+      "measuredFrom": "../src/components/CustomUI.jsx:15-21"
+    },
+    "motion.flare-video": {
+      "description": "The hero's one-shot light-flare video across the wordmark plate.",
+      "realUsage": [
+        "1 video, 1280x600, autoplay muted playsInline, deliberately NOT looped"
+      ],
+      "realCount": 1,
+      "generationPolicy": "may-generate-new",
+      "guidance": "Generate an original flare. Preserve the absence of a `loop` attribute \u2014 the one-shot behaviour is measured, not an oversight.",
+      "measuredFrom": "../src/components/Hero.jsx:146-149"
+    },
+    "font.self-hosted-substitute": {
+      "description": "A self-hosted woff2 metric-matched substitute for a commercial face the clone is not licensed to ship.",
+      "realUsage": [
+        "3 woff2 files under public/fonts/"
+      ],
+      "realCount": 3,
+      "generationPolicy": "must-reuse-exact",
+      "guidance": "Never generate or swap a font file. A licence purchase is a TOKEN change: update the family name in tokens/00-foundation/typography.json#families and the matching @font-face src. Both the intended commercial face and the shipped substitute are recorded in tokens/00-foundation/font-face.json.",
+      "measuredFrom": "../src/index.css:17-38"
+    }
+  }
+}

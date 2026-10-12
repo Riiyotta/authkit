@@ -1,0 +1,84 @@
+{
+  "id": "component.masked-line",
+  "className": ".dashboard-lines-item / .complete-line / .complete-multi-line / .complete-single-line / .radix-logo-lines-item",
+  "purpose": "Draw a travelling light along an arbitrary curved path, by sweeping a rotating gradient through a PNG mask of that path.",
+  "tags": [
+    "animation",
+    "mask",
+    "diagram"
+  ],
+  "mechanism": "An element sized to the mask's own box, with `--mask-image: url(<mask>.png)` and an inner div carrying the rotating gradient and a `--start-angle`.",
+  "instanceGroups": [
+    {
+      "where": "demo.dashboard connectors",
+      "count": 5,
+      "correction": "CLONE_SPEC says 4 connector lines; the real DOM has 5.",
+      "boxes": [
+        [
+          699.5,
+          157.5
+        ],
+        [
+          715.5,
+          173.5
+        ],
+        [
+          747.5,
+          222.5
+        ],
+        [
+          775.5,
+          263.5
+        ],
+        [
+          811.5,
+          279.5
+        ]
+      ],
+      "startAngle": "225deg",
+      "animationDuration": "5000ms",
+      "measuredFrom": "../src/components/Dashboard.jsx:14-20",
+      "alsoMeasuredFrom": [
+        "../src/components/Dashboard.jsx:72-82"
+      ]
+    },
+    {
+      "where": "demo.complete halo",
+      "count": 1,
+      "box": [
+        689.5,
+        349.5
+      ],
+      "measuredFrom": "../src/components/Complete.jsx:43-49"
+    },
+    {
+      "where": "demo.complete multi",
+      "count": 1,
+      "box": [
+        133.5,
+        37.5
+      ],
+      "measuredFrom": "../src/components/Complete.jsx:84-87"
+    },
+    {
+      "where": "demo.complete single",
+      "count": 4,
+      "box": [
+        63.5,
+        47.5
+      ],
+      "note": "2 pairs of 2",
+      "measuredFrom": "../src/components/Complete.jsx:90-102"
+    },
+    {
+      "where": "demo.radix logo lines",
+      "count": 3,
+      "measuredFrom": "../src/components/Radix.jsx:18-22",
+      "alsoMeasuredFrom": [
+        "../src/components/Radix.jsx:66-72"
+      ]
+    }
+  ],
+  "maskAssetRole": "ui.diagram-mask",
+  "evidence": "measured"
+}

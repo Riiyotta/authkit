@@ -1,0 +1,139 @@
+{
+  "id": "demo.complete-diagram",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PRODUCT_DEMO",
+  "name": "Platform completeness diagram",
+  "purpose": "Argue the product is a step into a whole platform rather than a point solution, by animating every adjacent capability around one core.",
+  "tags": [
+    "product-demo",
+    "diagram",
+    "animation"
+  ],
+  "uses": [
+    "component.section-header",
+    "component.masked-line",
+    "primitive.glowing-button"
+  ],
+  "content": {
+    "fields": {
+      "header": {
+        "type": "object",
+        "contract": "component.section-header",
+        "required": true
+      },
+      "background": {
+        "type": "assetRef",
+        "assetRole": "ui.diagram-background",
+        "required": true
+      },
+      "badges": {
+        "type": "array",
+        "itemType": "string",
+        "minItems": 5,
+        "maxItems": 5,
+        "maxWordsPerItem": 3,
+        "measuredChars": [
+          16,
+          12,
+          17,
+          14,
+          14
+        ]
+      },
+      "socialShapes": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.diagram-background",
+        "minItems": 6,
+        "maxItems": 6
+      },
+      "lineMasks": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.diagram-mask"
+      },
+      "ctaLabel": {
+        "type": "string",
+        "maxWords": 6,
+        "measuredChars": 39
+      }
+    },
+    "additionalProperties": false
+  },
+  "copyBudget": {
+    "eyebrow": {
+      "maxWords": 3,
+      "measuredChars": 21
+    },
+    "titleLines": {
+      "lines": 2,
+      "measuredCharsPerLine": [
+        17,
+        20
+      ],
+      "maxWords": 7
+    },
+    "description": {
+      "maxWords": 21,
+      "measuredChars": 138,
+      "maxWidth": "560px"
+    }
+  },
+  "geometry": {
+    "paddingTop": "148px",
+    "paddingBottom": "154px",
+    "haloMask": [
+      689.5,
+      349.5
+    ],
+    "multiMask": [
+      133.5,
+      37.5
+    ],
+    "singleMask": [
+      63.5,
+      47.5
+    ],
+    "singleOverlay": [
+      136.5,
+      61.5
+    ],
+    "socialShapeSize": [
+      28,
+      33
+    ],
+    "progressRows": 2,
+    "dotsPerRow": 6,
+    "multiDots": 6,
+    "dotCorrection": "CLONE_SPEC's '4x4 dots' is the dot SIZE, not a count. There are 6 dots per row."
+  },
+  "motion": {
+    "allowedPatterns": [
+      "mount-progress-fill",
+      "masked-line-sweep",
+      "css-only-loop"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "trigger": "mount",
+    "triggerNote": "NOT intersection-gated. Parked at the dashboard (scrollY 407) with this block at document y ~5150, far below the fold, the original was already writing progress heights every 500ms from t=391ms; at scrollY 0 on load a row already reads height: 3.33333px.",
+    "progress": {
+      "stepMs": 500,
+      "increments": 6,
+      "rowHeightPx": 20,
+      "incrementPx": 3.33333,
+      "rows": 2,
+      "holdSteps": 4,
+      "cycleMs": 7999,
+      "note": "Two 20px rows fill in 6 equal increments of 20/6px, one row at a time, on a 500ms step; both are reset to 0px first. Re-measured over several full passes: step 500, hold 2001 (4 steps), so a 7999ms cycle (16 steps). Earlier 512/8198/2043 figures came from a single pass with rAF jitter."
+    },
+    "measuredFrom": "../src/hooks/sequences.js:382-413"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustFollowSeparator": true
+  },
+  "measuredFrom": "../src/components/Complete.jsx:14-118"
+}

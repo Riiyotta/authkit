@@ -1,0 +1,48 @@
+{
+  "id": "component.testimonial-cell",
+  "className": ".testimonials-list-item",
+  "purpose": "Attribute a quote to a named person at a named company.",
+  "tags": [
+    "proof",
+    "quote"
+  ],
+  "composes": [
+    "primitive.outline-box"
+  ],
+  "structure": "OutlineBox(dots) > company mark img + .testimonials-list-item-content (the quote) + .testimonials-list-item-author (40x40 circular avatar + name + role)",
+  "instanceCount": 2,
+  "avatar": "40x40 circular",
+  "copyBudget": {
+    "quote": {
+      "maxWords": 32,
+      "measuredChars": [
+        167,
+        150
+      ],
+      "measuredWords": [
+        30,
+        25
+      ]
+    },
+    "authorName": {
+      "maxWords": 2,
+      "measuredChars": [
+        9,
+        13
+      ]
+    },
+    "authorTitle": {
+      "maxWords": 3,
+      "measuredChars": [
+        16,
+        17
+      ]
+    }
+  },
+  "licensing": {
+    "severity": "compliance-critical",
+    "statement": "The real site's two testimonial cells carry two identifiable real people's photographs with their real names, titles and verbatim quotes, plus two real customer company marks. None of that content is stored in this design-repo \u2014 only the measured character/word budgets above. A generator MUST fill these fields with original placeholder assets and original copy. See assets/asset-roles.json roles `person.headshot` and `customer.logo`."
+  },
+  "measuredFrom": "../src/components/Testimonials.jsx:26-56",
+  "evidence": "measured"
+}

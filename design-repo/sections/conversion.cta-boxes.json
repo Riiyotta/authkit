@@ -1,0 +1,100 @@
+{
+  "id": "conversion.cta-boxes",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CONVERSION",
+  "name": "Closing CTA paths",
+  "purpose": "Offer the two concrete next steps (hosted, or self-hosted from source) plus one social follow, and nothing else.",
+  "tags": [
+    "conversion",
+    "tile",
+    "cta"
+  ],
+  "uses": [
+    "component.cta-box",
+    "component.section-header",
+    "primitive.glowing-button",
+    "primitive.outline-box",
+    "primitive.icon",
+    "primitive.inert-link"
+  ],
+  "content": {
+    "fields": {
+      "boxes": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "itemContract": "component.cta-box"
+      },
+      "actionLabel": {
+        "type": "string",
+        "maxWords": 3,
+        "measuredChars": 18,
+        "required": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "copyBudget": {
+    "boxTitle": {
+      "maxWords": 4,
+      "measuredChars": [
+        18,
+        19
+      ],
+      "measuredWords": [
+        3,
+        4
+      ]
+    },
+    "boxDescription": {
+      "maxWords": 5,
+      "measuredChars": [
+        26,
+        23
+      ],
+      "measuredWords": [
+        5,
+        4
+      ]
+    },
+    "actionLabel": {
+      "maxWords": 3,
+      "measuredChars": 18
+    }
+  },
+  "geometry": {
+    "box": [
+      442,
+      332
+    ],
+    "boxStyle": "dotted outline",
+    "actionRow": [
+      450,
+      100
+    ],
+    "cornerDotsPerBox": 4
+  },
+  "hrefRule": {
+    "severity": "hard constraint",
+    "statement": "Every destination here is deliberately inert (`#`). The original's targets are all off-domain. This is by explicit user instruction and is NOT a defect \u2014 a generator must not substitute a real URL.",
+    "alsoNote": "The social action carries no `target` attribute, matching the original.",
+    "measuredFrom": "../src/components/Cta.jsx:6-21"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "glow-ring-chase"
+    ],
+    "requiredReducedMotionFallback": "none",
+    "loop": true,
+    "easing": "ease.linear",
+    "durationMs": 16000
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustBeLast": true
+  },
+  "measuredFrom": "../src/components/Cta.jsx:24-63"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "primitive.field",
+  "name": "Field",
+  "purpose": "A labelled Input \u2014 the only labelled-control idiom on the site.",
+  "tags": [
+    "control",
+    "form",
+    "composed"
+  ],
+  "composes": [
+    "primitive.input"
+  ],
+  "labelType": ".text-p .text-bold",
+  "inputMarginTop": 5,
+  "copyBudget": {
+    "label": {
+      "maxWords": 2,
+      "measuredChars": [
+        5,
+        8,
+        13
+      ]
+    },
+    "placeholder": {
+      "maxWords": 3,
+      "measuredChars": [
+        18,
+        19
+      ]
+    }
+  },
+  "measuredFrom": "../src/components/primitives.jsx:81-88",
+  "evidence": "measured"
+}

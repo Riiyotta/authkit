@@ -1,0 +1,183 @@
+{
+  "id": "demo.radix",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PRODUCT_DEMO",
+  "name": "Design-system foundation reveal",
+  "purpose": "Borrow credibility from the open-source design system underneath the product, by revealing its mark as the reader scrolls into it.",
+  "tags": [
+    "product-demo",
+    "scroll-scrub",
+    "reveal"
+  ],
+  "uses": [
+    "component.section-header",
+    "component.particle-canvas",
+    "component.masked-line",
+    "primitive.glowing-button",
+    "primitive.between-lines"
+  ],
+  "content": {
+    "fields": {
+      "header": {
+        "type": "object",
+        "contract": "component.section-header",
+        "required": true,
+        "note": "The ONLY section that ships a titleMobile variant."
+      },
+      "kitImage": {
+        "type": "assetRef",
+        "assetRole": "ui.diagram-background",
+        "required": true
+      },
+      "logoLayers": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "customer.logo",
+        "minItems": 3,
+        "maxItems": 3,
+        "note": "stroke / main / blender layers of a real third-party design system's mark. Compliance-critical \u2014 see assets/asset-roles.json."
+      },
+      "lineMasks": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.diagram-mask",
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "ctaLabel": {
+        "type": "string",
+        "maxWords": 4,
+        "measuredChars": 22
+      }
+    },
+    "additionalProperties": false
+  },
+  "copyBudget": {
+    "eyebrow": {
+      "maxWords": 2,
+      "measuredChars": 17
+    },
+    "titleLines": {
+      "lines": 2,
+      "measuredCharsPerLine": [
+        32,
+        26
+      ],
+      "maxWords": 10
+    },
+    "titleMobileLines": {
+      "lines": 4,
+      "measuredCharsPerLine": [
+        15,
+        16,
+        11,
+        14
+      ]
+    },
+    "description": {
+      "maxWords": 17,
+      "measuredChars": 103,
+      "maxWidth": "420px"
+    }
+  },
+  "geometry": {
+    "maxWidth": "1440px",
+    "padding": "120px 0 257px",
+    "headerMarginBottom": "100px",
+    "kitDesktop": [
+      1177,
+      399
+    ],
+    "kitMobile": [
+      883.5,
+      299
+    ],
+    "logoStack": {
+      "wide": [
+        560,
+        833
+      ],
+      "narrow": [
+        420,
+        624.75
+      ]
+    },
+    "radarRendered": [
+      292,
+      292
+    ],
+    "radarCorrection": "CLONE_SPEC's 367x367 is the radar file's INTRINSIC size. The rendered box is 292x292.",
+    "canvasParticles": 828
+  },
+  "responsive": {
+    "from1200": {
+      "kit": "kit-desktop.png 1177x399",
+      "logoStack": "560x833",
+      "titleVariant": "desktop (2 lines)",
+      "scrubSpan": 539
+    },
+    "below1200": {
+      "kit": "kit-mobile.png 883.5x299",
+      "logoStack": "420x624.75",
+      "titleVariant": "mobile (4 lines)",
+      "scrubSpan": 471.5
+    },
+    "measuredFrom": "../src/components/Radix.jsx:43-54"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "scroll-scrub-reveal",
+      "particle-drift",
+      "masked-line-sweep"
+    ],
+    "requiredReducedMotionFallback": "settle-to-resting-value",
+    "trigger": "scroll-scrub",
+    "scrub": {
+      "progressLaw": "p = clamp((1080.5 - rect.top) / D, 0, 1)",
+      "bandTopPx": 1080.5,
+      "bandTopNote": "T0 is a CONSTANT 1080.5 (measured 1080.44 at vh=900 and 1080.5 at vh=700), so it does NOT track viewport height. The earlier (vh + 180) form was a coincidence at vh=900 and was 200px off at vh=700.",
+      "spanWidePx": 539,
+      "spanNarrowPx": 471.5,
+      "spanBreakpointPx": 1200,
+      "spanNote": "D is WIDTH-dependent: 539 at >=1200px, 471.5 below. Both measured widths sit either side of the 1200px breakpoint at which the logo stack itself steps size. Only two widths were measured, so the MECHANISM is inferred; the two values are not.",
+      "channels": {
+        "stroke": {
+          "transform": "translateY(100 * (1 - p))",
+          "opacity": 1,
+          "damped": true
+        },
+        "main": {
+          "transform": "translateY(100 * (1 - p))",
+          "opacity": 1,
+          "damped": true
+        },
+        "blender": {
+          "transform": "translateY(100 * (1 - p))",
+          "opacity": "p",
+          "dampedTransform": true,
+          "dampedOpacity": false
+        },
+        "lines": {
+          "transform": "translateY(100 * (1 - p))",
+          "opacity": "clamp(1.5 - p, 0.5, 1)",
+          "dampedTransform": true,
+          "dampedOpacity": false
+        }
+      },
+      "dampingNote": "Only the TRANSFORM is damped (lerp 0.0745, settles over 67 frames). On a 480px scroll jump the blender's opacity was already at its final 0.891466 on the FIRST rAF and held for 90 frames with transition-duration 0s, while translateY on the same element took 67 frames. Deriving both from one damped channel made the blender fade lag scroll by ~650ms.",
+      "performanceGate": "An IntersectionObserver with rootMargin '800px 0px 800px 0px' gates the rAF loop. It is NOT the trigger \u2014 the trigger is the clamp. A bare threshold:0 observer would leave the layers frozen, because the band starts below the fold.",
+      "verification": "At vh=900: rect.top 1000 -> p 0.1484 -> translateY 85.16 (site 85.089), blender 0.1484 (site 0.149351); rect.top 700 -> p 0.7050 -> translateY 29.50 (site 29.4365), lines 0.7950 (site 0.794063).",
+      "measuredFrom": "../src/hooks/sequences.js:415-461"
+    },
+    "supersedes": "CLONE_SPEC 3.4's 'no scroll-linked (scrubbed) animation anywhere' is wrong for this section.",
+    "preRevealState": "translateY(100px) with the blender fully transparent. The inline values in a static capture are just the settled END of the scrub."
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustFollowSeparator": true
+  },
+  "measuredFrom": "../src/components/Radix.jsx:24-82"
+}

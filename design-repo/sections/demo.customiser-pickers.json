@@ -1,0 +1,121 @@
+{
+  "id": "demo.customiser-pickers",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PRODUCT_DEMO",
+  "name": "Brand customiser pickers",
+  "purpose": "Let the reader restyle the live preview themselves, which demonstrates the theming contract far faster than describing it.",
+  "tags": [
+    "product-demo",
+    "interactive",
+    "control"
+  ],
+  "uses": [
+    "component.picker-card"
+  ],
+  "interactive": true,
+  "content": {
+    "fields": {
+      "pickers": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "itemFields": {
+          "label": {
+            "type": "string",
+            "maxWords": 2,
+            "measuredChars": [
+              6,
+              9,
+              6
+            ]
+          },
+          "optionCount": {
+            "type": "integer",
+            "const": 4
+          }
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "interaction": {
+    "totalButtons": 12,
+    "pickers": [
+      {
+        "label": "Colour",
+        "writes": "--brand-color",
+        "domain": [
+          "#E46D4C",
+          "#663AF3",
+          "#027DEA",
+          "#269684"
+        ],
+        "default": "#663AF3",
+        "defaultIndex": 1
+      },
+      {
+        "label": "Radius",
+        "writes": "--brand-radius",
+        "domain": [
+          "0px",
+          "3px",
+          "6px",
+          "9999px"
+        ],
+        "default": "3px",
+        "defaultIndex": 1
+      },
+      {
+        "label": "Logo icon",
+        "writes": "--i",
+        "domain": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "default": 0,
+        "mechanism": "--i offsets ONE SVG sprite sheet via object-position: calc(32px * var(--i) * -1) 0. There are not four logo files.",
+        "spriteMeasuredFrom": "../src/components/CustomUI.jsx:12"
+      }
+    ],
+    "a11y": "Every button carries aria-label and aria-pressed.",
+    "measuredFrom": "../src/components/CustomUI.jsx:111-179"
+  },
+  "interactivityScope": {
+    "statement": "This and hero.light-switch are the ONLY two genuinely interactive widgets on the entire site. The other five PRODUCT_DEMO sections are observer- or mount-triggered animation with no user input at all.",
+    "measuredFrom": "../src/components/CustomUI.jsx:44-52"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "card-border-chase",
+      "instant-token-write"
+    ],
+    "requiredReducedMotionFallback": "none",
+    "trigger": "user-input",
+    "loop": true,
+    "pickerChases": [
+      {
+        "startAngle": "189deg",
+        "delayMs": 11000
+      },
+      {
+        "startAngle": "517deg",
+        "delayMs": 9000
+      },
+      {
+        "startAngle": "186deg",
+        "delayMs": 11000
+      }
+    ],
+    "measuredFrom": "../src/components/CustomUI.jsx:114"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustBeInsideSection": "demo.custom-ui-browser"
+  },
+  "measuredFrom": "../src/components/CustomUI.jsx:111-179"
+}

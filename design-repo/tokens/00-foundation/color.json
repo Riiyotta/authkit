@@ -1,0 +1,213 @@
+{
+  "$schema-note": "Flat foundation tokens. Every value is transcribed from a real named theme entry or CSS custom property in the cloned app; no colour here was invented or sampled by eye.",
+  "measuredFrom": "../tailwind.config.js:16-46",
+  "mirroredIn": "../src/index.css:60-81",
+  "evidence": "measured",
+  "note": "The clone's canonical palette is 9 named theme colours plus 15 recurring literals that CLONE_SPEC called out as repeated often enough to name. tailwind.config.js and src/index.css are deliberately kept in sync; src/index.css declares only the first 12 of these as :root custom properties (see tokens/00-foundation/custom-properties.json for the real, counted inventory).",
+  "palette": {
+    "color.surface.page": {
+      "value": "#05060f",
+      "tailwind": "dark-background",
+      "cssVar": "--dark-background",
+      "measuredFrom": "../tailwind.config.js:17"
+    },
+    "color.text.normal": {
+      "value": "#c8d4eac7",
+      "tailwind": "body-normal",
+      "cssVar": "--body-normal",
+      "measuredFrom": "../tailwind.config.js:18"
+    },
+    "color.text.loud": {
+      "value": "#c7d3ea",
+      "tailwind": "body-loud",
+      "cssVar": "--body-loud",
+      "measuredFrom": "../tailwind.config.js:19"
+    },
+    "color.text.muted": {
+      "value": "#c7d3eaa3",
+      "tailwind": "body-muted",
+      "cssVar": "--body-muted",
+      "measuredFrom": "../tailwind.config.js:20"
+    },
+    "color.ink.loud": {
+      "value": "#232425",
+      "tailwind": "blue-loud",
+      "cssVar": "--blue-loud",
+      "measuredFrom": "../tailwind.config.js:21"
+    },
+    "color.border.subtle": {
+      "value": "#bad6f70f",
+      "tailwind": "blue-6",
+      "cssVar": "--blue-6",
+      "measuredFrom": "../tailwind.config.js:22"
+    },
+    "color.border.default": {
+      "value": "#bad7f71f",
+      "tailwind": "blue-12",
+      "cssVar": "--blue-12",
+      "measuredFrom": "../tailwind.config.js:23"
+    },
+    "color.border.strong": {
+      "value": "#bad6f73d",
+      "tailwind": "blue-24",
+      "cssVar": "--blue-24",
+      "measuredFrom": "../tailwind.config.js:24"
+    },
+    "color.border.loud": {
+      "value": "#bad6f7e6",
+      "tailwind": "blue-90",
+      "cssVar": "--blue-90",
+      "measuredFrom": "../tailwind.config.js:25"
+    },
+    "color.hero.faint": {
+      "value": "#bad6f752",
+      "tailwind": "hero-faint",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:28"
+    },
+    "color.glow.light": {
+      "value": "#d1e4fa",
+      "tailwind": "glow-light",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:29"
+    },
+    "color.glow.pale": {
+      "value": "#d8ecf8",
+      "tailwind": "glow-pale",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:30"
+    },
+    "color.glow.blue": {
+      "value": "#98c0ef",
+      "tailwind": "glow-blue",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:31"
+    },
+    "color.glow.violet": {
+      "value": "#c2ccff",
+      "tailwind": "glow-violet",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:32"
+    },
+    "color.glow.indigo": {
+      "value": "#adbbff",
+      "tailwind": "glow-indigo",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:33"
+    },
+    "color.glow.periwinkle": {
+      "value": "#b3bbff",
+      "tailwind": "glow-periwinkle",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:34"
+    },
+    "color.glow.steel": {
+      "value": "#bacff7",
+      "tailwind": "glow-steel",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:35"
+    },
+    "color.readout.blue": {
+      "value": "#b6d9fc",
+      "tailwind": "readout-blue",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:36"
+    },
+    "color.brand.swatch-1": {
+      "value": "#E46D4C",
+      "tailwind": "swatch-1",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:37"
+    },
+    "color.brand.swatch-2": {
+      "value": "#663AF3",
+      "tailwind": "swatch-2",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:38",
+      "note": "The customiser's DEFAULT --brand-color (index 1 of 4)."
+    },
+    "color.brand.swatch-3": {
+      "value": "#027DEA",
+      "tailwind": "swatch-3",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:39"
+    },
+    "color.brand.swatch-4": {
+      "value": "#269684",
+      "tailwind": "swatch-4",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:40"
+    },
+    "color.brand.fallback": {
+      "value": "#6a38ff",
+      "tailwind": "brand-fallback",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:41"
+    },
+    "color.light.ink": {
+      "value": "#111",
+      "tailwind": "light-ink",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:42"
+    },
+    "color.light.ink-soft": {
+      "value": "#333",
+      "tailwind": "light-ink-soft",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:43"
+    },
+    "color.light.card": {
+      "value": "#fffffffc",
+      "tailwind": "light-card",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:44"
+    },
+    "color.light.switch-track": {
+      "value": "#e8e9ef",
+      "tailwind": "switch-light-track",
+      "cssVar": null,
+      "measuredFrom": "../tailwind.config.js:45"
+    }
+  },
+  "gradients": {
+    "gradient.background-6": {
+      "value": "linear-gradient(0deg, #d8ecf80f 0%, #98c0ef0f 100%)",
+      "measuredFrom": "../tailwind.config.js:77",
+      "cssVar": "--gradient-background-6"
+    },
+    "gradient.loud-100": {
+      "value": "linear-gradient(0deg, #d8ecf8 0%, #98c0ef 100%)",
+      "measuredFrom": "../tailwind.config.js:78",
+      "cssVar": "--gradient-loud-100"
+    },
+    "gradient.subdued-12": {
+      "value": "linear-gradient(0deg, #d8ecf81f 0%, #98c0ef1f 100%)",
+      "measuredFrom": "../tailwind.config.js:79",
+      "cssVar": "--gradient-subdued-12"
+    },
+    "gradient.label": {
+      "value": "linear-gradient(#98c0ef 0%, #d8ecf8 100%)",
+      "measuredFrom": "../tailwind.config.js:80"
+    },
+    "gradient.status-green": {
+      "value": "linear-gradient(#c9ffd5 0%, #caf1fd 100%)",
+      "measuredFrom": "../tailwind.config.js:81"
+    },
+    "gradient.status-blue": {
+      "value": "linear-gradient(#8ebbff 0%, #bedefc 100%)",
+      "measuredFrom": "../tailwind.config.js:82"
+    },
+    "gradient.status-pink": {
+      "value": "linear-gradient(#ed98ef 0%, #fde9ca 100%)",
+      "measuredFrom": "../tailwind.config.js:83"
+    },
+    "gradient.status-cyan": {
+      "value": "linear-gradient(#98daef 0%, #d7cafd 100%)",
+      "measuredFrom": "../tailwind.config.js:84"
+    },
+    "gradient.status-bar-red": {
+      "value": "linear-gradient(90deg, #fe90be 0%, #ff9595 100%)",
+      "measuredFrom": "../tailwind.config.js:85"
+    }
+  }
+}

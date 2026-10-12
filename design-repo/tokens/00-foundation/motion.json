@@ -1,0 +1,203 @@
+{
+  "evidence": "measured",
+  "authority": "../src/hooks/sequences.js and ../src/hooks/motion.js are the authoritative motion sources for this project. CLONE_SPEC.md sections 2.2, 3.4, 4.2, 4.4, 4.5 and 4.6 were superseded by two independent re-measurement passes against the live original; see extraction/measured-values.json#supersededClaims.",
+  "easings": {
+    "ease.house": {
+      "value": "cubic-bezier(0.6, 0.6, 0, 1)",
+      "cssVar": "--ease-house",
+      "tailwind": "house",
+      "measuredFrom": "../src/index.css:79",
+      "usage": "the site-wide default"
+    },
+    "ease.quart": {
+      "value": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "cssVar": "--ease-quart",
+      "tailwind": "quart",
+      "measuredFrom": "../src/index.css:80",
+      "usage": "the hero light-switch thumb only"
+    },
+    "ease.linear": {
+      "value": "linear",
+      "measuredFrom": "../src/index.css:103",
+      "usage": "every glow/border-chase keyframe"
+    }
+  },
+  "triggerModes": {
+    "intersection-threshold-0": {
+      "config": {
+        "threshold": 0,
+        "rootMargin": null
+      },
+      "oneShot": true,
+      "note": "Every real trigger observer on the page is a bare {threshold: 0} with NO rootMargin. Nothing is ever re-armed and no `-active` class is ever removed, so armed cascades are one-shot and keep their own clock after arming.",
+      "measuredFrom": "../src/hooks/motion.js:34-57",
+      "supersedes": "CLONE_SPEC 3.4's rootMargin:'200px' and 2.2's '0px 0px -100px 0px' are both wrong; CLONE_SPEC 3.4's 'clear the interval on exit' is not real behaviour."
+    },
+    "mount": {
+      "note": "Two timelines are NOT intersection-gated and run from page load: the RBAC card's clock and the complete section's user-progress rows. Verified by parking the original at scrollY 407 with both blocks far below the fold and observing inline writes already in flight.",
+      "measuredFrom": "../src/hooks/motion.js:375-399"
+    },
+    "scroll-scrub": {
+      "note": "Two systems are genuinely scroll-scrubbed. A performance-only IntersectionObserver with rootMargin '800px 0px 800px 0px' gates the rAF loop; it is NOT the trigger \u2014 the trigger is the clamp inside the progress function.",
+      "measuredFrom": "../src/hooks/motion.js:281-350",
+      "supersedes": "CLONE_SPEC 3.4's 'no scroll-linked (scrubbed) animation anywhere' is wrong."
+    },
+    "paint-time-intro": {
+      "note": "The hero's intro is a paint-time state in the original's server HTML (`.hero--intro`), not a transition from a previous state. The clone adds the class on the next frame, which is one frame later by necessity; the END states match.",
+      "measuredFrom": "../src/components/Hero.jsx:71-82"
+    },
+    "user-input": {
+      "note": "Click only. Two widgets site-wide (hero light switch, 12-button customiser).",
+      "measuredFrom": "../src/components/Hero.jsx:188-204"
+    }
+  },
+  "dampingRates": {
+    "lerp.default": {
+      "value": 0.075,
+      "unit": "per frame",
+      "evidence": "inferred",
+      "measuredFrom": "../src/hooks/motion.js:270",
+      "note": "Fitted from the geometric tail of the settle (ratio ~0.625 per ~6 frames). The TARGETS it damps toward are exact."
+    },
+    "lerp.radix": {
+      "value": 0.0745,
+      "unit": "per frame",
+      "evidence": "measured",
+      "measuredFrom": "../src/hooks/sequences.js:454",
+      "note": "translateY settles over 67 frames (~1.1s)."
+    },
+    "lerp.rbac-settle": {
+      "value": 0.0485,
+      "unit": "per frame",
+      "evidence": "measured",
+      "measuredFrom": "../src/hooks/rbacLerp.js:28-29",
+      "note": "Per-frame residual ratio 0.9515."
+    },
+    "lerp.rbac-exit": {
+      "value": 0.105,
+      "unit": "per frame",
+      "evidence": "inferred",
+      "measuredFrom": "../src/hooks/sequences.js:291-298",
+      "note": "EVIDENCE GAP. See docs/evidence-gaps.md#rbac-exit-rate."
+    }
+  },
+  "keyframes": {
+    "count": 29,
+    "soleLocation": "../src/index.css:266-523",
+    "rule": "All 29 @keyframes blocks live in src/index.css and nowhere else. No section stylesheet declares one. Verified: grep -c '^@keyframes' returns 29 for src/index.css and 0 for every src/styles/*.css.",
+    "names": [
+      "spotlight-opacity",
+      "spotlight-scale",
+      "line-anim",
+      "card-line-anim",
+      "sky-anim",
+      "line-opacity",
+      "line-opacity-loop",
+      "feature-intro",
+      "feature-separator-mask",
+      "feature-icon-shine",
+      "dashboard-application-button-press",
+      "dashboard-work-lights-rotate",
+      "spin",
+      "dashboard-events-spinner",
+      "dashboard-lines-spin",
+      "radix-logo-lines",
+      "security-leaked-line",
+      "security-automatic-radar",
+      "dot-animation-1",
+      "dot-animation-2",
+      "dot-animation-3",
+      "dot-animation-4",
+      "dot-animation-5",
+      "complete-line",
+      "complete-social-breath",
+      "complete-multi-border",
+      "complete-single-line",
+      "complete-directory",
+      "cta-line-anim"
+    ],
+    "note": "`line-anim` exists twice in the original stylesheet under two CSS-module scopes; the clone keeps them as `line-anim` and `card-line-anim`."
+  },
+  "reducedMotion": {
+    "originalBehaviour": "The original guards only `.spotlight`.",
+    "cloneBehaviour": "The clone adds a global guard clamping animation-duration and transition-duration to 0.01ms with iteration-count 1, AND every JS loop checks prefersReducedMotion() itself. This is a deliberate accessibility improvement over the original, not a fidelity defect.",
+    "measuredFrom": "../src/index.css:525-533",
+    "jsOptOut": "../src/hooks/motion.js:16-22"
+  },
+  "particleFields": {
+    "note": "Four canvases, read off the original's own instrumented draw calls (ctx.clearRect / ctx.arc / ctx.fillStyle patched on the live site). CLONE_SPEC 4.1 marked these approximate; they are now measured.",
+    "measuredFrom": "../src/hooks/motion.js:78-254",
+    "countLaw": {
+      "starfield": {
+        "formula": "round(w * h / 1666.67)",
+        "radius": 0.5,
+        "instances": [
+          {
+            "box": "1280x1222",
+            "count": 938,
+            "where": "hero"
+          },
+          {
+            "box": "1280x1078",
+            "count": 828,
+            "where": "radix"
+          },
+          {
+            "box": "992x664",
+            "count": 395,
+            "where": "customui browser pane"
+          }
+        ],
+        "measuredFrom": "../src/hooks/motion.js:111-122"
+      },
+      "dotField": {
+        "formula": "round(w * h / 553)",
+        "radius": 1.5,
+        "instances": [
+          {
+            "box": "128x363",
+            "count": 84,
+            "where": "security RBAC"
+          }
+        ],
+        "measuredFrom": "../src/hooks/motion.js:123-130"
+      }
+    },
+    "drift": {
+      "starfield": {
+        "vx": 0,
+        "vy": "-(0.1 + random() * 0.2) * (h / 1200)",
+        "note": "Height-normalised, so every starfield crosses its own canvas in the same time. x NEVER changes.",
+        "measuredFrom": "../src/hooks/motion.js:121"
+      },
+      "dotField": {
+        "vx": "-(1.2 + random() * 0.4) * (w / 1200)",
+        "vy": 0,
+        "note": "Width-normalised. The only field that moves horizontally; y NEVER changes.",
+        "measuredFrom": "../src/hooks/motion.js:129"
+      }
+    },
+    "alpha": {
+      "formula": "Math.sin(phase)",
+      "note": "A RAW sine, not an absolute value. Negative alphas are passed straight to rgba() (the original really does emit rgba(255,255,255,-0.48...)) and clamp to invisible, so ~48% of particles are mathematically invisible at any instant.",
+      "measuredFrom": "../src/hooks/motion.js:202"
+    },
+    "fill": {
+      "value": "rgb(255, 255, 255)",
+      "note": "White is the ONLY fill colour any of the four canvases ever uses.",
+      "measuredFrom": "../src/hooks/motion.js:202"
+    },
+    "twinklePhaseStep": {
+      "value": 0.062,
+      "unit": "rad/frame (upper bound of a uniform distribution)",
+      "evidence": "measured",
+      "method": "Derived analytically: cos(s) = (a0 + a2) / (2*a1) from three consecutive frames at full float precision over 724 particles; three independent estimators read 0.0653 / 0.0611 / 0.0623.",
+      "supersedes": "the earlier 0.07 / 0.075 zero-crossing fits",
+      "measuredFrom": "../src/hooks/motion.js:133-138"
+    },
+    "sizing": {
+      "rule": "All four canvases are lazily sized to their LAYOUT box (offsetWidth/offsetHeight) on first intersection, with no devicePixelRatio scaling. Using getBoundingClientRect() is wrong: `.security-rbac__dots` carries transform:scale(0.5), so the client rect reads 64x182 while the real backing store is 128x363.",
+      "measuredFrom": "../src/hooks/motion.js:171-195"
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "id": "demo.dashboard",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PRODUCT_DEMO",
+  "name": "Architecture node diagram",
+  "purpose": "Show that the product drops into any app architecture, by animating data moving between six named system nodes.",
+  "tags": [
+    "product-demo",
+    "diagram",
+    "animation"
+  ],
+  "uses": [
+    "component.section-header",
+    "component.dot-rows",
+    "component.masked-line"
+  ],
+  "content": {
+    "fields": {
+      "header": {
+        "type": "object",
+        "contract": "component.section-header",
+        "required": true
+      },
+      "background": {
+        "type": "assetRef",
+        "assetRole": "ui.diagram-background",
+        "required": true
+      },
+      "nodeAssets": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.diagram-background"
+      },
+      "connectorMasks": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.diagram-mask",
+        "minItems": 5,
+        "maxItems": 5
+      }
+    },
+    "additionalProperties": false
+  },
+  "copyBudget": {
+    "eyebrow": {
+      "maxWords": 3,
+      "measuredChars": 20
+    },
+    "titleLines": {
+      "lines": 2,
+      "measuredCharsPerLine": [
+        32,
+        20
+      ],
+      "maxWords": 4
+    },
+    "description": {
+      "maxWords": 17,
+      "measuredChars": 108,
+      "maxWidth": "440px"
+    }
+  },
+  "geometry": {
+    "maxWidth": "1440px",
+    "height": "1032px",
+    "headerTop": "120px",
+    "nodes": [
+      "application",
+      "auth",
+      "work",
+      "user",
+      "events",
+      "database"
+    ],
+    "connectorLines": 5,
+    "connectorCorrection": "CLONE_SPEC says 4 connector lines. The real DOM has 5. Cite 5.",
+    "databaseBars": 9,
+    "databaseBarRestingHeight": "2px",
+    "databaseBoxHeight": "28px",
+    "dotRows": 2,
+    "dotsPerRow": 6
+  },
+  "responsive": {
+    "from1200": {
+      "background": "bg-desktop.png at 1440x1032"
+    },
+    "below1200": {
+      "background": "bg-mobile.png at 697x506.5"
+    },
+    "measuredFrom": "../src/components/Dashboard.jsx:58-69"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "armed-node-cascade",
+      "dot-typewriter",
+      "equaliser-reroll",
+      "masked-line-sweep"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "trigger": "intersection-threshold-0",
+    "oneShot": true,
+    "cascadeStepMs": 833,
+    "cascadeOrder": [
+      "application",
+      "auth",
+      "work",
+      "user",
+      "events",
+      "database"
+    ],
+    "cascadeNote": "Step is 833ms EXACTLY (recorded 370/1203/2036/2870/3703/4536; the 370ms offset is scroll-behavior:smooth settling, not a timeline delay). The `lines` items fire with `application` on step 0. No `-active` class is ever removed, so the cascade is one-shot.",
+    "typewriter": {
+      "periodMs": 4000,
+      "onMs": 1802,
+      "appliesTo": [
+        "application",
+        "auth"
+      ],
+      "note": "auth is the same loop offset by +833ms. Measured over 20s: +animate at 465/4465/8465/12465/16464, -animate at 2267/6266/10265/14266/18266."
+    },
+    "equaliser": {
+      "bars": 9,
+      "intervalMs": 800,
+      "minPx": 2,
+      "maxPx": 27,
+      "containerPx": 28,
+      "cssTransition": "height 1s linear",
+      "correction": "CLONE_SPEC 4.5 says 20 bars on a 1s re-roll. Measured: 9 bars at 800ms (intervals 799/800/800/800/800/800/801/799/800/800) in a 28px box."
+    },
+    "dotDelayFormula": "0.2s + 0.1s * dotIndex across both rows",
+    "connectorDurationMs": 5000,
+    "connectorStartAngle": "225deg",
+    "supersedes": "CLONE_SPEC 4.2's derived ~750ms sequence step appears nowhere on this page.",
+    "measuredFrom": "../src/hooks/sequences.js:16-53"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1
+  },
+  "measuredFrom": "../src/components/Dashboard.jsx:36-138"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "primitive.icon",
+  "name": "icons",
+  "purpose": "Inline SVG glyphs. All of them live in one module; no component declares an SVG path inline except the four RBAC button shapes, which are data rather than chrome.",
+  "tags": [
+    "icon"
+  ],
+  "rule": "Every icon in this design system is exported from one module. A generator must not inline a new SVG path into a section.",
+  "exports": [
+    "PoweredByWordmark",
+    "HeroMarkIcon",
+    "GithubIcon",
+    "GoogleIcon",
+    "MicrosoftIcon",
+    "SOCIAL_ICONS",
+    "MoonIcon",
+    "SunIcon",
+    "XGlyph"
+  ],
+  "exportCount": 9,
+  "knownException": {
+    "what": "4 RBAC button shapes",
+    "where": "../src/components/Security.jsx:18-31",
+    "why": "They are per-role readout data (circle / square / triangle / cross), driven by the measured per-role lit-shape set, not reusable chrome."
+  },
+  "measuredFrom": "../src/components/icons.jsx:5-114",
+  "evidence": "measured"
+}

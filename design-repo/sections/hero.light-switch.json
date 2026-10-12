@@ -1,0 +1,63 @@
+{
+  "id": "hero.light-switch",
+  "evidence": "measured",
+  "supportsLightSubtree": true,
+  "retrievalEligible": true,
+  "category": "HERO",
+  "name": "Hero light switch",
+  "purpose": "Prove the product themes cleanly, by letting the reader flip the three live previews themselves.",
+  "tags": [
+    "hero",
+    "interactive",
+    "theme",
+    "control"
+  ],
+  "uses": [
+    "primitive.light-switch"
+  ],
+  "interactive": true,
+  "content": {
+    "fields": {
+      "switchLabel": {
+        "type": "string",
+        "maxWords": 6,
+        "measuredChars": 27,
+        "note": "aria-label."
+      },
+      "caption": {
+        "type": "string",
+        "maxWords": 5,
+        "measuredChars": 31
+      }
+    },
+    "additionalProperties": false
+  },
+  "interaction": {
+    "control": "one role=switch button",
+    "states": [
+      "unchecked",
+      "checked"
+    ],
+    "effect": "Toggles a `.light` class on the three hero AuthCard subtrees.",
+    "rule": "Light mode is a class cascade plus custom properties. There are deliberately NO forked `-light` components anywhere in this system.",
+    "measuredFrom": "../src/components/Hero.jsx:188-204"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "switch-thumb-travel",
+      "hero-intro-fade"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "durationMs": 600,
+    "easing": "ease.quart",
+    "delayMs": 2100,
+    "thumbTravelPx": 116,
+    "measuredFrom": "../src/styles/hero.css:504-514"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true,
+    "maxPerPage": 1
+  },
+  "measuredFrom": "../src/components/Hero.jsx:188-204"
+}

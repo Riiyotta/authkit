@@ -1,0 +1,142 @@
+{
+  "evidence": "measured",
+  "note": "The real, counted inventory of CSS custom properties in the clone. Recorded because an earlier project note asserted '57 CSS custom properties'; no counting method reproduces 57 (see extraction/measured-values.json#groundworkCorrections).",
+  "counts": {
+    "rootDeclarations": 17,
+    "uniqueNamesAcrossAllStylesheets": 40,
+    "declarationSitesAcrossAllStylesheets": 74,
+    "atPropertyRegistrations": 2
+  },
+  "measurementMethod": "grep -ohE '^[[:space:]]*--[a-zA-Z0-9-]+[[:space:]]*:' over src/index.css and src/styles/*.css; :root counted from src/index.css:60-81",
+  "rootProperties": [
+    "--dark-background",
+    "--body-normal",
+    "--body-loud",
+    "--body-muted",
+    "--blue-loud",
+    "--blue-6",
+    "--blue-12",
+    "--blue-24",
+    "--blue-90",
+    "--gradient-background-6",
+    "--gradient-loud-100",
+    "--gradient-subdued-12",
+    "--font-sans",
+    "--font-display",
+    "--font-dot-digital",
+    "--ease-house",
+    "--ease-quart"
+  ],
+  "rootMeasuredFrom": "../src/index.css:60-81",
+  "atProperty": [
+    {
+      "name": "--angle",
+      "syntax": "<angle>",
+      "initialValue": "0deg",
+      "inherits": false,
+      "measuredFrom": "../src/index.css:83-87"
+    },
+    {
+      "name": "--cta-angle",
+      "syntax": "<angle>",
+      "initialValue": "0deg",
+      "inherits": false,
+      "measuredFrom": "../src/index.css:88-92"
+    }
+  ],
+  "componentScopedNames": [
+    "--circle-color",
+    "--columns",
+    "--delay",
+    "--dot-color",
+    "--dot-size",
+    "--duration",
+    "--easing",
+    "--focus-color",
+    "--focus-width",
+    "--gap",
+    "--gradient-spread",
+    "--intro-delay",
+    "--line-color",
+    "--line-opacity",
+    "--line-width",
+    "--logo-height",
+    "--section-height",
+    "--section-max-height",
+    "--separator-width",
+    "--size",
+    "--start-angle"
+  ],
+  "runtimeWrittenNames": [
+    {
+      "name": "--brand-color",
+      "writtenBy": "customiser colour picker + per-instance hero card styles",
+      "measuredFrom": "../src/components/CustomUI.jsx:84"
+    },
+    {
+      "name": "--brand-radius",
+      "writtenBy": "customiser radius picker + per-instance hero card styles",
+      "measuredFrom": "../src/components/CustomUI.jsx:84"
+    },
+    {
+      "name": "--i",
+      "writtenBy": "customiser logo picker and the features strip stagger index",
+      "measuredFrom": "../src/components/CustomUI.jsx:92"
+    },
+    {
+      "name": "--play-state",
+      "writtenBy": "the features strip's IntersectionObserver",
+      "measuredFrom": "../src/components/FeaturesSlider.jsx:34"
+    },
+    {
+      "name": "--step",
+      "writtenBy": "the password-strength timeline",
+      "measuredFrom": "../src/hooks/sequences.js:165"
+    },
+    {
+      "name": "--transition-delay",
+      "writtenBy": "the dashboard dot-typewriter generator",
+      "measuredFrom": "../src/components/Dashboard.jsx:12"
+    },
+    {
+      "name": "--mask-image",
+      "writtenBy": "every masked line/halo overlay",
+      "measuredFrom": "../src/components/Dashboard.jsx:77"
+    },
+    {
+      "name": "--color-swatch",
+      "writtenBy": "the customiser colour picker buttons",
+      "measuredFrom": "../src/components/CustomUI.jsx:126"
+    },
+    {
+      "name": "--border-radius",
+      "writtenBy": "the customiser radius picker buttons",
+      "measuredFrom": "../src/components/CustomUI.jsx:175"
+    },
+    {
+      "name": "--rotate",
+      "writtenBy": "the three hero spotlights",
+      "measuredFrom": "../src/components/Hero.jsx:13-17"
+    },
+    {
+      "name": "--scale",
+      "writtenBy": "the three hero spotlights",
+      "measuredFrom": "../src/components/Hero.jsx:13-17"
+    },
+    {
+      "name": "--input-height",
+      "writtenBy": "the OTP row",
+      "measuredFrom": "../src/components/AuthCard.jsx:70"
+    },
+    {
+      "name": "--animation-duration",
+      "writtenBy": "the dashboard connector lines",
+      "measuredFrom": "../src/components/Dashboard.jsx:77"
+    },
+    {
+      "name": "--mask-position",
+      "writtenBy": "reserved by the feature-separator keyframes",
+      "measuredFrom": "../src/index.css:337-342"
+    }
+  ]
+}

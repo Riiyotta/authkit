@@ -1,0 +1,52 @@
+{
+  "id": "primitive.feature-tile",
+  "name": "FeatureTile",
+  "className": ".features-slider__item",
+  "purpose": "One capability as a 48x48 icon over a nowrap label, with an optional connector separator.",
+  "tags": [
+    "icon",
+    "label",
+    "capability"
+  ],
+  "props": {
+    "index": {
+      "type": "integer",
+      "note": "written out as --i, which drives the 1.2s stagger"
+    },
+    "withSeparator": {
+      "type": "boolean"
+    },
+    "mobileLabel": {
+      "type": "string",
+      "note": "a shorter art-directed label swapped in below 940px"
+    }
+  },
+  "iconBox": "48x48 displayed, 96x96 intrinsic",
+  "copyBudget": {
+    "label": {
+      "maxWords": 4,
+      "measuredChars": [
+        14,
+        8,
+        17,
+        12,
+        25,
+        10
+      ]
+    },
+    "mobileLabel": {
+      "maxWords": 3,
+      "measuredChars": [
+        14,
+        8,
+        17,
+        12,
+        4,
+        10
+      ]
+    },
+    "note": "Exactly one tile has a materially shorter mobile label (25 chars -> 4)."
+  },
+  "measuredFrom": "../src/components/primitives.jsx:156-171",
+  "evidence": "measured"
+}

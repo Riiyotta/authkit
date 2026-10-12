@@ -1,0 +1,79 @@
+{
+  "id": "chrome.hero-header",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CHROME",
+  "name": "Static hero header",
+  "purpose": "Identify the product and its parent company, and offer the two entry actions, without ever competing with the page as the reader scrolls.",
+  "tags": [
+    "chrome",
+    "header",
+    "static"
+  ],
+  "uses": [
+    "primitive.glowing-button",
+    "primitive.icon",
+    "primitive.inert-link"
+  ],
+  "content": {
+    "fields": {
+      "companyHeading": {
+        "type": "string",
+        "maxWords": 1,
+        "measuredChars": 7,
+        "visuallyHidden": true,
+        "note": "An h2 carried for screen readers only."
+      },
+      "poweredByWordmark": {
+        "type": "assetRef",
+        "assetRole": "brand.wordmark",
+        "required": true
+      },
+      "productMark": {
+        "type": "assetRef",
+        "assetRole": "brand.product-mark",
+        "required": true
+      },
+      "iconActionLabel": {
+        "type": "string",
+        "maxWords": 5,
+        "measuredChars": 21,
+        "note": "aria-label on the icon-only button."
+      },
+      "primaryActionLabel": {
+        "type": "string",
+        "maxWords": 2,
+        "measuredChars": 11
+      }
+    },
+    "additionalProperties": false
+  },
+  "structuralAnomaly": {
+    "severity": "document, do not normalise",
+    "statement": "There is NO <nav> element anywhere on this site, and this header is position:static with ZERO scroll behaviour \u2014 no sticky, no blur, no shrink, no shadow. It is a <header> placed in the hero's grid, and it scrolls away like any other content.",
+    "measuredFrom": "../src/components/Hero.jsx:122-140",
+    "rule": "A generator MUST NOT add a nav element, a sticky header, or any scroll-reactive chrome."
+  },
+  "knownOverflow": {
+    "statement": "At >=640px the header deliberately re-uses the hero's 17-column template, which makes it overflow at 768px. Reproduced from the original.",
+    "measuredFrom": "../src/styles/hero.css:91-97"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-intro-fade"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "durationMs": 1500,
+    "delayMs": 300,
+    "measuredFrom": "../src/components/Hero.jsx:71-78"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "mustBeFirst": false,
+    "mustImmediatelyFollow": "chrome.hairline-grid",
+    "heroOnly": true,
+    "note": "The FIRST node of the template is chrome.hairline-grid; this header is node 1. It is the first node carrying content."
+  },
+  "measuredFrom": "../src/components/Hero.jsx:122-140"
+}

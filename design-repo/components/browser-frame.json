@@ -1,0 +1,15 @@
+{
+  "id": "component.browser-frame",
+  "name": "browser",
+  "className": ".browser",
+  "purpose": "A faux browser chrome that reads as 'this is your real app', hosting the live AuthCard preview and its pickers.",
+  "tags": [
+    "frame",
+    "chrome"
+  ],
+  "structure": ".browser > .browser__header + .browser__content (which contains a canvas starfield, the preview card, 3 picker cards and 5 decorative screenshots)",
+  "paneSize": "992x664",
+  "canvasParticles": 395,
+  "measuredFrom": "../src/components/CustomUI.jsx:72-74",
+  "evidence": "measured"
+}

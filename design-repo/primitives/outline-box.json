@@ -1,0 +1,45 @@
+{
+  "id": "primitive.outline-box",
+  "name": "OutlineBox",
+  "className": ".outline-box",
+  "purpose": "Frame a block in the site's dotted/hairline corner treatment, so a block reads as a measured cell of the page's grid rather than a floating card.",
+  "tags": [
+    "frame",
+    "chrome",
+    "hairline"
+  ],
+  "modifiers": [
+    {
+      "name": "-lines",
+      "effect": "adds the side rules"
+    },
+    {
+      "name": "-dots",
+      "effect": "adds the corner dots"
+    }
+  ],
+  "props": {
+    "as": {
+      "type": "string",
+      "default": "div"
+    },
+    "lines": {
+      "type": "boolean",
+      "default": false
+    },
+    "dots": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "usedBy": [
+    "hero.wordmark",
+    "hero.headline",
+    "demo.custom-ui-browser",
+    "demo.customiser-pickers",
+    "proof.testimonials",
+    "conversion.cta-boxes"
+  ],
+  "measuredFrom": "../src/components/primitives.jsx:17-25",
+  "evidence": "measured"
+}

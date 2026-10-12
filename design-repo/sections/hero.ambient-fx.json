@@ -1,0 +1,72 @@
+{
+  "id": "hero.ambient-fx",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "HERO",
+  "name": "Hero ambient effects",
+  "purpose": "Give the hero atmospheric depth without adding anything a reader has to parse.",
+  "tags": [
+    "hero",
+    "ambient",
+    "canvas",
+    "decorative"
+  ],
+  "uses": [
+    "component.particle-canvas"
+  ],
+  "content": {
+    "fields": {},
+    "additionalProperties": false,
+    "note": "Non-interactive, zero content. Purely atmospheric."
+  },
+  "composition": {
+    "spotlights": 3,
+    "canvas": 1,
+    "flareVideo": 1
+  },
+  "spotlights": [
+    {
+      "--rotate": "20deg",
+      "--scale": 1,
+      "--duration": "5s"
+    },
+    {
+      "--rotate": "0deg",
+      "--scale": 1.02,
+      "--duration": "8s"
+    },
+    {
+      "--rotate": "-20deg",
+      "--scale": 1,
+      "--duration": "4s"
+    }
+  ],
+  "canvas": {
+    "kind": "stars",
+    "box": [
+      1280,
+      1222
+    ],
+    "particleCount": 938,
+    "radius": 0.5,
+    "cssOpacity": 0.5,
+    "countFormula": "round(w*h/1666.67)"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "spotlight-breathe",
+      "particle-drift",
+      "one-shot-flare"
+    ],
+    "requiredReducedMotionFallback": "none",
+    "loop": true,
+    "reducedMotionNote": "The spotlights are the ONLY prefers-reduced-motion carve-out the ORIGINAL ships. The clone additionally stops the particle rAF loop entirely under reduced motion.",
+    "measuredFrom": "../src/components/Hero.jsx:84-87"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true
+  },
+  "measuredFrom": "../src/components/Hero.jsx:98-105"
+}

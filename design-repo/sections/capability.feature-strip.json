@@ -1,0 +1,105 @@
+{
+  "id": "capability.feature-strip",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CAPABILITY",
+  "name": "Capability feature strip",
+  "purpose": "Enumerate the product's six capabilities compactly, so a reader can confirm their own requirement is covered before reading further.",
+  "tags": [
+    "capability",
+    "icon-strip",
+    "enumeration"
+  ],
+  "uses": [
+    "primitive.feature-tile"
+  ],
+  "content": {
+    "fields": {
+      "tiles": {
+        "type": "array",
+        "minItems": 6,
+        "maxItems": 6,
+        "itemFields": {
+          "label": {
+            "type": "string",
+            "maxWords": 4,
+            "measuredChars": [
+              14,
+              8,
+              17,
+              12,
+              25,
+              10
+            ]
+          },
+          "mobileLabel": {
+            "type": "string",
+            "maxWords": 3,
+            "measuredChars": [
+              14,
+              8,
+              17,
+              12,
+              4,
+              10
+            ]
+          },
+          "icon": {
+            "type": "assetRef",
+            "assetRole": "ui.feature-icon",
+            "intrinsic": "96x96",
+            "displayed": "48x48"
+          }
+        }
+      }
+    },
+    "additionalProperties": false
+  },
+  "notACarousel": {
+    "statement": "This is a static grid with a one-shot entrance, NOT a carousel. Despite the `features-slider` class name there is no transport, no autoplay transport, no dots and no drag.",
+    "measuredFrom": "../src/components/FeaturesSlider.jsx:5"
+  },
+  "responsive": {
+    "below940": {
+      "columns": 3,
+      "gap": "4px",
+      "separatorWidth": "56px",
+      "thirdTileSeparator": "hidden",
+      "labelSwap": "mobileLabel is used"
+    },
+    "from940": {
+      "columns": 6,
+      "gap": "14px",
+      "separatorWidth": "72px",
+      "thirdTileSeparator": "shown",
+      "labelSwap": "full label is used"
+    },
+    "measuredFrom": "../src/styles/features-slider.css:27-72"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "staggered-entrance"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "trigger": "intersection-threshold-0",
+    "oneShot": true,
+    "durationMs": 1500,
+    "stepMs": 1200,
+    "stepFormula": "--delay: calc(var(--i, 0) * 1.2s)",
+    "gate": {
+      "property": "--play-state",
+      "resting": "paused",
+      "armed": "running",
+      "divergence": "The ORIGINAL writes `--play-state: playing`, which is not a valid animation-play-state keyword and works only because the invalid value computes to the initial `running`. The clone writes `running` \u2014 valid CSS, identical resulting motion."
+    },
+    "observerNote": "A bare {threshold: 0} with no rootMargin. Flips between rect.top 902 and 892 at a 900px viewport \u2014 exactly the fold. Fire-once; never unset.",
+    "measuredFrom": "../src/components/FeaturesSlider.jsx:5-17"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustFollowSection": "the hero"
+  },
+  "measuredFrom": "../src/components/FeaturesSlider.jsx:28-46"
+}

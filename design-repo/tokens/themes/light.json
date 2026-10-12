@@ -1,0 +1,26 @@
+{
+  "id": "theme.light",
+  "isDefault": false,
+  "scope": "SUBTREE ONLY. There is no light page theme. `.light` is applied to the three hero AuthCard subtrees by the hero light switch and nowhere else.",
+  "mechanism": "A `.light` ancestor class cascade plus custom properties. There are deliberately NO forked `-light` components \u2014 base.css ships `.light .x-<base>` rules so the ancestor class alone flips a subtree.",
+  "rule": "A generator MUST NOT create a `-light` variant of any primitive, component or section. Light appearance is expressed solely as `theme: \"light\"` on a node whose section declares `supportsLightSubtree: true`.",
+  "evidence": "measured",
+  "measuredFrom": "../src/styles/base.css:6-10",
+  "appliedBy": "../src/components/Hero.jsx:181",
+  "resolved": {
+    "text.muted": "#00003ba3",
+    "betweenLines.color": "#00082f47",
+    "betweenLines.lineColor": "#00003b0d",
+    "card.surface": "#fffffffc",
+    "card.ink": "#05060f",
+    "switch.track": "#e8e9ef",
+    "switch.thumb": "#fff",
+    "switch.ink": "#00003b"
+  },
+  "resolvedMeasuredFrom": "../src/styles/base.css:165-167",
+  "resolvedAlsoMeasuredFrom": [
+    "../src/styles/base.css:309-314",
+    "../src/styles/hero.css:455-457",
+    "../src/styles/hero.css:542-549"
+  ]
+}

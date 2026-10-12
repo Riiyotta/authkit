@@ -1,0 +1,30 @@
+{
+  "id": "primitive.input",
+  "name": "Input",
+  "className": ".input",
+  "purpose": "The AuthCard's text/OTP field.",
+  "tags": [
+    "control",
+    "form"
+  ],
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "solid",
+        "outline"
+      ],
+      "default": "solid"
+    }
+  },
+  "realDomClasses": [
+    ".input-solid"
+  ],
+  "a11yAndHygiene": {
+    "data-1p-ignore": "true",
+    "autoComplete": "off",
+    "note": "Set on every input so password managers do not interfere with the decorative demo forms."
+  },
+  "measuredFrom": "../src/components/primitives.jsx:67-79",
+  "evidence": "measured"
+}

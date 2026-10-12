@@ -1,0 +1,58 @@
+{
+  "id": "hero.wordmark",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "HERO",
+  "name": "Hero wordmark plate",
+  "purpose": "State the product's name at the largest scale on the page, framed as a plate in the hero grid, with a one-shot light flare across it.",
+  "tags": [
+    "hero",
+    "brand",
+    "identity"
+  ],
+  "uses": [
+    "primitive.outline-box"
+  ],
+  "content": {
+    "fields": {
+      "wordmark": {
+        "type": "assetRef",
+        "assetRole": "brand.wordmark",
+        "required": true,
+        "intrinsic": "476x106"
+      },
+      "flareVideo": {
+        "type": "assetRef",
+        "assetRole": "motion.flare-video",
+        "required": false,
+        "intrinsic": "1280x600"
+      }
+    },
+    "additionalProperties": false
+  },
+  "geometry": {
+    "plateRow": "135px at >=640px; var(--logo-height) below",
+    "svg": "476x106",
+    "videoAttrs": "autoPlay muted playsInline preload=auto"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-intro-fade",
+      "one-shot-flare"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "durationMs": 2000,
+    "delayMs": 100,
+    "flare": {
+      "loop": false,
+      "note": "The `loop` attribute is deliberately ABSENT \u2014 the flare plays once and stops. Not an oversight."
+    },
+    "measuredFrom": "../src/components/Hero.jsx:144-150"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true
+  },
+  "measuredFrom": "../src/components/Hero.jsx:144-150"
+}

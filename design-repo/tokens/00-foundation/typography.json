@@ -1,0 +1,198 @@
+{
+  "measuredFrom": "../tailwind.config.js:47-75",
+  "evidence": "measured",
+  "note": "21 named type-scale entries. Every numeric value (size, line-height, letter-spacing) was verified to match the live original exactly at 1280/1024/768/390; only glyph-level text-run widths differ, because the three source faces are commercial and substituted (see font-face.json).",
+  "scale": {
+    "type.h1": {
+      "value": "48px",
+      "lineHeight": "normal",
+      "letterSpacing": null,
+      "tailwind": "h1",
+      "measuredFrom": "../tailwind.config.js:54"
+    },
+    "type.h1-sm": {
+      "value": "56px",
+      "lineHeight": "normal",
+      "letterSpacing": null,
+      "tailwind": "h1-sm",
+      "measuredFrom": "../tailwind.config.js:55"
+    },
+    "type.h2": {
+      "value": "40px",
+      "lineHeight": "normal",
+      "letterSpacing": null,
+      "tailwind": "h2",
+      "measuredFrom": "../tailwind.config.js:56"
+    },
+    "type.h2-sm": {
+      "value": "44px",
+      "lineHeight": "normal",
+      "letterSpacing": null,
+      "tailwind": "h2-sm",
+      "measuredFrom": "../tailwind.config.js:57"
+    },
+    "type.h3": {
+      "value": "24px",
+      "lineHeight": "28px",
+      "letterSpacing": null,
+      "tailwind": "h3",
+      "measuredFrom": "../tailwind.config.js:58"
+    },
+    "type.h3-sm": {
+      "value": "28px",
+      "lineHeight": "32px",
+      "letterSpacing": null,
+      "tailwind": "h3-sm",
+      "measuredFrom": "../tailwind.config.js:59"
+    },
+    "type.h4": {
+      "value": "20px",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.24px",
+      "tailwind": "h4",
+      "measuredFrom": "../tailwind.config.js:60"
+    },
+    "type.h4-sm": {
+      "value": "24px",
+      "lineHeight": "28px",
+      "letterSpacing": "-0.24px",
+      "tailwind": "h4-sm",
+      "measuredFrom": "../tailwind.config.js:61"
+    },
+    "type.h5": {
+      "value": "16px",
+      "lineHeight": "24px",
+      "letterSpacing": null,
+      "tailwind": "h5",
+      "measuredFrom": "../tailwind.config.js:62"
+    },
+    "type.body": {
+      "value": "14px",
+      "lineHeight": "20px",
+      "letterSpacing": null,
+      "tailwind": "p",
+      "measuredFrom": "../tailwind.config.js:63"
+    },
+    "type.small": {
+      "value": "12px",
+      "lineHeight": "16px",
+      "letterSpacing": null,
+      "tailwind": "small",
+      "measuredFrom": "../tailwind.config.js:64"
+    },
+    "type.title-h1": {
+      "value": "48px",
+      "lineHeight": "68px",
+      "letterSpacing": null,
+      "tailwind": "title-h1",
+      "measuredFrom": "../tailwind.config.js:65"
+    },
+    "type.title-h1-sm": {
+      "value": "56px",
+      "lineHeight": "68px",
+      "letterSpacing": null,
+      "tailwind": "title-h1-sm",
+      "measuredFrom": "../tailwind.config.js:66"
+    },
+    "type.title-h2": {
+      "value": "44px",
+      "lineHeight": "52px",
+      "letterSpacing": null,
+      "tailwind": "title-h2",
+      "measuredFrom": "../tailwind.config.js:67"
+    },
+    "type.title-h2-sm": {
+      "value": "48px",
+      "lineHeight": "56px",
+      "letterSpacing": null,
+      "tailwind": "title-h2-sm",
+      "measuredFrom": "../tailwind.config.js:68"
+    },
+    "type.title-h3": {
+      "value": "40px",
+      "lineHeight": "48px",
+      "letterSpacing": null,
+      "tailwind": "title-h3",
+      "measuredFrom": "../tailwind.config.js:69"
+    },
+    "type.title-h3-sm": {
+      "value": "44px",
+      "lineHeight": "51px",
+      "letterSpacing": null,
+      "tailwind": "title-h3-sm",
+      "measuredFrom": "../tailwind.config.js:70"
+    },
+    "type.title-h4": {
+      "value": "28px",
+      "lineHeight": "32px",
+      "letterSpacing": null,
+      "tailwind": "title-h4",
+      "measuredFrom": "../tailwind.config.js:71"
+    },
+    "type.description": {
+      "value": "16px",
+      "lineHeight": "24px",
+      "letterSpacing": null,
+      "tailwind": "description",
+      "measuredFrom": "../tailwind.config.js:72"
+    },
+    "type.badge": {
+      "value": "14px",
+      "lineHeight": "20px",
+      "letterSpacing": null,
+      "tailwind": "badge",
+      "measuredFrom": "../tailwind.config.js:73"
+    },
+    "type.readout": {
+      "value": "15px",
+      "lineHeight": null,
+      "letterSpacing": "1.5px",
+      "tailwind": "readout",
+      "measuredFrom": "../tailwind.config.js:74"
+    }
+  },
+  "families": {
+    "font.sans": {
+      "value": [
+        "Inter",
+        "Arial",
+        "sans-serif"
+      ],
+      "cssVar": "--font-sans",
+      "measuredFrom": "../tailwind.config.js:48",
+      "intendedFace": "Untitled Sans (Klim Type Foundry)",
+      "substituteReason": "commercial licence"
+    },
+    "font.display": {
+      "value": [
+        "Instrument Sans",
+        "aeonikPro Fallback",
+        "Arial",
+        "sans-serif"
+      ],
+      "cssVar": "--font-display",
+      "measuredFrom": "../tailwind.config.js:49",
+      "intendedFace": "Aeonik Pro (CoType Foundry)",
+      "substituteReason": "commercial licence"
+    },
+    "font.dot": {
+      "value": [
+        "Share Tech Mono",
+        "dotDigital Fallback",
+        "Arial",
+        "monospace"
+      ],
+      "cssVar": "--font-dot-digital",
+      "measuredFrom": "../tailwind.config.js:50",
+      "intendedFace": "Enhanced Dot Digital-7",
+      "substituteReason": "commercial licence",
+      "usedBy": "the 15px RBAC readout only"
+    }
+  },
+  "weights": {
+    "regular": 400,
+    "bold": 700,
+    "note": "The clone uses `.text-bold` and a 100-900 variable range on the sans face; no other weight token exists.",
+    "measuredFrom": "../src/index.css:17-23"
+  }
+}

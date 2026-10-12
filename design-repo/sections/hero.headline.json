@@ -1,0 +1,61 @@
+{
+  "id": "hero.headline",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "HERO",
+  "name": "Hero headline plate",
+  "purpose": "Make the single positioning claim of the whole page, in two authored lines of gradient text.",
+  "tags": [
+    "hero",
+    "headline",
+    "type"
+  ],
+  "uses": [
+    "primitive.outline-box",
+    "primitive.eyebrow"
+  ],
+  "content": {
+    "fields": {
+      "eyebrow": {
+        "type": "string",
+        "maxWords": 1,
+        "measuredChars": 11,
+        "required": true
+      },
+      "titleLines": {
+        "type": "array",
+        "itemType": "string",
+        "minItems": 2,
+        "maxItems": 2,
+        "maxWordsPerLine": 5,
+        "measuredCharsPerLine": [
+          27,
+          26
+        ],
+        "note": "Exactly two authored lines, separated by an explicit <br>. Not reflowed text."
+      }
+    },
+    "additionalProperties": false
+  },
+  "type": {
+    "tag": "h2",
+    "class": "text-h4 text-center",
+    "firstLineLineHeight": "32px",
+    "treatment": "text-gradient"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-intro-fade"
+    ],
+    "requiredReducedMotionFallback": "static-end-state",
+    "durationMs": 1500,
+    "delayMs": 600,
+    "measuredFrom": "../src/components/Hero.jsx:71-78"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true
+  },
+  "measuredFrom": "../src/components/Hero.jsx:142-160"
+}

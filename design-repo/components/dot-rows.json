@@ -1,0 +1,16 @@
+{
+  "id": "component.dot-rows",
+  "className": ".dashboard-application-input / .dashboard-auth-input",
+  "purpose": "A typewriter readout: two 6-dot rows whose per-dot transition delay makes text appear to type in.",
+  "tags": [
+    "animation",
+    "readout"
+  ],
+  "rows": 2,
+  "dotsPerRow": 6,
+  "totalDots": 12,
+  "delayFormula": "0.2s + 0.1s * dotIndex, across both rows (so 0.2s .. 1.3s)",
+  "delayProperty": "--transition-delay",
+  "measuredFrom": "../src/components/Dashboard.jsx:10-34",
+  "evidence": "measured"
+}

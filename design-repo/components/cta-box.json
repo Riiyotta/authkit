@@ -1,0 +1,31 @@
+{
+  "id": "component.cta-box",
+  "className": ".cta-box",
+  "purpose": "Offer one of the two closing paths as a clickable framed tile.",
+  "tags": [
+    "conversion",
+    "tile"
+  ],
+  "structure": "<a class=cta-box> > img + .section-header(h6 title + description) + .cta-box-dots (4 corner dots)",
+  "instanceCount": 2,
+  "cornerDots": 4,
+  "copyBudget": {
+    "title": {
+      "maxWords": 4,
+      "measuredChars": [
+        18,
+        19
+      ]
+    },
+    "description": {
+      "maxWords": 4,
+      "measuredChars": [
+        26,
+        23
+      ]
+    }
+  },
+  "hrefRule": "Both hrefs are INERT_HREF by the hard no-outbound-links constraint.",
+  "measuredFrom": "../src/components/Cta.jsx:35-53",
+  "evidence": "measured"
+}

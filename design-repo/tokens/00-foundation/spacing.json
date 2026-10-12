@@ -1,0 +1,112 @@
+{
+  "evidence": "measured",
+  "note": "This site has NO uniform spacing scale. Every section carries its own measured padding block because CLONE_SPEC gives a different measured value for each, and the clone deliberately keeps per-section padding in each section's own stylesheet rather than normalising it. Recorded here as the real observed inventory, not as a ladder a generator may interpolate within.",
+  "rule": "A generator MUST NOT invent an intermediate spacing value. Use a section's own recorded padding, or the shared gaps below.",
+  "sectionPadding": {
+    "hero": {
+      "paddingBottom": "100px",
+      "measuredFrom": "../src/styles/hero.css:33"
+    },
+    "features-slider": {
+      "paddingInline": "20px",
+      "gap": "40px",
+      "itemsPaddingBottom": "32px",
+      "measuredFrom": "../src/styles/features-slider.css:8-20"
+    },
+    "dashboard": {
+      "height": "1032px",
+      "maxWidth": "1440px",
+      "headerTop": "120px",
+      "measuredFrom": "../src/styles/dashboard.css:7-32"
+    },
+    "customui": {
+      "maxWidth": "1040px",
+      "marginInline": "8px",
+      "paddingBlock": "60px 80px",
+      "mdPaddingBlock": "120px",
+      "measuredFrom": "../src/styles/customui.css:5-16"
+    },
+    "radix": {
+      "maxWidth": "1440px",
+      "padding": "120px 0 257px",
+      "headerMarginBottom": "100px",
+      "measuredFrom": "../src/styles/radix.css:5-25"
+    },
+    "security": {
+      "maxWidth": "1076px",
+      "padding": "80px 16px",
+      "mdPadding": "120px 16px",
+      "headerMarginBottom": "56px",
+      "cardGap": "8px",
+      "measuredFrom": "../src/styles/security.css:7-45"
+    },
+    "complete": {
+      "paddingTop": "148px",
+      "paddingBottom": "154px",
+      "paddingInline": "16px",
+      "measuredFrom": "../src/styles/complete.css:5-15"
+    },
+    "testimonials": {
+      "maxWidth": "1200px",
+      "paddingBlock": "80px",
+      "smPaddingBlock": "160px 80px",
+      "paddingInline": "16px",
+      "measuredFrom": "../src/styles/testimonials.css:7-19"
+    },
+    "cta": {
+      "maxWidth": "1440px",
+      "paddingTop": "80px",
+      "smPaddingTop": "180px",
+      "paddingBottom": "100px",
+      "paddingInline": "16px",
+      "measuredFrom": "../src/styles/cta.css:5-18"
+    }
+  },
+  "sharedGaps": {
+    "gap.card-content": {
+      "value": "16px",
+      "usedBy": ".hero__card-content",
+      "measuredFrom": "../src/styles/hero.css:463-467"
+    },
+    "gap.card-header": {
+      "value": "10px",
+      "usedBy": ".hero__card-header",
+      "measuredFrom": "../src/styles/hero.css:472-477"
+    },
+    "gap.field": {
+      "value": "5px",
+      "usedBy": "Field's input wrapper marginTop and the OTP column",
+      "measuredFrom": "../src/components/primitives.jsx:85"
+    },
+    "gap.otp-row": {
+      "value": "10px",
+      "usedBy": "the 6-input OTP row",
+      "measuredFrom": "../src/components/AuthCard.jsx:70"
+    },
+    "gap.security-cards": {
+      "value": "8px",
+      "usedBy": ".security-cards",
+      "measuredFrom": "../src/styles/security.css:43"
+    },
+    "gap.feature-icon": {
+      "value": "12px",
+      "usedBy": ".features-slider__icon-container",
+      "measuredFrom": "../src/styles/features-slider.css:114"
+    }
+  },
+  "cardContentPadding": {
+    "card-small": {
+      "value": "12px",
+      "measuredFrom": "../src/styles/base.css:543-545"
+    },
+    "card-medium": {
+      "value": "36px 24px",
+      "measuredFrom": "../src/styles/base.css:549-551"
+    },
+    "card-large": {
+      "value": "42px 24px",
+      "smValue": "42px 36px",
+      "measuredFrom": "../src/styles/base.css:555-562"
+    }
+  }
+}

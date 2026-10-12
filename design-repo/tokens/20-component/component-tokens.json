@@ -1,0 +1,236 @@
+{
+  "note": "Component-scoped overrides that the clone really declares. These are the ONLY per-component token surfaces a generator may set.",
+  "evidence": "measured",
+  "glowing-button": {
+    "--line-width": {
+      "default": "1px",
+      "measuredFrom": "../src/index.css:99"
+    },
+    "--line-color": {
+      "default": "#c2ccff",
+      "ref": "color.glow.violet",
+      "measuredFrom": "../src/index.css:100"
+    },
+    "--line-opacity": {
+      "default": "1",
+      "mediumOverride": "0.2",
+      "measuredFrom": "../src/index.css:101",
+      "alsoMeasuredFrom": [
+        "../src/index.css:123"
+      ]
+    },
+    "--duration": {
+      "default": "6s",
+      "mediumOverride": "16s",
+      "measuredFrom": "../src/index.css:102",
+      "alsoMeasuredFrom": [
+        "../src/index.css:124"
+      ]
+    },
+    "--easing": {
+      "default": "linear",
+      "measuredFrom": "../src/index.css:103"
+    },
+    "sizes": {
+      "base": {
+        "height": "32px"
+      },
+      "medium": {
+        "height": "36px",
+        "paddingInline": "16px",
+        "fontSize": "14px",
+        "lineHeight": "36px"
+      },
+      "large": {
+        "height": "44px",
+        "paddingInline": "32px",
+        "fontSize": "18px",
+        "lineHeight": "44px"
+      }
+    },
+    "sizesMeasuredFrom": "../src/index.css:104-135",
+    "sizesInUse": [
+      "medium"
+    ],
+    "inUseNote": "`medium` is the ONLY size this page instantiates; `large` is declared but unused. Used 5 times: hero Get-started, hero GitHub icon, radix, complete, cta.",
+    "knownOriginalBehaviour": "At size-medium --line-opacity is 0.2, so the sparkle DIMS on hover. That is the original's behaviour, reproduced deliberately.",
+    "hoverNoteMeasuredFrom": "../src/index.css:170-177"
+  },
+  "card": {
+    "--line-width": {
+      "default": "1px",
+      "measuredFrom": "../src/styles/base.css:532"
+    },
+    "--line-color": {
+      "default": "#adbbff",
+      "ref": "color.glow.indigo",
+      "measuredFrom": "../src/styles/base.css:533"
+    },
+    "--start-angle": {
+      "default": "0deg",
+      "perInstance": true,
+      "measuredFrom": "../src/styles/base.css:534"
+    },
+    "--delay": {
+      "default": "0s",
+      "perInstance": true,
+      "measuredFrom": "../src/styles/base.css:535"
+    },
+    "--brand-color": {
+      "default": "#663AF3",
+      "domain": [
+        "#E46D4C",
+        "#663AF3",
+        "#027DEA",
+        "#269684"
+      ],
+      "measuredFrom": "../src/components/CustomUI.jsx:10"
+    },
+    "--brand-radius": {
+      "default": "3px",
+      "domain": [
+        "0px",
+        "3px",
+        "6px",
+        "9999px"
+      ],
+      "measuredFrom": "../src/components/CustomUI.jsx:11"
+    },
+    "perspective": {
+      "value": "1000px",
+      "measuredFrom": "../src/styles/base.css:537"
+    },
+    "variants": {
+      "card-small": "radius 12px / content padding 12px",
+      "card-medium": "radius 16px / content padding 36px 24px",
+      "card-large": "radius 16px / content padding 42px 24px (42px 36px at >=640px)"
+    },
+    "chaseVariants": {
+      "card-animated-loop": {
+        "animation": "card-line-anim 12s linear infinite, line-opacity-loop 3s linear infinite",
+        "restingOpacity": 0.5,
+        "measuredFrom": "../src/index.css:249-253"
+      },
+      "card-animated-intermittent": {
+        "animation": "card-line-anim 8s linear infinite, line-opacity 4s linear var(--delay)",
+        "restingOpacity": 0,
+        "measuredFrom": "../src/index.css:254-258",
+        "inUse": false,
+        "note": "Declared but not instantiated by any current section."
+      }
+    },
+    "instanceStartAngles": [
+      {
+        "where": "hero centre card",
+        "startAngle": "631deg",
+        "delay": "7s",
+        "measuredFrom": "../src/components/Hero.jsx:41"
+      },
+      {
+        "where": "customui preview card",
+        "startAngle": "541deg",
+        "delay": "10s",
+        "measuredFrom": "../src/components/CustomUI.jsx:83"
+      },
+      {
+        "where": "colour picker card",
+        "startAngle": "189deg",
+        "delay": "11s",
+        "measuredFrom": "../src/components/CustomUI.jsx:114"
+      },
+      {
+        "where": "logo picker card",
+        "startAngle": "517deg",
+        "delay": "9s",
+        "measuredFrom": "../src/components/CustomUI.jsx:135"
+      },
+      {
+        "where": "radius picker card",
+        "startAngle": "186deg",
+        "delay": "11s",
+        "measuredFrom": "../src/components/CustomUI.jsx:163"
+      }
+    ]
+  },
+  "light-switch": {
+    "track": {
+      "width": "240px",
+      "height": "36px",
+      "padding": "4px",
+      "borderRadius": "999px",
+      "measuredFrom": "../src/styles/hero.css:490-499"
+    },
+    "thumb": {
+      "width": "50%",
+      "height": "100%",
+      "borderRadius": "999px",
+      "transition": "transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "checkedTransform": "translate(100%)",
+      "renderedTravelPx": 116,
+      "renderedTravelDerivation": "width:50% resolves against the 232px content box (240px - 2*4px padding) = 116px, so translate(100%) moves the thumb 116px.",
+      "measuredFrom": "../src/styles/hero.css:504-514"
+    },
+    "iconTransition": {
+      "value": "opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "measuredFrom": "../src/styles/hero.css:515-521"
+    },
+    "darkTrack": {
+      "thumbBackground": "#bacff70a",
+      "measuredFrom": "../src/styles/hero.css:534-537"
+    },
+    "lightTrack": {
+      "background": "#e8e9ef",
+      "ref": "color.light.switch-track",
+      "thumbBackground": "#fff",
+      "measuredFrom": "../src/styles/hero.css:542-549"
+    },
+    "entranceDelay": {
+      "value": "2.1s",
+      "transition": "1.5s",
+      "measuredFrom": "../src/components/Hero.jsx:71-78"
+    }
+  },
+  "features-slider": {
+    "--duration": {
+      "value": "1.5s",
+      "measuredFrom": "../src/styles/features-slider.css:44"
+    },
+    "--delay": {
+      "value": "calc(var(--i, 0) * 1.2s)",
+      "note": "The real stagger step is 1.2s per tile, driven by the tile index.",
+      "measuredFrom": "../src/styles/features-slider.css:45"
+    },
+    "--columns": {
+      "base": 3,
+      "md": 6,
+      "measuredFrom": "../src/styles/features-slider.css:30-40"
+    },
+    "--gap": {
+      "base": "4px",
+      "md": "14px",
+      "measuredFrom": "../src/styles/features-slider.css:29-40"
+    },
+    "--separator-width": {
+      "base": "56px",
+      "md": "72px",
+      "measuredFrom": "../src/styles/features-slider.css:60-72"
+    },
+    "iconBox": {
+      "value": "48x48",
+      "measuredFrom": "../src/styles/features-slider.css:107-121"
+    },
+    "playStateGate": {
+      "property": "--play-state",
+      "restingValue": "paused",
+      "armedValue": "running",
+      "note": "The ORIGINAL literally writes `--play-state: playing`, which is not a valid animation-play-state keyword; it works only because the invalid value makes the declaration compute to the initial `running`. The clone writes `running` so the cascade is valid CSS \u2014 identical resulting motion. Documented as a deliberate, behaviour-preserving divergence.",
+      "measuredFrom": "../src/components/FeaturesSlider.jsx:14-17"
+    }
+  },
+  "page-separator": {
+    "height": "1px",
+    "borderBottom": "1px solid var(--blue-6)",
+    "width": "100vw",
+    "measuredFrom": "../src/styles/base.css:637-641"
+  }
+}

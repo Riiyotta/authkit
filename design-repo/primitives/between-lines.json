@@ -1,0 +1,31 @@
+{
+  "id": "primitive.between-lines",
+  "name": "BetweenLines",
+  "className": ".between-lines",
+  "purpose": "Centre a short label or control with a rule running out to each side \u2014 the site's only horizontal-divider-with-content idiom.",
+  "tags": [
+    "divider",
+    "label"
+  ],
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "gradient",
+        "solid"
+      ],
+      "default": "gradient"
+    }
+  },
+  "variantUse": {
+    "gradient": "every eyebrow, and the radix/complete CTA rails",
+    "solid": "the AuthCard 'OR' divider only"
+  },
+  "lightSubtree": {
+    "color": "#00082f47",
+    "solidLineColor": "#00003b0d",
+    "measuredFrom": "../src/styles/base.css:309-314"
+  },
+  "measuredFrom": "../src/components/primitives.jsx:27-34",
+  "evidence": "measured"
+}

@@ -1,0 +1,120 @@
+{
+  "id": "demo.custom-ui-browser",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PRODUCT_DEMO",
+  "name": "Customiser browser frame",
+  "purpose": "Place the live, user-editable login preview inside a faux browser so the reader reads it as their own shipped app.",
+  "tags": [
+    "product-demo",
+    "frame",
+    "browser"
+  ],
+  "uses": [
+    "component.browser-frame",
+    "component.auth-card",
+    "component.particle-canvas",
+    "primitive.outline-box"
+  ],
+  "content": {
+    "fields": {
+      "header": {
+        "type": "object",
+        "fields": {
+          "eyebrow": {
+            "type": "string",
+            "maxWords": 2,
+            "measuredChars": 12
+          },
+          "title": {
+            "type": "string",
+            "maxWords": 4,
+            "measuredChars": 23
+          },
+          "description": {
+            "type": "string",
+            "maxWords": 13,
+            "measuredChars": 78
+          }
+        }
+      },
+      "previewCard": {
+        "type": "object",
+        "contract": "component.auth-card",
+        "required": true
+      },
+      "decorations": {
+        "type": "array",
+        "itemType": "assetRef",
+        "assetRole": "ui.decorative-screenshot",
+        "minItems": 5,
+        "maxItems": 5,
+        "note": "Five non-interactive screenshots at opacity .75. Decorative only."
+      }
+    },
+    "additionalProperties": false
+  },
+  "geometry": {
+    "sectionMaxWidth": "1040px",
+    "browserPane": [
+      992,
+      664
+    ],
+    "canvasParticles": 395,
+    "decorationSizes": [
+      [
+        252,
+        126
+      ],
+      [
+        279,
+        142
+      ],
+      [
+        304,
+        155
+      ],
+      [
+        208,
+        126
+      ],
+      [
+        252,
+        126
+      ]
+    ],
+    "decorationOpacity": 0.75
+  },
+  "responsive": {
+    "below940": {
+      "marginInline": "8px",
+      "paddingBlock": "60px 80px"
+    },
+    "from940": {
+      "marginInline": "auto",
+      "paddingBlock": "120px"
+    },
+    "measuredFrom": "../src/styles/customui.css:5-16"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "particle-drift",
+      "card-border-chase"
+    ],
+    "requiredReducedMotionFallback": "none",
+    "loop": true,
+    "cardChase": {
+      "startAngle": "541deg",
+      "delayMs": 10000
+    },
+    "measuredFrom": "../src/components/CustomUI.jsx:49-51"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustContain": "demo.customiser-pickers",
+    "note": "This section HOSTS the pickers; the two cannot be separated."
+  },
+  "measuredFrom": "../src/components/CustomUI.jsx:44-190"
+}

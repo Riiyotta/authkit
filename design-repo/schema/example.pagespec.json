@@ -1,0 +1,828 @@
+{
+  "pageSpecVersion": "1.0.0",
+  "route": "/",
+  "basedOnTemplate": "template.homepage",
+  "theme": "theme.dark",
+  "nodes": [
+    {
+      "section": "chrome.hairline-grid",
+      "content": {},
+      "motion": {
+        "pattern": "hairline-intro",
+        "trigger": "paint-time-intro",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 3000,
+        "delayMs": 100,
+        "easing": "ease.house"
+      }
+    },
+    {
+      "section": "chrome.hero-header",
+      "content": {
+        "companyHeading": "Northgate",
+        "poweredByWordmark": {
+          "assetRole": "brand.wordmark",
+          "assetRef": "/img/brand/placeholder-wordmark.svg",
+          "intrinsic": "208x18",
+          "alt": "Northgate"
+        },
+        "productMark": {
+          "assetRole": "brand.product-mark",
+          "assetRef": "/img/brand/placeholder-mark.svg",
+          "intrinsic": "24x24",
+          "alt": "Northgate mark"
+        },
+        "iconActionLabel": "Browse the source code",
+        "primaryActionLabel": "Start free"
+      },
+      "motion": {
+        "pattern": "hero-intro-fade",
+        "trigger": "paint-time-intro",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 1500,
+        "delayMs": 300,
+        "easing": "ease.house"
+      }
+    },
+    {
+      "section": "hero.wordmark",
+      "content": {
+        "wordmark": {
+          "assetRole": "brand.wordmark",
+          "assetRef": "/img/brand/placeholder-logotype.svg",
+          "intrinsic": "476x106",
+          "alt": "Gatehouse"
+        },
+        "flareVideo": {
+          "assetRole": "motion.flare-video",
+          "assetRef": "/video/placeholder-flare.mov",
+          "intrinsic": "1280x600"
+        }
+      },
+      "motion": {
+        "pattern": "one-shot-flare",
+        "trigger": "paint-time-intro",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 2000,
+        "delayMs": 100,
+        "loop": false
+      }
+    },
+    {
+      "section": "hero.headline",
+      "content": {
+        "eyebrow": "Announcing",
+        "titleLines": [
+          "A sign-in screen worth",
+          "shipping on day one."
+        ]
+      },
+      "motion": {
+        "pattern": "hero-intro-fade",
+        "trigger": "paint-time-intro",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 1500,
+        "delayMs": 600,
+        "easing": "ease.house"
+      }
+    },
+    {
+      "section": "hero.auth-card-trio",
+      "content": {
+        "cards": [
+          {
+            "surface": "hero",
+            "size": "large",
+            "brandColor": "#E46D4C",
+            "brandRadius": "4px",
+            "title": "Welcome to Harbour",
+            "subtitle": "Log in to continue.",
+            "logo": {
+              "assetRole": "ui.card-logo",
+              "assetRef": "/img/hero/placeholder-logo-1.png",
+              "intrinsic": "32x32",
+              "alt": "Harbour"
+            },
+            "fields": [
+              {
+                "label": "Email",
+                "placeholder": "Your email address",
+                "type": "email"
+              }
+            ],
+            "primaryLabel": "Continue",
+            "primaryVariant": "outline",
+            "footer": {
+              "text": "No account yet?",
+              "linkLabel": "Sign up"
+            }
+          },
+          {
+            "surface": "hero",
+            "size": "large",
+            "brandRadius": "999px",
+            "animatedChase": {
+              "startAngle": "631deg",
+              "delayMs": 7000
+            },
+            "title": "Sign in to Lumen",
+            "logo": {
+              "assetRole": "ui.card-logo",
+              "assetRef": "/img/hero/placeholder-logo-2.png",
+              "intrinsic": "32x32",
+              "alt": "Lumen"
+            },
+            "fields": [
+              {
+                "label": "Email",
+                "placeholder": "Your email address",
+                "type": "email"
+              }
+            ],
+            "primaryLabel": "Continue",
+            "primaryVariant": "outline",
+            "divider": "OR",
+            "socials": [
+              "google",
+              "microsoft"
+            ],
+            "footer": {
+              "text": "No account yet?",
+              "linkLabel": "Sign up"
+            }
+          },
+          {
+            "surface": "hero",
+            "size": "large",
+            "brandColor": "#000",
+            "brandRadius": "2px",
+            "title": "Sign in to Tessel",
+            "subtitle": "Enter the passcode from your authenticator app.",
+            "logo": {
+              "assetRole": "ui.card-logo",
+              "assetRef": "/img/hero/placeholder-logo-3.png",
+              "intrinsic": "32x32",
+              "alt": "Tessel"
+            },
+            "otp": {
+              "label": "One time code",
+              "length": 6
+            },
+            "primaryLabel": "Continue",
+            "primaryVariant": "outline",
+            "footer": {
+              "linkLabel": "Return to sign in"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "scroll-scrub-float",
+        "trigger": "scroll-scrub",
+        "reducedMotionFallback": "settle-to-resting-value",
+        "evidence": "measured",
+        "dampingRate": 0.075
+      }
+    },
+    {
+      "section": "hero.light-switch",
+      "content": {
+        "switchLabel": "Toggle light and dark mode",
+        "caption": "Light and dark both ship."
+      },
+      "motion": {
+        "pattern": "switch-thumb-travel",
+        "trigger": "user-input",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 600,
+        "delayMs": 2100,
+        "easing": "ease.quart"
+      }
+    },
+    {
+      "section": "hero.ambient-fx",
+      "content": {},
+      "motion": {
+        "pattern": "particle-drift",
+        "trigger": "intersection-threshold-0",
+        "reducedMotionFallback": "none",
+        "evidence": "measured",
+        "loop": true
+      }
+    },
+    {
+      "section": "capability.feature-strip",
+      "content": {
+        "tiles": [
+          {
+            "label": "Single Sign-On",
+            "mobileLabel": "Single Sign-On",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-1.png",
+              "intrinsic": "96x96",
+              "alt": "sso"
+            }
+          },
+          {
+            "label": "Passwords",
+            "mobileLabel": "Passwords",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-2.png",
+              "intrinsic": "96x96",
+              "alt": "password"
+            }
+          },
+          {
+            "label": "Multi-Factor Auth",
+            "mobileLabel": "Multi-Factor Auth",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-3.png",
+              "intrinsic": "96x96",
+              "alt": "mfa"
+            }
+          },
+          {
+            "label": "Social Login",
+            "mobileLabel": "Social Login",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-4.png",
+              "intrinsic": "96x96",
+              "alt": "social"
+            }
+          },
+          {
+            "label": "Access Control Rules",
+            "mobileLabel": "Access",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-5.png",
+              "intrinsic": "96x96",
+              "alt": "rbac"
+            }
+          },
+          {
+            "label": "Magic Links",
+            "mobileLabel": "Magic Links",
+            "icon": {
+              "assetRole": "ui.feature-icon",
+              "assetRef": "/img/features/placeholder-6.png",
+              "intrinsic": "96x96",
+              "alt": "magic"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "staggered-entrance",
+        "trigger": "intersection-threshold-0",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "durationMs": 1500,
+        "stepMs": 1200,
+        "oneShot": true
+      }
+    },
+    {
+      "section": "demo.dashboard",
+      "content": {
+        "header": {
+          "eyebrow": "Built to extend",
+          "titleLines": [
+            "Your users. Your records.",
+            "Wired your way."
+          ],
+          "description": "Sits behind any app shape you already run, and keeps user records in step over a realtime feed."
+        },
+        "background": {
+          "assetRole": "ui.diagram-background",
+          "assetRef": "/img/dashboard/placeholder-bg.png",
+          "intrinsic": "1440x1032",
+          "alt": "Diagram plate"
+        },
+        "connectorMasks": [
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/dashboard/masks/placeholder-1.png",
+            "intrinsic": "699.5x157.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/dashboard/masks/placeholder-2.png",
+            "intrinsic": "715.5x173.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/dashboard/masks/placeholder-3.png",
+            "intrinsic": "747.5x222.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/dashboard/masks/placeholder-4.png",
+            "intrinsic": "775.5x263.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/dashboard/masks/placeholder-5.png",
+            "intrinsic": "811.5x279.5"
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "armed-node-cascade",
+        "trigger": "intersection-threshold-0",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "stepMs": 833,
+        "oneShot": true
+      }
+    },
+    {
+      "section": "demo.custom-ui-browser",
+      "content": {
+        "header": {
+          "eyebrow": "Make yours",
+          "title": "Your brand. Your rules.",
+          "description": "Restyle every surface so sign-in reads as part of your product."
+        },
+        "previewCard": {
+          "surface": "dark",
+          "size": "large",
+          "brandColor": "#663AF3",
+          "brandRadius": "3px",
+          "animatedChase": {
+            "startAngle": "541deg",
+            "delayMs": 10000
+          },
+          "title": "Sign in to Lumen",
+          "logoBoxed": true,
+          "logo": {
+            "assetRole": "ui.card-logo",
+            "assetRef": "/img/customui/placeholder-sprite.svg",
+            "intrinsic": "32x32",
+            "alt": "Lumen"
+          },
+          "fields": [
+            {
+              "label": "Email",
+              "placeholder": "Your email address",
+              "type": "email"
+            },
+            {
+              "label": "Password",
+              "placeholder": "Enter your password",
+              "type": "password"
+            }
+          ],
+          "primaryLabel": "Continue",
+          "primaryVariant": "solid",
+          "divider": "OR",
+          "socials": [
+            "google"
+          ],
+          "footer": {
+            "text": "No account yet?",
+            "linkLabel": "Sign up"
+          }
+        },
+        "decorations": [
+          {
+            "assetRole": "ui.decorative-screenshot",
+            "assetRef": "/img/customui/placeholder-d1.png",
+            "intrinsic": "252x126",
+            "alt": "Page background"
+          },
+          {
+            "assetRole": "ui.decorative-screenshot",
+            "assetRef": "/img/customui/placeholder-d2.png",
+            "intrinsic": "279x142",
+            "alt": "Appearance"
+          },
+          {
+            "assetRole": "ui.decorative-screenshot",
+            "assetRef": "/img/customui/placeholder-d3.png",
+            "intrinsic": "304x155",
+            "alt": "Favicon"
+          },
+          {
+            "assetRole": "ui.decorative-screenshot",
+            "assetRef": "/img/customui/placeholder-d4.png",
+            "intrinsic": "208x126",
+            "alt": "Button colour"
+          },
+          {
+            "assetRole": "ui.decorative-screenshot",
+            "assetRef": "/img/customui/placeholder-d5.png",
+            "intrinsic": "252x126",
+            "alt": "Link colour"
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "card-border-chase",
+        "trigger": "intersection-threshold-0",
+        "reducedMotionFallback": "none",
+        "evidence": "measured",
+        "loop": true,
+        "easing": "ease.linear"
+      }
+    },
+    {
+      "section": "demo.customiser-pickers",
+      "content": {
+        "pickers": [
+          {
+            "label": "Colour",
+            "optionCount": 4,
+            "writes": "--brand-color"
+          },
+          {
+            "label": "Radius",
+            "optionCount": 4,
+            "writes": "--brand-radius"
+          },
+          {
+            "label": "Logo icon",
+            "optionCount": 4,
+            "writes": "--i"
+          }
+        ],
+        "logoSprite": {
+          "assetRole": "ui.sprite-sheet",
+          "assetRef": "/img/placeholder-logos-sprite.svg",
+          "intrinsic": "128x32",
+          "alt": "Logo frames"
+        }
+      },
+      "motion": {
+        "pattern": "instant-token-write",
+        "trigger": "user-input",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "chrome.page-separator",
+      "occurrence": 1,
+      "content": {},
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "demo.radix",
+      "content": {
+        "header": {
+          "eyebrow": "Open foundations",
+          "titleLines": [
+            "Standing on an open source",
+            "component foundation."
+          ],
+          "titleMobileLines": [
+            "Standing on",
+            "an open source",
+            "component",
+            "foundation."
+          ],
+          "description": "Assembled from the same open component primitives your own team is most likely already using."
+        },
+        "kitImage": {
+          "assetRole": "ui.diagram-background",
+          "assetRef": "/img/radix/placeholder-kit.png",
+          "intrinsic": "1177x399",
+          "alt": "Component kit"
+        },
+        "logoLayers": [
+          {
+            "assetRole": "customer.logo",
+            "assetRef": "/img/radix/placeholder-stroke.png",
+            "alt": "Placeholder mark stroke"
+          },
+          {
+            "assetRole": "customer.logo",
+            "assetRef": "/img/radix/placeholder-main.png",
+            "alt": "Placeholder mark"
+          },
+          {
+            "assetRole": "customer.logo",
+            "assetRef": "/img/radix/placeholder-blender.png",
+            "alt": "Placeholder mark blend"
+          }
+        ],
+        "lineMasks": [
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/radix/masks/placeholder-1.png"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/radix/masks/placeholder-2.png"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/radix/masks/placeholder-3.png"
+          }
+        ],
+        "ctaLabel": "Read the foundations"
+      },
+      "motion": {
+        "pattern": "scroll-scrub-reveal",
+        "trigger": "scroll-scrub",
+        "reducedMotionFallback": "settle-to-resting-value",
+        "evidence": "measured",
+        "dampingRate": 0.0745
+      }
+    },
+    {
+      "section": "chrome.page-separator",
+      "occurrence": 2,
+      "content": {},
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "demo.security-cards",
+      "content": {
+        "header": {
+          "eyebrow": "Hardened by default",
+          "titleLines": [
+            "Shaped for engineers.",
+            "Ready for procurement."
+          ],
+          "description": "Covers the modern authentication and authorization standards a security review will ask about."
+        },
+        "cards": [
+          {
+            "label": "Leaked password checks",
+            "mechanism": "leaked-password",
+            "background": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/security/placeholder-1.png",
+              "intrinsic": "320x242"
+            }
+          },
+          {
+            "label": "Access control rules",
+            "mechanism": "rbac",
+            "background": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/security/placeholder-2.png",
+              "intrinsic": "320x242"
+            }
+          },
+          {
+            "label": "Password strength checks",
+            "mechanism": "password-strength",
+            "background": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/security/placeholder-3.png",
+              "intrinsic": "320x242"
+            }
+          },
+          {
+            "label": "Spam and bot detection",
+            "mechanism": "automatic-detection",
+            "background": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/security/placeholder-4.png",
+              "intrinsic": "320x242"
+            }
+          },
+          {
+            "label": "Multi-factor authentication",
+            "mechanism": "multi-factor",
+            "background": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/security/placeholder-5.png",
+              "intrinsic": "320x242"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "armed-cycle",
+        "trigger": "intersection-threshold-0",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "cycleMs": 14081,
+        "oneShot": false,
+        "loop": true
+      }
+    },
+    {
+      "section": "chrome.page-separator",
+      "occurrence": 3,
+      "content": {},
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "demo.complete-diagram",
+      "content": {
+        "header": {
+          "eyebrow": "Room to grow",
+          "titleLines": [
+            "One platform,",
+            "for the next decade."
+          ],
+          "description": "Slots into a wider identity platform, so directory sync, provisioning and access rules are already waiting when you need them."
+        },
+        "background": {
+          "assetRole": "ui.diagram-background",
+          "assetRef": "/img/complete/placeholder-bg.png",
+          "alt": "Platform diagram"
+        },
+        "badges": [
+          "Email & Password",
+          "Social Login",
+          "Multi-Factor Auth",
+          "Single Sign-On",
+          "Directory Sync"
+        ],
+        "socialShapes": [
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s1.png",
+            "intrinsic": "28x33"
+          },
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s2.png",
+            "intrinsic": "28x33"
+          },
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s3.png",
+            "intrinsic": "28x33"
+          },
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s4.png",
+            "intrinsic": "28x33"
+          },
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s5.png",
+            "intrinsic": "28x33"
+          },
+          {
+            "assetRole": "ui.diagram-background",
+            "assetRef": "/img/complete/placeholder-s6.png",
+            "intrinsic": "28x33"
+          }
+        ],
+        "lineMasks": [
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/complete/masks/placeholder-halo.png",
+            "intrinsic": "689.5x349.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/complete/masks/placeholder-multi.png",
+            "intrinsic": "133.5x37.5"
+          },
+          {
+            "assetRole": "ui.diagram-mask",
+            "assetRef": "/img/complete/masks/placeholder-single.png",
+            "intrinsic": "63.5x47.5"
+          }
+        ],
+        "ctaLabel": "Read the platform overview"
+      },
+      "motion": {
+        "pattern": "mount-progress-fill",
+        "trigger": "mount",
+        "reducedMotionFallback": "static-end-state",
+        "evidence": "measured",
+        "stepMs": 500,
+        "cycleMs": 7999,
+        "loop": true
+      }
+    },
+    {
+      "section": "chrome.page-separator",
+      "occurrence": 4,
+      "content": {},
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "proof.testimonials",
+      "content": {
+        "cells": [
+          {
+            "quote": "We had it in front of real users inside a week, and the sign-in screen still looks like something we designed ourselves rather than something we bolted on.",
+            "authorName": "Rae Oyelaran",
+            "authorTitle": "Platform lead",
+            "avatar": {
+              "assetRole": "person.headshot",
+              "assetRef": "/img/avatars/placeholder-1.png",
+              "intrinsic": "40x40"
+            },
+            "companyLogo": {
+              "assetRole": "customer.logo",
+              "assetRef": "/img/testimonials/placeholder-1.svg",
+              "intrinsic": "129x40",
+              "alt": "Placeholder Co"
+            }
+          },
+          {
+            "quote": "Moving across took one sprint and gave us back most of a quarter of engineering time we had been pouring into our own login stack.",
+            "authorName": "Tomas Brightwell",
+            "authorTitle": "Founder",
+            "avatar": {
+              "assetRole": "person.headshot",
+              "assetRef": "/img/avatars/placeholder-2.png",
+              "intrinsic": "40x40"
+            },
+            "companyLogo": {
+              "assetRole": "customer.logo",
+              "assetRef": "/img/testimonials/placeholder-2.svg",
+              "intrinsic": "41x40",
+              "alt": "Placeholder Ltd"
+            }
+          }
+        ]
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "conversion.cta-header",
+      "content": {
+        "heading": "Start building today"
+      },
+      "motion": {
+        "pattern": "none",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured"
+      }
+    },
+    {
+      "section": "conversion.cta-boxes",
+      "content": {
+        "boxes": [
+          {
+            "title": "Use the hosted screen",
+            "description": "The fastest way to launch.",
+            "href": "#",
+            "image": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/cta/placeholder-hosted.png",
+              "alt": "Hosted option"
+            }
+          },
+          {
+            "title": "Build from the source",
+            "description": "Host your own frontend.",
+            "href": "#",
+            "image": {
+              "assetRole": "ui.diagram-background",
+              "assetRef": "/img/cta/placeholder-source.png",
+              "alt": "Source option"
+            }
+          }
+        ],
+        "actionLabel": "Follow along"
+      },
+      "motion": {
+        "pattern": "glow-ring-chase",
+        "trigger": "none",
+        "reducedMotionFallback": "none",
+        "evidence": "measured",
+        "loop": true,
+        "easing": "ease.linear",
+        "durationMs": 16000
+      }
+    }
+  ]
+}

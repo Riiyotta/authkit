@@ -1,0 +1,153 @@
+{
+  "templateCount": 1,
+  "routeCount": 1,
+  "evidence": "measured",
+  "singleRouteJustification": {
+    "severity": "document, do not expand",
+    "statement": "This is GENUINELY a one-page site, not a scope reduction and not an unfinished clone.",
+    "verification": [
+      "No sitemap.xml and no robots.txt on the original.",
+      "Every href on the page is off-domain (and therefore inert in the clone).",
+      "15 probed candidate routes all return 404: /docs /pricing /blog /about /login /signup /features /security /changelog /legal /privacy /terms /contact /customers /enterprise.",
+      "Only / returns 200."
+    ],
+    "rule": "A generator MUST NOT invent a route or a second template. There is one page shape and one route.",
+    "measuredFrom": "../ia.json:2-8"
+  },
+  "templates": {
+    "template.homepage": {
+      "id": "template.homepage",
+      "name": "AuthKit homepage (single route)",
+      "purpose": "The product's entire public surface: identity, capability enumeration, five animated product demonstrations, third-party proof, and a two-path close.",
+      "routes": [
+        "/"
+      ],
+      "routePattern": null,
+      "routeCount": 1,
+      "chrome": "minimal-static",
+      "chromeNote": "No <nav>, no <footer>, and a position:static header with zero scroll behaviour. The only inter-section chrome is a 1px --blue-6 rule at 4 of the 8 section boundaries.",
+      "defaultTheme": "theme.dark",
+      "retrievalEligible": true,
+      "nodes": [
+        {
+          "section": "chrome.hairline-grid",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "chrome.hero-header",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.wordmark",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.headline",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.auth-card-trio",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.light-switch",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "hero.ambient-fx",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "capability.feature-strip",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "demo.dashboard",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "demo.custom-ui-browser",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "demo.customiser-pickers",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "chrome.page-separator",
+          "required": true,
+          "repeatable": true,
+          "occurrences": 4,
+          "occurrenceNote": "Rendered 4 times, before demo.radix, demo.security-cards, demo.complete-diagram and proof.testimonials. Listed once here, at its first occurrence in document order."
+        },
+        {
+          "section": "demo.radix",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "demo.security-cards",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "demo.complete-diagram",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "proof.testimonials",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "conversion.cta-header",
+          "required": true,
+          "repeatable": false
+        },
+        {
+          "section": "conversion.cta-boxes",
+          "required": true,
+          "repeatable": false
+        }
+      ],
+      "nodeCount": 18,
+      "sectionSourceOfTruth": "../ia.json templates[0].sections \u2014 same 18 ids, same order.",
+      "renderedSectionComponents": [
+        "hero",
+        "features-slider",
+        "dashboard",
+        "customui",
+        "radix",
+        "security",
+        "complete",
+        "testimonials",
+        "cta"
+      ],
+      "renderedSectionCount": 9,
+      "nodeVsComponentNote": "18 contract nodes map onto 9 rendered React section components: the 7 hero-internal nodes all live inside the single <Hero> component, demo.customiser-pickers lives inside <CustomUI>, and chrome.page-separator is emitted by the App shell. This is an inventory granularity difference, not a structural disagreement.",
+      "measuredFrom": "../src/App.jsx:18-28"
+    }
+  },
+  "routeToTemplate": {
+    "/": "template.homepage"
+  },
+  "routeCoverage": {
+    "routes": 1,
+    "assigned": 1,
+    "unassigned": 0,
+    "doubleAssigned": 0
+  },
+  "unmappedSections": []
+}

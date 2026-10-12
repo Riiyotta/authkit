@@ -1,0 +1,59 @@
+{
+  "note": "The curated, referenceable view handed to a generator. A generator references these ids, never a raw hex/px literal.",
+  "categories": {
+    "color": {
+      "file": "../00-foundation/color.json",
+      "key": "palette",
+      "count": 27
+    },
+    "gradient": {
+      "file": "../00-foundation/color.json",
+      "key": "gradients",
+      "count": 9
+    },
+    "fontSize": {
+      "file": "../00-foundation/typography.json",
+      "key": "scale",
+      "count": 21
+    },
+    "fontFamily": {
+      "file": "../00-foundation/typography.json",
+      "key": "families",
+      "count": 3
+    },
+    "fontWeight": {
+      "file": "../00-foundation/typography.json",
+      "key": "weights",
+      "count": 2
+    },
+    "radius": {
+      "file": "../00-foundation/radius.json",
+      "key": "scale",
+      "count": 4
+    },
+    "breakpoint": {
+      "file": "../00-foundation/breakpoint.json",
+      "key": "namedScreens",
+      "count": 4
+    },
+    "easing": {
+      "file": "../00-foundation/motion.json",
+      "key": "easings",
+      "count": 3
+    },
+    "semanticRole": {
+      "file": "../10-semantic/semantic.json",
+      "key": "roles",
+      "count": 12
+    }
+  },
+  "resolutionOrder": [
+    "foundation",
+    "theme-mode overrides",
+    "semantic aliases",
+    "component tokens",
+    "permitted local overrides",
+    "responsive overrides"
+  ],
+  "resolutionNote": "Never resolve aliases before the mode is known. theme.light resolves only within a `.light` subtree."
+}

@@ -1,0 +1,60 @@
+{
+  "note": "Semantic roles resolve to foundation tokens by id. A generator references these, never a hex literal.",
+  "evidence": "measured",
+  "roles": {
+    "text.primary": {
+      "ref": "color.text.loud",
+      "measuredFrom": "../src/styles/base.css:25"
+    },
+    "text.secondary": {
+      "ref": "color.text.normal",
+      "measuredFrom": "../tailwind.config.js:18"
+    },
+    "text.muted": {
+      "ref": "color.text.muted",
+      "measuredFrom": "../tailwind.config.js:20"
+    },
+    "text.gradient": {
+      "ref": "gradient.loud-100",
+      "measuredFrom": "../src/styles/base.css:170-177",
+      "note": "`.text-gradient` is background-clip:text with a 0 2px 16px #aecff23d text-shadow."
+    },
+    "surface.page": {
+      "ref": "color.surface.page",
+      "measuredFrom": "../src/styles/base.css:24-28"
+    },
+    "surface.card": {
+      "value": "#bad6f703",
+      "measuredFrom": "../src/styles/security.css:48",
+      "note": "The security card's own 3%-alpha wash; not a named theme colour."
+    },
+    "border.hairline": {
+      "ref": "color.border.subtle",
+      "measuredFrom": "../src/styles/base.css:637-641",
+      "note": "The page separator and the hero grid tracks."
+    },
+    "border.default": {
+      "ref": "color.border.default",
+      "measuredFrom": "../tailwind.config.js:23"
+    },
+    "border.strong": {
+      "ref": "color.border.strong",
+      "measuredFrom": "../tailwind.config.js:24"
+    },
+    "accent.glow-line": {
+      "ref": "color.glow.violet",
+      "measuredFrom": "../src/index.css:100",
+      "note": "`.glowing-button`'s --line-color."
+    },
+    "accent.card-line": {
+      "ref": "color.glow.indigo",
+      "measuredFrom": "../src/styles/base.css:533",
+      "note": "`.card`'s --line-color."
+    },
+    "brand.default": {
+      "ref": "color.brand.swatch-2",
+      "measuredFrom": "../src/components/CustomUI.jsx:45",
+      "note": "#663AF3 is the customiser's default brand colour."
+    }
+  }
+}

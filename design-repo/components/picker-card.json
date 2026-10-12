@@ -1,0 +1,44 @@
+{
+  "id": "component.picker-card",
+  "name": "PickerCard",
+  "purpose": "Host one customiser control group in the site's small dark card, framed by an OutlineBox.",
+  "tags": [
+    "card",
+    "control",
+    "shared"
+  ],
+  "composes": [
+    "primitive.outline-box"
+  ],
+  "structure": "OutlineBox(lines, dots) > div > .card.card-small.card-dark.card-animated.card-animated-loop > .effect + .content > .<cardClass>__content > label + children",
+  "instanceCount": 3,
+  "instances": [
+    {
+      "label": "Colour",
+      "chars": 6,
+      "controls": 4
+    },
+    {
+      "label": "Logo icon",
+      "chars": 9,
+      "controls": 4
+    },
+    {
+      "label": "Radius",
+      "chars": 6,
+      "controls": 4
+    }
+  ],
+  "copyBudget": {
+    "label": {
+      "maxWords": 2,
+      "measuredChars": [
+        6,
+        9,
+        6
+      ]
+    }
+  },
+  "measuredFrom": "../src/components/CustomUI.jsx:23-42",
+  "evidence": "measured"
+}

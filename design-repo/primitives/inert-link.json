@@ -1,0 +1,13 @@
+{
+  "id": "primitive.inert-link",
+  "name": "INERT_HREF",
+  "purpose": "Encode the project's hard no-outbound-links constraint as a single shared constant.",
+  "tags": [
+    "link",
+    "constraint"
+  ],
+  "value": "#",
+  "rule": "HARD CONSTRAINT, by explicit user instruction. EVERY off-domain destination on this site resolves to the inert href `#`. Link text, styling and hover states are unchanged. This is NOT a defect to fix and MUST NOT be 'repaired' by a generator into a real URL.",
+  "measuredFrom": "../src/components/primitives.jsx:9-11",
+  "evidence": "measured"
+}

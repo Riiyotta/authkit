@@ -1,0 +1,51 @@
+{
+  "evidence": "measured",
+  "note": "Radius is NOT a free scale on this site: there are five real resting values plus one user-settable custom property with a closed 4-value domain.",
+  "scale": {
+    "radius.card-small": {
+      "value": "12px",
+      "usedBy": ".card-small (the three customiser picker cards)",
+      "measuredFrom": "../src/styles/base.css:540-542"
+    },
+    "radius.card": {
+      "value": "16px",
+      "usedBy": ".card-medium, .card-large, .security-card",
+      "measuredFrom": "../src/styles/base.css:546-557"
+    },
+    "radius.security-card": {
+      "value": "16px",
+      "usedBy": ".security-card",
+      "measuredFrom": "../src/styles/security.css:49"
+    },
+    "radius.pill": {
+      "value": "999px",
+      "usedBy": ".glowing-button",
+      "measuredFrom": "../src/index.css:105"
+    }
+  },
+  "userSettable": {
+    "--brand-radius": {
+      "domain": [
+        "0px",
+        "3px",
+        "6px",
+        "9999px"
+      ],
+      "default": "3px",
+      "defaultIndex": 1,
+      "setBy": "the customiser's 4-button radius picker",
+      "measuredFrom": "../src/components/CustomUI.jsx:11",
+      "note": "The hero's three AuthCard instances set --brand-radius inline to 4px / 999px / 2px respectively \u2014 those are per-instance literals outside the picker's domain, not additional scale entries.",
+      "heroInstanceValues": [
+        "4px",
+        "999px",
+        "2px"
+      ],
+      "heroMeasuredFrom": "../src/components/Hero.jsx:26",
+      "heroAlsoMeasuredFrom": [
+        "../src/components/Hero.jsx:40",
+        "../src/components/Hero.jsx:55"
+      ]
+    }
+  }
+}

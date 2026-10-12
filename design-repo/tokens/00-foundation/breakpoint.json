@@ -1,0 +1,78 @@
+{
+  "evidence": "measured",
+  "namedScreens": {
+    "sm": {
+      "value": "640px",
+      "measuredFrom": "../tailwind.config.js:10"
+    },
+    "md": {
+      "value": "940px",
+      "measuredFrom": "../tailwind.config.js:11"
+    },
+    "lg": {
+      "value": "996px",
+      "measuredFrom": "../tailwind.config.js:12"
+    },
+    "xl": {
+      "value": "1200px",
+      "measuredFrom": "../tailwind.config.js:13"
+    }
+  },
+  "realMediaQueryInventory": {
+    "note": "Counted directly out of the clone's own stylesheets. Two of these do NOT correspond to a named Tailwind screen, because the hand-written section CSS was transcribed from the original's compiled stylesheet rather than authored through Tailwind.",
+    "queries": [
+      {
+        "query": "(min-width: 640px)",
+        "occurrences": 35,
+        "named": "sm"
+      },
+      {
+        "query": "(max-width: 1199px)",
+        "occurrences": 11,
+        "named": "xl-1 (desktop/mobile <picture> switch)"
+      },
+      {
+        "query": "(min-width: 940px)",
+        "occurrences": 8,
+        "named": "md"
+      },
+      {
+        "query": "(max-width: 1200px)",
+        "occurrences": 3,
+        "named": "xl"
+      },
+      {
+        "query": "(max-width: 940px)",
+        "occurrences": 2,
+        "named": "md"
+      },
+      {
+        "query": "(min-width: 996px)",
+        "occurrences": 1,
+        "named": "lg"
+      },
+      {
+        "query": "(max-width: 996px)",
+        "occurrences": 1,
+        "named": "lg"
+      },
+      {
+        "query": "(min-width: 440px)",
+        "occurrences": 1,
+        "named": null,
+        "unnamedNote": "Only raises the hero's --logo-height from 100px to 120px. Not in tailwind.config.js's screens."
+      }
+    ],
+    "measuredFrom": "../src/styles",
+    "measurementMethod": "grep -rhoE '@media[^{]*' over src/index.css and src/styles/*.css, sorted and counted"
+  },
+  "fidelityViewports": {
+    "note": "The widths at which the clone's static fidelity was measured to 0 computed diffs.",
+    "values": [
+      1280,
+      1024,
+      768,
+      390
+    ]
+  }
+}

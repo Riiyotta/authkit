@@ -1,0 +1,69 @@
+{
+  "id": "component.security-card",
+  "name": "Card (Security-local)",
+  "className": ".security-card",
+  "purpose": "A fixed-size tile that animates one security capability and labels it, so five unrelated mechanisms read as one family.",
+  "tags": [
+    "card",
+    "animation",
+    "shared"
+  ],
+  "geometry": {
+    "maxWidth": "320px",
+    "height": "242px",
+    "borderRadius": "16px",
+    "background": "#bad6f703",
+    "gap": "8px"
+  },
+  "instanceCount": 5,
+  "correction": "ia.json's demo.security-cards description says 'four 320x242 animated cards' and names only four mechanisms. The real section renders FIVE cards: leaked-password, RBAC, password-strength, automatic-detection and multi-factor. The 320x242 geometry is correct.",
+  "instances": [
+    {
+      "label": "Leaked password protection",
+      "chars": 26,
+      "timeline": "intersection-armed, 14081ms cycle"
+    },
+    {
+      "label": "Role-Based Access Control",
+      "chars": 25,
+      "timeline": "MOUNT (not intersection-gated), 6050ms cycle"
+    },
+    {
+      "label": "Password strength validation",
+      "chars": 28,
+      "timeline": "intersection-armed, 2017ms step over an 8-state cycle"
+    },
+    {
+      "label": "Automatic spam and bot detection",
+      "chars": 32,
+      "timeline": "CSS-only; no JS timeline"
+    },
+    {
+      "label": "Multi-Factor Authentication",
+      "chars": 27,
+      "timeline": "intersection-armed, 1016ms step over a 16264ms cycle"
+    }
+  ],
+  "props": {
+    "fromLoad": {
+      "type": "boolean",
+      "default": false,
+      "note": "Only the RBAC card sets this. Verified by parking the original at scrollY 407 with the RBAC block at document y ~4800, far below the fold: it was already writing translateX every frame."
+    }
+  },
+  "copyBudget": {
+    "label": {
+      "maxWords": 5,
+      "measuredChars": [
+        26,
+        25,
+        28,
+        32,
+        27
+      ]
+    }
+  },
+  "measuredFrom": "../src/components/Security.jsx:42-63",
+  "geometryMeasuredFrom": "../src/styles/security.css:40-57",
+  "evidence": "measured"
+}

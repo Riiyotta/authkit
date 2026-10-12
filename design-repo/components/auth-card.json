@@ -1,0 +1,204 @@
+{
+  "id": "component.auth-card",
+  "name": "AuthCard",
+  "className": ".card",
+  "purpose": "Show what an AuthKit-style login box looks like, in every shape the product supports, from one implementation.",
+  "tags": [
+    "card",
+    "form",
+    "shared",
+    "product-preview"
+  ],
+  "composes": [
+    "primitive.button",
+    "primitive.input",
+    "primitive.field",
+    "primitive.between-lines",
+    "primitive.icon"
+  ],
+  "sharedOnceRule": {
+    "statement": "HARD RULE, a user directive rather than an accident: there is exactly ONE AuthCard implementation, instantiated 4 times \u2014 3 mapped in the hero and 1 as the customiser's live preview target. Shape differences are PROPS. Brand differences are the --brand-color / --brand-radius custom properties. Light mode is the `.light` ancestor cascade.",
+    "forbidden": [
+      "a second login-card component",
+      "a forked `-light` card",
+      "copy-pasting the card markup into a section"
+    ],
+    "measuredFrom": "../src/components/AuthCard.jsx:4-10"
+  },
+  "instanceCount": 4,
+  "instances": [
+    {
+      "where": "hero left",
+      "props": "height 392, --brand-color #EF6643, --brand-radius 4px, 1 field, footer with text",
+      "measuredFrom": "../src/components/Hero.jsx:21-34"
+    },
+    {
+      "where": "hero centre",
+      "props": "--brand-radius 999px, animated chase (631deg / 7s), 1 field + OR divider + 2 socials, z-index 1; the ONLY scroll-scrubbed card",
+      "measuredFrom": "../src/components/Hero.jsx:35-49"
+    },
+    {
+      "where": "hero right",
+      "props": "height 392, --brand-color #000, --brand-radius 2px, 6-digit OTP, footer link only",
+      "measuredFrom": "../src/components/Hero.jsx:50-62"
+    },
+    {
+      "where": "customui preview",
+      "props": "surface dark, animated chase (541deg / 10s), boxed sprite logo, 2 fields, solid primary, OR divider + 1 social; the customiser target",
+      "measuredFrom": "../src/components/CustomUI.jsx:80-106"
+    }
+  ],
+  "props": {
+    "surface": {
+      "type": "string",
+      "enum": [
+        "hero",
+        "dark"
+      ],
+      "default": "hero"
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "default": "large"
+    },
+    "animated": {
+      "type": "object",
+      "fields": [
+        "startAngle",
+        "delay"
+      ],
+      "note": "opt-in `.card-animated-loop` border chase"
+    },
+    "logoBoxed": {
+      "type": "boolean",
+      "default": false
+    },
+    "fields": {
+      "type": "array",
+      "maxItems": 2
+    },
+    "otp": {
+      "type": "object",
+      "fields": [
+        "label",
+        "length"
+      ],
+      "measuredLength": 6
+    },
+    "primary": {
+      "type": "object",
+      "fields": [
+        "label",
+        "variant"
+      ],
+      "default": {
+        "label": "Continue",
+        "variant": "outline"
+      }
+    },
+    "divider": {
+      "type": "string",
+      "maxWords": 1
+    },
+    "socials": {
+      "type": "array",
+      "enum": [
+        "google",
+        "microsoft"
+      ],
+      "maxItems": 2
+    },
+    "footer": {
+      "type": "object",
+      "fields": [
+        "text",
+        "linkLabel"
+      ]
+    }
+  },
+  "copyBudget": {
+    "title": {
+      "maxWords": 4,
+      "measuredChars": [
+        21,
+        19,
+        19,
+        19
+      ]
+    },
+    "subtitle": {
+      "maxWords": 9,
+      "measuredChars": [
+        19,
+        57
+      ]
+    },
+    "fieldLabel": {
+      "maxWords": 2,
+      "measuredChars": [
+        5,
+        8,
+        13
+      ]
+    },
+    "placeholder": {
+      "maxWords": 3,
+      "measuredChars": [
+        18,
+        19
+      ]
+    },
+    "primaryLabel": {
+      "maxWords": 1,
+      "measuredChars": [
+        8
+      ]
+    },
+    "socialLabel": {
+      "maxWords": 3,
+      "measuredChars": [
+        20,
+        23
+      ],
+      "note": "generated as 'Continue with <Provider>'"
+    },
+    "footerText": {
+      "maxWords": 4,
+      "measuredChars": [
+        22
+      ]
+    },
+    "footerLink": {
+      "maxWords": 4,
+      "measuredChars": [
+        7,
+        17
+      ]
+    },
+    "divider": {
+      "maxWords": 1,
+      "measuredChars": [
+        2
+      ]
+    }
+  },
+  "geometry": {
+    "width": {
+      "base": "320px",
+      "sm": "392px"
+    },
+    "contentGap": "16px",
+    "headerGap": "10px",
+    "logo": "32x32",
+    "measuredFrom": "../src/styles/hero.css:444-477"
+  },
+  "supportsLightSubtree": true,
+  "footerLinkNote": "The footer link carries pointerEvents:none in addition to the inert href.",
+  "measuredFrom": "../src/components/AuthCard.jsx:12-106",
+  "evidence": "measured"
+}

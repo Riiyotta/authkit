@@ -1,0 +1,33 @@
+{
+  "id": "primitive.eyebrow",
+  "name": "Eyebrow",
+  "purpose": "The composed section eyebrow: always a gradient BetweenLines wrapping a gradient Badge. Never hand-assembled.",
+  "tags": [
+    "label",
+    "eyebrow",
+    "composed"
+  ],
+  "composes": [
+    "primitive.between-lines",
+    "primitive.badge"
+  ],
+  "rule": "An eyebrow is ALWAYS `BetweenLines variant=gradient > Badge gradient`. A generator must not emit a bare badge as an eyebrow.",
+  "copyBudget": {
+    "maxWords": 3,
+    "measuredCharRange": [
+      11,
+      21
+    ],
+    "measuredInstances": [
+      11,
+      20,
+      17,
+      17,
+      21,
+      12
+    ],
+    "note": "Measured character lengths of the 6 real eyebrows, recorded as a budget. The text itself is proprietary marketing copy and is deliberately not stored here."
+  },
+  "measuredFrom": "../src/components/primitives.jsx:45-52",
+  "evidence": "measured"
+}

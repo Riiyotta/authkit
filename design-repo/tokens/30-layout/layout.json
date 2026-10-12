@@ -1,0 +1,115 @@
+{
+  "evidence": "measured",
+  "pageShell": {
+    "note": "There is NO <nav> and NO <footer> element anywhere on this site, and the header is position:static with zero scroll behaviour. The only inter-section chrome is a 1px --blue-6 rule, and it is present at just 4 of the 8 section boundaries.",
+    "measuredFrom": "../src/App.jsx:13-41",
+    "sectionOrder": [
+      "hero",
+      "features-slider",
+      "dashboard",
+      "customui",
+      "radix",
+      "security",
+      "complete",
+      "testimonials",
+      "cta"
+    ],
+    "separatorBefore": [
+      "radix",
+      "security",
+      "complete",
+      "testimonials"
+    ],
+    "separatorCount": 4,
+    "boundaryCount": 8,
+    "separator": {
+      "height": "1px",
+      "borderBottom": "1px solid var(--blue-6)",
+      "width": "100vw",
+      "measuredFrom": "../src/styles/base.css:637-641"
+    }
+  },
+  "heroGrid": {
+    "note": "The hero is the only section with a visible hairline grid. 17 columns x 14 rows at >=640px; 9 columns x 14 rows below.",
+    "wideColumns": "1fr 1px 70px 1px 70px 1px 70px 1px 370px 1px 70px 1px 70px 1px 70px 1px 1fr",
+    "wideRowHeights": [
+      "1px",
+      "105px",
+      "1px",
+      "70px",
+      "1px",
+      "70px",
+      "1px",
+      "135px",
+      "1px",
+      "85px",
+      "1px",
+      "540px",
+      "1px",
+      "110px"
+    ],
+    "narrowColumns": "20px 1px 40px 1px 1fr 1px 40px 1px 20px",
+    "narrowRowHeights": [
+      "1px",
+      "90px",
+      "1px",
+      "40px",
+      "1px",
+      "50px",
+      "1px",
+      "var(--logo-height)",
+      "1px",
+      "85px",
+      "1px",
+      "540px",
+      "1px",
+      "110px"
+    ],
+    "logoHeight": {
+      "base": "100px",
+      "at440": "120px",
+      "at640": "135px (fixed row)"
+    },
+    "measuredFrom": "../src/styles/hero.css:6-60",
+    "namedAreas": [
+      "header",
+      "introducing",
+      "logo",
+      "headline",
+      "cards",
+      "light-switch",
+      "cross-1",
+      "cross-2",
+      "h-line-1..9",
+      "v-line-1..4",
+      "vs-line-1",
+      "vs-line-2"
+    ]
+  },
+  "contentVisibility": {
+    "value": "auto",
+    "appliedTo": [
+      "dashboard",
+      "radix",
+      "security",
+      "complete",
+      "testimonials",
+      "cta"
+    ],
+    "measuredFrom": "../src/styles/dashboard.css:8",
+    "consequence": "document scrollHeight varies per measurement pass on BOTH the clone and the original. Document height is NOT a fidelity metric for this project and MUST NOT be recorded as a contract value anywhere in this repo."
+  },
+  "maxWidths": {
+    "container-lg": {
+      "value": "1200px",
+      "usedBy": "shared chrome only",
+      "measuredFrom": "../src/styles/base.css:644-645"
+    },
+    "dashboard": "1440px",
+    "radix": "1440px",
+    "cta": "1440px",
+    "testimonials": "1200px",
+    "security": "1076px",
+    "customui": "1040px"
+  }
+}

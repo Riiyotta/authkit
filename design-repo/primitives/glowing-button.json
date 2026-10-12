@@ -1,0 +1,53 @@
+{
+  "id": "primitive.glowing-button",
+  "name": "GlowingButton",
+  "className": ".glowing-button",
+  "purpose": "The site's only real call-to-action control: a pill with a conic-gradient border chase, a travelling sparkle layer and a hover bloom.",
+  "tags": [
+    "control",
+    "cta",
+    "glow"
+  ],
+  "props": {
+    "as": {
+      "type": "string",
+      "default": "a"
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "medium",
+        "large"
+      ],
+      "default": "medium"
+    }
+  },
+  "sizeInUse": "medium",
+  "instanceCount": 5,
+  "instances": [
+    "hero Get-started",
+    "hero GitHub icon",
+    "radix rail",
+    "complete rail",
+    "cta actions"
+  ],
+  "structure": "`<span class=effect aria-hidden>` + `<span class=text>`; ::before is the sparkle, ::after the hover bloom, .effect::before/::after the ring.",
+  "motion": {
+    "ring": "line-anim var(--duration) var(--easing) infinite",
+    "sparkle": "line-anim var(--duration) infinite, sky-anim 2s var(--easing) infinite",
+    "durationMedium": "16s"
+  },
+  "copyBudget": {
+    "maxWords": 6,
+    "measuredChars": [
+      11,
+      22,
+      39,
+      18
+    ],
+    "note": "Longest real label is 39 characters / 6 words."
+  },
+  "measuredFrom": "../src/components/primitives.jsx:90-99",
+  "styleMeasuredFrom": "../src/index.css:98-219",
+  "evidence": "measured"
+}

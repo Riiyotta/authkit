@@ -1,0 +1,20 @@
+{
+  "id": "theme.dark",
+  "isDefault": true,
+  "note": "The page's only document-level theme. Every semantic role resolves here.",
+  "evidence": "measured",
+  "measuredFrom": "../src/styles/base.css:24-28",
+  "resolved": {
+    "surface.page": "#05060f",
+    "text.primary": "#c7d3ea",
+    "text.secondary": "#c8d4eac7",
+    "text.muted": "#c7d3eaa3",
+    "border.hairline": "#bad6f70f",
+    "border.default": "#bad7f71f",
+    "border.strong": "#bad6f73d",
+    "accent.glow-line": "#c2ccff",
+    "accent.card-line": "#adbbff",
+    "brand.default": "#663AF3",
+    "bodyColor": "#fff"
+  }
+}

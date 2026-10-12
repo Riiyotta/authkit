@@ -1,0 +1,57 @@
+{
+  "id": "component.particle-canvas",
+  "purpose": "Give a section depth with a drifting, twinkling field of white dots, at a density fixed by the canvas's own area.",
+  "tags": [
+    "animation",
+    "canvas",
+    "ambient"
+  ],
+  "instanceCount": 4,
+  "kinds": [
+    "stars",
+    "dots"
+  ],
+  "rule": "A generator must not choose a particle count. Count is derived: round(w*h/1666.67) for `stars`, round(w*h/553) for `dots`. Radius is 0.5 and 1.5 respectively. White is the only fill colour. Alpha is a raw Math.sin(phase) that genuinely emits negative values.",
+  "instances": [
+    {
+      "section": "hero",
+      "kind": "stars",
+      "box": [
+        1280,
+        1222
+      ],
+      "count": 938,
+      "cssOpacity": 0.5
+    },
+    {
+      "section": "demo.custom-ui-browser",
+      "kind": "stars",
+      "box": [
+        992,
+        664
+      ],
+      "count": 395
+    },
+    {
+      "section": "demo.radix",
+      "kind": "stars",
+      "box": [
+        1280,
+        1078
+      ],
+      "count": 828
+    },
+    {
+      "section": "demo.security-cards",
+      "kind": "dots",
+      "box": [
+        128,
+        363
+      ],
+      "count": 84,
+      "note": "Carries transform:scale(0.5), so the backing store must be sized from the LAYOUT box, not getBoundingClientRect()."
+    }
+  ],
+  "measuredFrom": "../src/hooks/motion.js:78-254",
+  "evidence": "measured"
+}

@@ -1,0 +1,313 @@
+{
+  "version": "1.0.0",
+  "evidence": "measured",
+  "scopeNote": "This page has exactly ONE template and ONE route, so this graph's job is not to referee many possible compositions \u2014 it is to pin the one real composition and reject drift away from it. Every rule below was checked against templates/templates.json's actual node sequence at the time it was written.",
+  "categoryVocabulary": [
+    "CHROME",
+    "HERO",
+    "CAPABILITY",
+    "PRODUCT_DEMO",
+    "PROOF",
+    "CONVERSION"
+  ],
+  "realCategorySequence": [
+    "CHROME",
+    "CHROME",
+    "HERO",
+    "HERO",
+    "HERO",
+    "HERO",
+    "HERO",
+    "CAPABILITY",
+    "PRODUCT_DEMO",
+    "PRODUCT_DEMO",
+    "PRODUCT_DEMO",
+    "CHROME",
+    "PRODUCT_DEMO",
+    "CHROME",
+    "PRODUCT_DEMO",
+    "CHROME",
+    "PRODUCT_DEMO",
+    "CHROME",
+    "PROOF",
+    "CONVERSION",
+    "CONVERSION"
+  ],
+  "rules": {
+    "EXPECTED_CATEGORY_SEQUENCE": {
+      "severity": "warn",
+      "statement": "The rendered category sequence is fixed. Note this is the EXPANDED instance order: chrome.page-separator is listed once in templates.json but renders 4 times, before demo.radix, demo.security-cards, demo.complete-diagram and proof.testimonials, so the real instance is 21 nodes rather than the template's 18.",
+      "expected": [
+        "CHROME",
+        "CHROME",
+        "HERO",
+        "HERO",
+        "HERO",
+        "HERO",
+        "HERO",
+        "CAPABILITY",
+        "PRODUCT_DEMO",
+        "PRODUCT_DEMO",
+        "PRODUCT_DEMO",
+        "CHROME",
+        "PRODUCT_DEMO",
+        "CHROME",
+        "PRODUCT_DEMO",
+        "CHROME",
+        "PRODUCT_DEMO",
+        "CHROME",
+        "PROOF",
+        "CONVERSION",
+        "CONVERSION"
+      ],
+      "rationale": "A single-route site has one correct order; a reordering is drift, not a variant.",
+      "measuredFrom": "../templates/templates.json",
+      "expectedNodeOrder": [
+        "chrome.hairline-grid",
+        "chrome.hero-header",
+        "hero.wordmark",
+        "hero.headline",
+        "hero.auth-card-trio",
+        "hero.light-switch",
+        "hero.ambient-fx",
+        "capability.feature-strip",
+        "demo.dashboard",
+        "demo.custom-ui-browser",
+        "demo.customiser-pickers",
+        "chrome.page-separator",
+        "demo.radix",
+        "chrome.page-separator",
+        "demo.security-cards",
+        "chrome.page-separator",
+        "demo.complete-diagram",
+        "chrome.page-separator",
+        "proof.testimonials",
+        "conversion.cta-header",
+        "conversion.cta-boxes"
+      ]
+    },
+    "NO_ADJACENT_SAME_CATEGORY_DOES_NOT_APPLY": {
+      "severity": "none",
+      "status": "deliberately NOT a rule",
+      "statement": "The conventional NO_ADJACENT_SAME_CATEGORY rhythm rule is NOT enforced here, because the real page violates it everywhere by design: 2 consecutive CHROME nodes, 5 consecutive HERO nodes, 3 consecutive PRODUCT_DEMO nodes, then 3 more, then 2 consecutive CONVERSION nodes. A rule with exceptions covering every run in the document would be vacuous. EXPECTED_CATEGORY_SEQUENCE carries the real constraint instead.",
+      "verifiedAgainst": "templates/templates.json node sequence"
+    },
+    "ONE_HERO_DOES_NOT_APPLY": {
+      "severity": "none",
+      "status": "deliberately NOT a rule",
+      "statement": "There is no single 'hero' section on this site to be unique. The hero is a COMPOSITE of 5 HERO-category nodes plus 2 CHROME nodes, all living inside one React component and one CSS grid. A classic ONE_HERO rule would have nothing to count. HERO_NODE_SET_COMPLETE carries the real constraint.",
+      "realHeroNodes": [
+        "hero.wordmark",
+        "hero.headline",
+        "hero.auth-card-trio",
+        "hero.light-switch",
+        "hero.ambient-fx"
+      ]
+    },
+    "HERO_NODE_SET_COMPLETE": {
+      "severity": "error",
+      "statement": "All 5 HERO-category nodes must be present exactly once each, and all must appear before capability.feature-strip.",
+      "nodes": [
+        "hero.wordmark",
+        "hero.headline",
+        "hero.auth-card-trio",
+        "hero.light-switch",
+        "hero.ambient-fx"
+      ],
+      "rationale": "They are facets of one grid; omitting one leaves a hole in the hero's 14-row template.",
+      "measuredFrom": "../src/styles/hero.css:6-33"
+    },
+    "HAIRLINE_GRID_FIRST": {
+      "severity": "error",
+      "statement": "chrome.hairline-grid must be the first node. The grid is declared before anything placed into it.",
+      "verifiedIndex": 0
+    },
+    "HEADER_IMMEDIATELY_AFTER_GRID": {
+      "severity": "error",
+      "statement": "chrome.hero-header must be node 1, immediately after chrome.hairline-grid.",
+      "verifiedIndex": 1,
+      "note": "The header is the first node carrying content, but it is NOT first \u2014 see HAIRLINE_GRID_FIRST."
+    },
+    "CTA_BOXES_LAST": {
+      "severity": "error",
+      "statement": "conversion.cta-boxes must be the last node. There is no footer to follow it.",
+      "verifiedIndex": 17,
+      "exception": "None. This template has no footer section, because the site has no <footer> element at all."
+    },
+    "CTA_HEADER_IMMEDIATELY_PRECEDES_BOXES": {
+      "severity": "error",
+      "statement": "conversion.cta-header must appear exactly once, immediately before conversion.cta-boxes.",
+      "verifiedIndices": [
+        16,
+        17
+      ]
+    },
+    "PICKERS_IMMEDIATELY_FOLLOW_BROWSER": {
+      "severity": "error",
+      "statement": "demo.customiser-pickers must appear exactly once, immediately after demo.custom-ui-browser, because the browser frame physically hosts the pickers and the two cannot be separated.",
+      "verifiedIndices": [
+        9,
+        10
+      ],
+      "measuredFrom": "../src/components/CustomUI.jsx:111-179"
+    },
+    "SEPARATOR_PLACEMENT": {
+      "severity": "error",
+      "statement": "chrome.page-separator is the only repeatable node. It occurs exactly 4 times, before demo.radix, demo.security-cards, demo.complete-diagram and proof.testimonials \u2014 4 of the 8 section boundaries. It MUST NOT be added at the other four boundaries, and the rhythm MUST NOT be regularised.",
+      "maxPerPage": 4,
+      "allowedBefore": [
+        "demo.radix",
+        "demo.security-cards",
+        "demo.complete-diagram",
+        "proof.testimonials"
+      ],
+      "measuredFrom": "../src/App.jsx:18-28"
+    },
+    "NO_NAV_NO_FOOTER": {
+      "severity": "error",
+      "statement": "No navigation and no footer section may be added. The real site has no <nav> and no <footer> element at all, and its header is position:static with zero scroll behaviour.",
+      "forbiddenIds": [
+        "shell.navbar",
+        "chrome.navbar",
+        "chrome.footer",
+        "shell.footer",
+        "conversion.footer-cta"
+      ],
+      "rationale": "Absence of site chrome is a measured structural fact here, not an omission to be helpfully filled in.",
+      "measuredFrom": "../src/components/Hero.jsx:122-140"
+    },
+    "SINGLE_ROUTE_SINGLE_TEMPLATE": {
+      "severity": "error",
+      "statement": "Exactly one route (/) bound to exactly one template. No route or template may be invented: 15 probed candidate routes on the original all return 404 and only / returns 200.",
+      "measuredFrom": "../ia.json:2-8"
+    },
+    "SCROLL_SCRUB_BUDGET": {
+      "severity": "error",
+      "statement": "Exactly two scroll-scrubbed systems exist on this page: the hero's CENTRE auth card and the demo.radix logo stack. No other node may declare trigger scroll-scrub.",
+      "nodes": [
+        "hero.auth-card-trio",
+        "demo.radix"
+      ],
+      "supersedes": "CLONE_SPEC 3.4 claims there is no scroll-linked (scrubbed) animation anywhere. That is wrong; this rule records the two real systems.",
+      "measuredFrom": "../src/hooks/motion.js:256-269"
+    },
+    "NO_CONSECUTIVE_SCROLL_SCRUB": {
+      "severity": "error",
+      "statement": "The two scrubbed systems must not be adjacent nodes \u2014 two competing rAF scrub loops in one viewport is the one motion-budget failure this page's composition avoids.",
+      "verifiedIndices": [
+        4,
+        12
+      ],
+      "verifiedGap": 8
+    },
+    "INTERACTIVITY_BUDGET": {
+      "severity": "error",
+      "statement": "Exactly two nodes are genuinely interactive: hero.light-switch and demo.customiser-pickers. The other five PRODUCT_DEMO nodes are observer- or mount-triggered animation with NO user input. A generator must not add interactivity to them.",
+      "interactiveNodes": [
+        "demo.customiser-pickers",
+        "hero.light-switch"
+      ],
+      "measuredFrom": "../src/components/CustomUI.jsx:44-52"
+    },
+    "REDUCED_MOTION_FALLBACK_REQUIRED": {
+      "severity": "error",
+      "statement": "Every node's motion object must declare a reducedMotionFallback. The clone goes beyond the original here deliberately: the original guards only .spotlight, while the clone adds a global duration clamp AND every JS loop checks prefersReducedMotion() itself.",
+      "measuredFrom": "../src/index.css:525-533"
+    },
+    "MOTION_FREE_NODES": {
+      "severity": "warn",
+      "statement": "Exactly three nodes are entirely motion-free and must stay that way: chrome.page-separator, proof.testimonials and conversion.cta-header. proof.testimonials is the only fully static content section on the page.",
+      "nodes": [
+        "chrome.page-separator",
+        "conversion.cta-header",
+        "proof.testimonials"
+      ]
+    },
+    "ONE_AUTH_CARD_IMPLEMENTATION": {
+      "severity": "error",
+      "statement": "All four auth-card instances (3 in the hero, 1 as the customiser target) must resolve to the ONE shared component.auth-card contract. Forking the card, or adding a second login-card component, is forbidden \u2014 this is a user directive, not an incidental convenience.",
+      "instanceCount": 4,
+      "measuredFrom": "../src/components/AuthCard.jsx:4-10"
+    },
+    "NO_LIGHT_MODE_FORK": {
+      "severity": "error",
+      "statement": "Light appearance is a `.light` ancestor class cascade plus custom properties. There are deliberately NO forked `-light` primitives, components or sections. A generated node expresses light appearance only as theme 'light', and only on a section whose contract sets supportsLightSubtree true.",
+      "sectionsSupportingLightSubtree": [
+        "hero.auth-card-trio",
+        "hero.light-switch"
+      ],
+      "measuredFrom": "../src/styles/base.css:6-10"
+    },
+    "ALL_OUTBOUND_HREFS_INERT": {
+      "severity": "error",
+      "statement": "HARD CONSTRAINT by explicit user instruction. Every off-domain destination resolves to the inert href '#'. A generated instance must not emit an absolute or external URL anywhere. This is not a defect to repair.",
+      "measuredFrom": "../src/components/primitives.jsx:9-11"
+    },
+    "NO_EXTERNAL_ASSET_REQUESTS": {
+      "severity": "error",
+      "statement": "Every asset must resolve to a local path. Fonts are self-hosted. No Google Fonts, no CDN, no third-party request. The clone runs fully offline.",
+      "measuredFrom": "../src/index.css:17-38"
+    },
+    "SHARED_ONCE_STRUCTURE": {
+      "severity": "error",
+      "statement": "A user directive about where things may be defined: shared UI lives only in the primitives module, every icon only in the icons module, design tokens only in tailwind.config.js, and all 29 @keyframes plus both glow primitives only in src/index.css. A generated contract must not introduce a second home for any of these.",
+      "verifiedKeyframeLocation": "29 @keyframes in src/index.css; 0 in every src/styles/*.css (verified by grep -c)",
+      "measuredFrom": "../src/index.css:1-7"
+    },
+    "NO_DOCUMENT_HEIGHT_CONTRACT": {
+      "severity": "error",
+      "statement": "Document height must NOT be recorded as a contract or fidelity value anywhere. Six sections use content-visibility:auto, so scrollHeight varies per measurement pass on BOTH the clone and the original. CLONE_SPEC's 6484 figure was a mid-expansion capture.",
+      "contentVisibilitySections": [
+        "demo.dashboard",
+        "demo.radix",
+        "demo.security-cards",
+        "demo.complete-diagram",
+        "proof.testimonials",
+        "conversion.cta-boxes"
+      ],
+      "measuredFrom": "../src/styles/dashboard.css:8"
+    },
+    "ASSET_ROLE_CLOSED": {
+      "severity": "error",
+      "statement": "Every media field must carry an assetRole drawn from the closed vocabulary in assets/asset-roles.json. Bare generic strings like 'image' or 'src' are rejected. Five roles are pinned to one specific generationPolicy value and may not be changed even to another valid enum member.",
+      "pinnedRoles": [
+        "brand.wordmark",
+        "brand.product-mark",
+        "customer.logo",
+        "person.headshot",
+        "font.self-hosted-substitute"
+      ]
+    },
+    "NO_REAL_ENTITY_CONTENT": {
+      "severity": "error",
+      "statement": "COMPLIANCE-CRITICAL. A generated instance must not reproduce or fabricate a real company's logo, a real identifiable person's photograph or likeness, a real person's name attached to a quote, or real proprietary marketing copy. Generated instances get original placeholder assets and original copy. This design-repo stores copy BUDGETS (character and line counts) rather than the text itself for exactly this reason.",
+      "affectedRoles": [
+        "brand.wordmark",
+        "brand.product-mark",
+        "customer.logo",
+        "person.headshot"
+      ],
+      "affectedSections": [
+        "proof.testimonials",
+        "demo.radix",
+        "chrome.hero-header",
+        "hero.wordmark"
+      ]
+    },
+    "PRESERVE_INTENTIONAL_UPSTREAM_BUG": {
+      "severity": "error",
+      "statement": "The hero's two auto-placing vertical lines are a REPRODUCED upstream bug, not a defect. The stylesheet declares grid areas vs-line-1/vs-line-2 while the DOM writes v-line-5/v-line-6, so those two elements auto-place. A generator must not 'fix' it.",
+      "cssMeasuredFrom": "../src/styles/hero.css:412",
+      "domMeasuredFrom": "../src/components/Hero.jsx:113-119"
+    },
+    "MOTION_EVIDENCE_HONESTY": {
+      "severity": "warn",
+      "statement": "Two motion values are inferences rather than measurements and must keep their honest evidence level: the RBAC card's exit-leg rate (0.105/frame) and the unmeasured trigger of the unused .anim2 RBAC mask variant. Neither may be promoted to 'measured', and no trigger may be invented for .anim2.",
+      "gaps": [
+        "rbac-exit-rate",
+        "anim2-trigger"
+      ],
+      "detail": "../docs/evidence-gaps.md"
+    }
+  }
+}

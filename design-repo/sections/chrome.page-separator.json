@@ -1,0 +1,50 @@
+{
+  "id": "chrome.page-separator",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CHROME",
+  "name": "Inter-section rule",
+  "purpose": "Mark a change of subject with the lightest possible division \u2014 the only inter-section chrome this page has.",
+  "tags": [
+    "chrome",
+    "divider"
+  ],
+  "uses": [
+    "primitive.page-separator"
+  ],
+  "content": {
+    "fields": {},
+    "additionalProperties": false
+  },
+  "geometry": {
+    "height": "1px",
+    "color": "var(--blue-6)",
+    "width": "100vw"
+  },
+  "placement": {
+    "occurrences": 4,
+    "totalBoundaries": 8,
+    "before": [
+      "demo.radix",
+      "demo.security-cards",
+      "demo.complete-diagram",
+      "proof.testimonials"
+    ],
+    "rule": "Present at exactly 4 of the 8 section boundaries. This is NOT a uniform rhythm and must not be regularised into one.",
+    "correction": "ia.json's description says 'four of the nine section boundaries'. Nine SECTIONS produce eight boundaries; the same file's `scope` field states 4 of 8 correctly. Cite 4 of 8.",
+    "measuredFrom": "../src/App.jsx:18-28"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredReducedMotionFallback": "none"
+  },
+  "constraints": {
+    "repeatable": true,
+    "maxPerPage": 4,
+    "onePerPage": false
+  },
+  "measuredFrom": "../src/components/primitives.jsx:141-143"
+}

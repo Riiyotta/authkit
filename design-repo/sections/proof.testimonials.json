@@ -1,0 +1,99 @@
+{
+  "id": "proof.testimonials",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "PROOF",
+  "name": "Customer testimonial row",
+  "purpose": "Transfer trust from two named practitioners at named companies to the product.",
+  "tags": [
+    "proof",
+    "quote",
+    "third-party"
+  ],
+  "uses": [
+    "component.testimonial-cell",
+    "primitive.outline-box"
+  ],
+  "content": {
+    "fields": {
+      "cells": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "itemContract": "component.testimonial-cell"
+      }
+    },
+    "additionalProperties": false
+  },
+  "copyBudget": {
+    "quote": {
+      "maxWords": 32,
+      "measuredChars": [
+        167,
+        150
+      ],
+      "measuredWords": [
+        30,
+        25
+      ]
+    },
+    "authorName": {
+      "maxWords": 2,
+      "measuredChars": [
+        9,
+        13
+      ]
+    },
+    "authorTitle": {
+      "maxWords": 3,
+      "measuredChars": [
+        16,
+        17
+      ]
+    }
+  },
+  "geometry": {
+    "sectionMaxWidth": "1200px",
+    "cell": [
+      498,
+      384
+    ],
+    "row": "996px bordered",
+    "avatar": [
+      40,
+      40
+    ],
+    "borderDivs": 5
+  },
+  "responsive": {
+    "below640": {
+      "paddingBlock": "80px"
+    },
+    "from640": {
+      "paddingBlock": "160px 80px"
+    },
+    "measuredFrom": "../src/styles/testimonials.css:15-19"
+  },
+  "licensing": {
+    "severity": "compliance-critical",
+    "statement": "This is the only third-party-content section. On the real site it carries two identifiable real people's photographs with their real names and titles, two real customer company marks, and two verbatim quotes. NONE of that content is stored in this design-repo \u2014 only the measured budgets above. A generator MUST produce original placeholder assets and original copy. Reproducing or fabricating a real person's likeness, a real person's name attached to a quote they did not give, or a real company's mark is forbidden.",
+    "assetRoles": [
+      "person.headshot",
+      "customer.logo"
+    ]
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredReducedMotionFallback": "none",
+    "note": "This section has no motion at all. It is the only fully static content section on the page."
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustFollowSeparator": true
+  },
+  "measuredFrom": "../src/components/Testimonials.jsx:26-56"
+}

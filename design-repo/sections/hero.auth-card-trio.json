@@ -1,0 +1,79 @@
+{
+  "id": "hero.auth-card-trio",
+  "evidence": "measured",
+  "supportsLightSubtree": true,
+  "retrievalEligible": true,
+  "category": "HERO",
+  "name": "Hero auth-card trio",
+  "purpose": "Show three different real login shapes at once, so the product's flexibility is visible before a single word of body copy is read.",
+  "tags": [
+    "hero",
+    "product-preview",
+    "card"
+  ],
+  "uses": [
+    "component.auth-card"
+  ],
+  "content": {
+    "fields": {
+      "cards": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "itemContract": "component.auth-card",
+        "note": "Three instances of ONE shared component, differing only by props and the two brand custom properties."
+      }
+    },
+    "additionalProperties": false
+  },
+  "sharedOnceRule": {
+    "severity": "user directive",
+    "statement": "All three cards, plus the customiser's preview, are rendered by a single AuthCard implementation \u2014 4 instances site-wide. A generator must not fork the card.",
+    "measuredFrom": "../src/components/Hero.jsx:162-186"
+  },
+  "geometry": {
+    "cardWidth": {
+      "base": "320px",
+      "sm": "392px"
+    },
+    "leftRightInlineHeight": 392,
+    "centreHeightPx": 459,
+    "layout": "A centred flex row inside the `cards` grid area with perspective:1000px.",
+    "sideCardStaticTransforms": {
+      "left": "translateZ(-50px) rotateY(-10deg) + translateX(180px)",
+      "right": "translateZ(-50px) rotateY(10deg) + translateX(-180px)"
+    },
+    "sideCardTiltNote": "The static translateX(+/-180px) was measured IDENTICAL at 1280 and at 390, so it is not a narrow-width-only offset as CLONE_SPEC assumed.",
+    "correction": "ia.json describes this as '344x386, 392x459, 344x386 at x=100/444/836'. Those were original-site measurements; the clone's own CSS gives all three cards one width (320px / 392px at >=640px) in a centred flex row with no absolute x positions. Cite the CSS values.",
+    "measuredFrom": "../src/styles/hero.css:444-462"
+  },
+  "motion": {
+    "allowedPatterns": [
+      "hero-intro-fade",
+      "scroll-scrub-float",
+      "static-tilt"
+    ],
+    "requiredReducedMotionFallback": "settle-to-resting-value",
+    "scrubbed": {
+      "which": "the CENTRE card only",
+      "law": "translateY = clamp(25 - 50*(vh - rect.top)/(vh + 459), -25, 25)",
+      "denominatorNote": "459 is the scrubbed card's own height, so the denominator is vh + 459 \u2014 NOT a constant. An earlier hardcoded 1303 was exact only at vh=844 and ran 4.3% steep at 1280x900.",
+      "clampPx": [
+        -25,
+        25
+      ],
+      "dampedChannels": [
+        "translateY"
+      ],
+      "measureParent": true,
+      "measureParentReason": "getBoundingClientRect() on the scrubbed element reflects the transform just written, which feeds back and stretches the mapping by 1/(1-slope).",
+      "measuredFrom": "../src/hooks/sequences.js:488-522"
+    },
+    "measuredFrom": "../src/components/Hero.jsx:89-92"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "heroOnly": true
+  },
+  "measuredFrom": "../src/components/Hero.jsx:162-186"
+}

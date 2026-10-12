@@ -1,0 +1,45 @@
+{
+  "id": "conversion.cta-header",
+  "evidence": "measured",
+  "supportsLightSubtree": false,
+  "retrievalEligible": true,
+  "category": "CONVERSION",
+  "name": "Closing CTA heading",
+  "purpose": "Mark the end of the argument with a single short imperative.",
+  "tags": [
+    "conversion",
+    "heading"
+  ],
+  "uses": [
+    "primitive.outline-box"
+  ],
+  "content": {
+    "fields": {
+      "heading": {
+        "type": "string",
+        "maxWords": 3,
+        "measuredChars": 20,
+        "required": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "type": {
+    "tag": "h3",
+    "class": "text-h2 text-gradient",
+    "textAlign": "center",
+    "framePadding": 32
+  },
+  "motion": {
+    "allowedPatterns": [
+      "none"
+    ],
+    "requiredReducedMotionFallback": "none"
+  },
+  "constraints": {
+    "onePerPage": true,
+    "maxPerPage": 1,
+    "mustPrecedeSection": "conversion.cta-boxes"
+  },
+  "measuredFrom": "../src/components/Cta.jsx:27-33"
+}
