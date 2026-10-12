@@ -9,3 +9,6 @@ _source/
 
 # Playwright MCP scratch output from the recon/audit agents
 .playwright-mcp/
+
+# Generated fresh by the design-repo build; regenerate rather than version it
+design-repo.zip

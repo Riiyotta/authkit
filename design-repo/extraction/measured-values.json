@@ -1,0 +1,239 @@
+{
+  "note": "The external evidence trail behind every contract in this package. These citations point at the SIBLING clone project (../src, ../tailwind.config.js, ../ia.json), which is deliberately NOT part of this package -- see registry.manifest.json#entryPointsNote.",
+  "degradesGracefully": {
+    "statement": "extraction/verify_all.py range-checks every citation whose file it can resolve. When no sibling source tree is present -- a zipped or standalone copy of design-repo/ -- the external citations simply cannot be resolved, and verify_all.py reports them as a WARNING and continues, rather than failing. Run it from inside the full project to range-check them for real.",
+    "rationale": "A design-repo must verify cleanly as a standalone package. Its build-time evidence trail is still worth shipping, but it cannot be a hard dependency."
+  },
+  "authoritativeMotionSource": {
+    "files": [
+      "../src/hooks/sequences.js",
+      "../src/hooks/motion.js",
+      "../src/hooks/rbacLerp.js"
+    ],
+    "statement": "These three files carry provenance comments recording how each number was measured off the live original. They SUPERSEDE CLONE_SPEC.md wherever the two disagree. Two independent re-measurement passes (a pixel audit and an animation-QA pass) refuted the spec claims listed below.",
+    "lineCounts": {
+      "sequences.js": 526,
+      "motion.js": 434,
+      "rbacLerp.js": 92
+    }
+  },
+  "supersededClaims": [
+    {
+      "n": 1,
+      "spec": "CLONE_SPEC 3.4: 'no scroll-linked (scrubbed) animation anywhere'",
+      "real": "Two systems are genuinely scroll-scrubbed: the radix logo stack and the hero centre card.",
+      "citedAt": "../src/hooks/motion.js:256-269"
+    },
+    {
+      "n": 2,
+      "spec": "CLONE_SPEC 3.4 rootMargin '200px' and 2.2 rootMargin '0px 0px -100px 0px'",
+      "real": "Every real trigger observer is a bare {threshold: 0} with NO rootMargin. The features strip flips between rect.top 902 and 892 at a 900px viewport; .dashboard arms between 906 and 890 -- exactly the fold.",
+      "citedAt": "../src/hooks/motion.js:24-33"
+    },
+    {
+      "n": 3,
+      "spec": "CLONE_SPEC 3.4: 'clear the interval on exit'",
+      "real": "Not real behaviour. Cascades are one-shot; no `-active` class is ever removed, and nothing is re-armed.",
+      "citedAt": "../src/hooks/motion.js:352-360"
+    },
+    {
+      "n": 4,
+      "spec": "CLONE_SPEC 4.2: a derived ~750ms sequence step",
+      "real": "Appears nowhere. The real steps are dashboard 833ms, MFA 1016ms, password 2017ms; cycles 6050ms (RBAC), 14081ms (leaked), 16264ms (MFA), 16134ms (password), 7999ms (complete progress).",
+      "citedAt": "../src/hooks/sequences.js:1-12"
+    },
+    {
+      "n": 5,
+      "spec": "CLONE_SPEC 4.5: 20 database bars on a 1s re-roll",
+      "real": "9 bars on an 800ms re-roll in a 28px box (measured intervals 799/800/800/800/800/800/801/799/800/800).",
+      "citedAt": "../src/hooks/sequences.js:37-42"
+    },
+    {
+      "n": 6,
+      "spec": "CLONE_SPEC: 4 dashboard connector lines",
+      "real": "5. Verified against the real LINES array.",
+      "citedAt": "../src/components/Dashboard.jsx:14-20"
+    },
+    {
+      "n": 7,
+      "spec": "CLONE_SPEC: radix radar 367x367",
+      "real": "367x367 is the intrinsic file size; the RENDERED box is 292x292.",
+      "citedAt": "../src/components/Security.jsx:191-197"
+    },
+    {
+      "n": 8,
+      "spec": "CLONE_SPEC: document height 6484",
+      "real": "A mid-expansion capture. Six sections use content-visibility:auto, so scrollHeight varies per pass on BOTH sides. Document height is NOT a fidelity metric for this project and is recorded nowhere in this package as a contract value.",
+      "citedAt": "../src/styles/dashboard.css:8",
+      "enforcedBy": "compatibility/graph.json#NO_DOCUMENT_HEIGHT_CONTRACT and a schema-layer rejection"
+    },
+    {
+      "n": 9,
+      "spec": "CLONE_SPEC: the complete section's '4x4 dots'",
+      "real": "4x4 is the dot SIZE, not a count. There are 6 dots per row.",
+      "citedAt": "../src/components/Complete.jsx:63-68"
+    },
+    {
+      "n": 10,
+      "spec": "CLONE_SPEC: hero card classes `.button-hero` / `.input-hero`",
+      "real": "The real DOM uses `.button-outline` / `.input-solid`.",
+      "citedAt": "../src/components/primitives.jsx:54-79"
+    },
+    {
+      "n": 11,
+      "spec": "CLONE_SPEC 4.1: canvas particle systems marked approximate",
+      "real": "Read off the original's own instrumented draw calls. count = round(w*h/1666.67) for the three starfields (938 @1280x1222, 828 @1280x1078, 395 @992x664) and round(w*h/553) at r=1.5 for the RBAC dot field (84 @128x363). Alpha is a raw Math.sin(phase) that emits negatives, so ~48% are mathematically invisible. White is the only fill colour. Starfield drift vy = -(0.1+rand*0.2) * h/1200, x never changes; dot field vx = -(1.2+rand*0.4) * w/1200, y never changes. All four canvases are lazily sized to their LAYOUT box on first intersection.",
+      "citedAt": "../src/hooks/motion.js:78-254"
+    },
+    {
+      "n": 12,
+      "spec": "Earlier zero-crossing fits of 0.07 / 0.075 rad/frame for the twinkle phase step",
+      "real": "0.062 rad/frame, derived ANALYTICALLY: cos(s) = (a0 + a2) / (2*a1) from three consecutive frames at full float precision over 724 particles; three independent estimators read 0.0653 / 0.0611 / 0.0623.",
+      "citedAt": "../src/hooks/motion.js:133-138"
+    },
+    {
+      "n": 13,
+      "spec": "Radix scrub band start as (vh + 180)",
+      "real": "T0 is a CONSTANT rect.top 1080.5, independent of viewport height (1080.44 at vh=900, 1080.5 at vh=700). The (vh+180) form was a coincidence at vh=900 and was 200px off at vh=700. The span D is WIDTH-dependent: 539 at >=1200px, 471.5 below.",
+      "citedAt": "../src/hooks/sequences.js:435-451"
+    },
+    {
+      "n": 14,
+      "spec": "Hero card scrub with a hardcoded denominator of 1303",
+      "real": "y = clamp(25 - 50*(vh - rect.top)/(vh + 459), -25, 25). 459 is the card's own height, so the denominator tracks the viewport. Pinned at three heights: vh 844 -> slope 0.0383632, vh 900 -> 0.036786, vh 700 -> 0.043127. The hardcoded 1303 was exact only at 390x844 and ran 4.3% steep at 1280x900.",
+      "citedAt": "../src/hooks/sequences.js:506-522"
+    },
+    {
+      "n": 15,
+      "spec": "CLONE_SPEC 4.4: the RBAC lit-shape set unmeasured / one rotating glyph",
+      "real": "PER-ROLE, measured per frame over three full roles by DOM index, rest level 0.4: ADMIN lights all four [1,1,1,1]; VIEWER lights index 0 only [1,0.2,0.2,0.2]; EDITOR lights 0 and 3 [1,0.2,0.2,1].",
+      "citedAt": "../src/hooks/sequences.js:282-287"
+    }
+  ],
+  "groundworkCorrections": [
+    {
+      "artifact": "ia.json demo.security-cards",
+      "claim": "'1044x492 grid of four 320x242 animated cards', naming four mechanisms",
+      "finding": "The real section renders FIVE cards: leaked-password, RBAC, password-strength, automatic-detection and multi-factor. The 320x242 card geometry is correct; the count is not.",
+      "evidence": "../src/components/Security.jsx:85-220 renders 5 <Card> elements; ../src/styles/security.css:47-57 gives max-width 320px / height 242px",
+      "correctedIn": [
+        "sections/demo.security-cards.json",
+        "components/security-card.json",
+        "schema/pagespec.schema.json"
+      ]
+    },
+    {
+      "artifact": "ia.json hero.auth-card-trio",
+      "claim": "'(344x386, 392x459, 344x386) at x=100/444/836'",
+      "finding": "Original-site measurements, not what the clone renders. The clone's own CSS gives all three cards ONE width (320px, 392px at >=640px) in a centred flex row with no absolute x positions; the left/right cards get an inline height of 392 and the centre card's own height is 459.",
+      "evidence": "../src/styles/hero.css:444-462",
+      "correctedIn": [
+        "sections/hero.auth-card-trio.json"
+      ]
+    },
+    {
+      "artifact": "ia.json chrome.page-separator",
+      "claim": "description says 'four of the nine section boundaries'",
+      "finding": "Nine SECTIONS produce EIGHT boundaries. The same file's `scope` field already states '4 of 8' correctly, so this is an internal inconsistency in the prose rather than a wrong measurement.",
+      "evidence": "../src/App.jsx:18-28 -- 9 sections, 4 separatorBefore flags",
+      "correctedIn": [
+        "sections/chrome.page-separator.json",
+        "tokens/30-layout/layout.json"
+      ]
+    },
+    {
+      "artifact": "ia.json capability.feature-strip",
+      "claim": "'a 788x80 strip'",
+      "finding": "Neither 788 nor an 80px height appears anywhere in the clone's features-slider stylesheet. The real strip is a grid of fit-content columns (3 below 940px, 6 at and above) with a 48x48 icon box. 788x80 is an original-site measurement that the clone's CSS does not express.",
+      "evidence": "grep for '788' and ': 80px' in ../src/styles/features-slider.css returns nothing; ../src/styles/features-slider.css:27-121",
+      "correctedIn": [
+        "sections/capability.feature-strip.json",
+        "tokens/20-component/component-tokens.json"
+      ]
+    },
+    {
+      "artifact": "project note: '57 CSS custom properties in src/index.css'",
+      "claim": "57",
+      "finding": "No counting method reproduces 57. The real figures: 17 declared in :root, 24 declaration sites in index.css, 40 unique custom-property NAMES across all stylesheets, 74 declaration sites across all stylesheets, plus 2 @property registrations.",
+      "evidence": "grep -ohE '^[[:space:]]*--[a-zA-Z0-9-]+[[:space:]]*:' over ../src/index.css and ../src/styles/*.css; :root block at ../src/index.css:60-81",
+      "correctedIn": [
+        "tokens/00-foundation/custom-properties.json"
+      ]
+    },
+    {
+      "artifact": "source comment drift in ../src/hooks/motion.js",
+      "claim": "The comment block at motion.js:99-108 still describes the starfield drift without height normalisation and quotes a twinkle step of 'random() * 0.07'.",
+      "finding": "The CODE is correct and current -- FIELD_PRESETS applies the h/1200 normalisation and TWINKLE_STEP_MAX is 0.062. Only the prose comment above it is stale. Separately, the comment at motion.js:329-335 still describes the radix scrub band as starting at 'vh+180', a form superseded by the constant 1080.5. Recorded as source-comment drift, NOT corrected: the clone's src/ is read-only reference material for this task.",
+      "evidence": "../src/hooks/motion.js:121 vs ../src/hooks/motion.js:99-101; ../src/hooks/motion.js:138 vs ../src/hooks/motion.js:107-108",
+      "correctedIn": [
+        "this ledger only -- the contracts cite the CODE, not the stale comments"
+      ]
+    },
+    {
+      "artifact": "ia.json meta.source",
+      "claim": "records an absolute local machine path",
+      "finding": "True of the sibling artifact, and deliberately not carried into this package. registry.manifest.json#sourceProject.pathNote records the omission, and verify_all.py fails if any absolute path appears in the tree.",
+      "evidence": "../ia.json:3",
+      "correctedIn": [
+        "registry.manifest.json"
+      ]
+    }
+  ],
+  "verifiedGroundwork": [
+    {
+      "artifact": "ia.json",
+      "checked": "18 sections, 6 categories, 1 template; the template's 18 section ids are exactly the 18 contract ids with no extras and no gaps",
+      "result": "holds up"
+    },
+    {
+      "artifact": "ia.json",
+      "checked": "implementedBy names real components and real class names",
+      "result": "holds up for every section checked"
+    },
+    {
+      "artifact": "tailwind.config.js",
+      "checked": "screens 640/940/996/1200; 27 named colours including the 4 brand swatches; 21 type-scale entries; 9 gradients; the two house easings",
+      "result": "holds up exactly"
+    },
+    {
+      "artifact": "tailwind.config.js",
+      "checked": "whether the named screens cover every real media query",
+      "result": "PARTIAL -- the stylesheets also use (min-width: 440px), which raises the hero's --logo-height from 100px to 120px and is NOT in the Tailwind screens. Recorded in tokens/00-foundation/breakpoint.json#realMediaQueryInventory."
+    },
+    {
+      "artifact": "src/index.css",
+      "checked": "all 29 @keyframes present, and present ONLY here",
+      "result": "holds up -- grep -c '^@keyframes' returns 29 for index.css and 0 for every src/styles/*.css"
+    },
+    {
+      "artifact": "the deliberately reproduced upstream grid bug",
+      "checked": "stylesheet declares vs-line-1/vs-line-2 while the DOM writes v-line-5/v-line-6",
+      "result": "holds up exactly -- ../src/styles/hero.css:412 declares the vs- names; ../src/components/Hero.jsx:116-118 writes v-line-${n} for n=1..6, so those two auto-place"
+    },
+    {
+      "artifact": "the one-page claim",
+      "checked": "no sitemap.xml, no robots.txt, every href off-domain, 15 probed routes 404, only / returns 200",
+      "result": "accepted as given; recorded in templates/templates.json#singleRouteJustification"
+    },
+    {
+      "artifact": "src/components/Dashboard.jsx",
+      "checked": "5 connector masks and 9 database bars at 2px resting",
+      "result": "holds up"
+    },
+    {
+      "artifact": "src/components/Complete.jsx",
+      "checked": "6 dots per progress row, 2 rows",
+      "result": "holds up"
+    },
+    {
+      "artifact": "src/components/CustomUI.jsx",
+      "checked": "12 picker buttons = 4 swatches + 4 radii + 4 logos; #663AF3 default; sprite offset via object-position",
+      "result": "holds up"
+    }
+  ],
+  "measurementMethods": {
+    "staticFidelity": "0 computed diffs on colour, border-radius, gap, padding, position, text-align, z-index, display, max-width and all numeric type values at 1280/1024/768/390.",
+    "motion": "Class and inline-style mutations recorded with timestamps while the block was parked in view; canvas systems read by patching CanvasRenderingContext2D on the live original; scrub laws read from settled inline values at 100px scroll intervals and pinned at three viewport heights.",
+    "copyBudgets": "Character and word counts computed programmatically from the clone's own component source. The text itself was never copied into this package."
+  }
+}
