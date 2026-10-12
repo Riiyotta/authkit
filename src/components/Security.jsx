@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { SectionHeader } from './primitives.jsx'
-import { createScheduler, useArmedTimeline, useParticleField } from '../hooks/motion.js'
+import { createScheduler, useArmedTimeline, useMountTimeline, useParticleField } from '../hooks/motion.js'
 import { RBAC, runLeaked, runMulti, runPassword, runRbac } from '../hooks/sequences.js'
 import { makeRbacLerp } from '../hooks/rbacLerp.js'
 
@@ -31,16 +31,28 @@ const BUTTON_SHAPES = [
 ]
 
 /* One armed timeline per card, so each card starts when it reaches the fold
-   exactly as the original's do. */
-function Card({ label, children, timeline }) {
-  const ref = useRef(null)
+   exactly as the original's do — EXCEPT the RBAC card (`fromLoad`), which the
+   original runs from page load. Parked at the dashboard (scrollY 407) with the
+   RBAC block at document y ~4800, far below the fold, the original was already
+   writing `.security-rbac__card` translateX every frame, the 6050ms opacity
+   clock and the button-shape opacities; at scrollY 0 on load the card already
+   carries inline `translateX(53px)` rather than the CSS `translate(-100%)`.
+   The leaked / password / MFA cards really are intersection-armed and
+   one-shot. */
+function Card({ label, children, timeline, fromLoad = false }) {
+  /* two refs so both hooks can be called unconditionally; whichever one the
+     card does not use stays null and its hook no-ops */
+  const armedRef = useRef(null)
+  const mountRef = useRef(null)
+  const ref = fromLoad ? mountRef : armedRef
   const run = useCallback((el) => {
     if (!timeline) return undefined
     const scheduler = createScheduler()
     timeline(el, scheduler)
     return () => scheduler.dispose()
   }, [timeline])
-  useArmedTimeline(ref, run)
+  useArmedTimeline(armedRef, run)
+  useMountTimeline(mountRef, run)
 
   return (
     <div className="security-card" ref={ref}>
@@ -98,7 +110,7 @@ export default function Security() {
         </Card>
 
         {/* 2 — role-based access control */}
-        <Card label="Role-Based Access Control" timeline={rbacTimeline}>
+        <Card label="Role-Based Access Control" timeline={rbacTimeline} fromLoad>
           <div className="security-rbac">
             <div className="security-rbac__card-container">
               <img

@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { GlowingButton, INERT_HREF, SectionHeader } from './primitives.jsx'
-import { createScheduler, useArmedTimeline } from '../hooks/motion.js'
+import { createScheduler, useMountTimeline } from '../hooks/motion.js'
 import { runProgress } from '../hooks/sequences.js'
 
 /* CLONE_SPEC §2.7 — "one platform" section.
@@ -14,13 +14,18 @@ const SINGLE_MASK = '/img/complete/masks/single.png'
 export default function Complete() {
   const ref = useRef(null)
   /* MEASURED: the two `.complete-user-progress` rows fill in 6 increments of
-     20/6px on a ~512ms step, one row after the other. See `runProgress`. */
+     20/6px on a 500ms step, one row after the other. See `runProgress`.
+
+     NOT intersection-gated: parked at the dashboard (scrollY 407) with this
+     block at document y ~5150, far below the fold, the original was already
+     writing these heights every 500ms from t=391ms — and at scrollY 0 on load
+     a row already reads `height: 3.33333px`. So it runs on mount. */
   const run = useCallback((el) => {
     const scheduler = createScheduler()
     runProgress(el, scheduler)
     return () => scheduler.dispose()
   }, [])
-  useArmedTimeline(ref, run)
+  useMountTimeline(ref, run)
 
   return (
     <div className="complete" ref={ref}>

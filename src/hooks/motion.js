@@ -113,17 +113,29 @@ const FIELD_PRESETS = {
   stars: {
     areaPerParticle: 1666.67,
     radius: 0.5,
-    velocity: () => ({ vx: 0, vy: -(0.1 + Math.random() * 0.2) }),
+    /* MEASURED: drift is height-normalised, so every starfield crosses its own
+       canvas in the same time. Per-frame dy was hero 1280x1222 -0.305…-0.102,
+       radix 1280x1078 -0.2692…-0.0898, browser 992x664 -0.166…-0.056 — the
+       scale factor is exactly height/1200 (1.0183 / 0.8983 / 0.5533). A flat
+       px/frame made the CustomUI browser field 1.81x too fast. */
+    velocity: (w, h) => ({ vx: 0, vy: -(0.1 + Math.random() * 0.2) * (h / 1200) }),
   },
   /* .security-rbac__dots */
   dots: {
     areaPerParticle: 553,
     radius: 1.5,
-    velocity: () => ({ vx: -(0.128 + Math.random() * 0.042), vy: 0 }),
+    /* same law on the width axis: at w=128 this gives 0.128…0.1707 px/frame,
+       which is the measured range. */
+    velocity: (w) => ({ vx: -(1.2 + Math.random() * 0.4) * (w / 1200), vy: 0 }),
   },
 }
 
-const TWINKLE_STEP_MAX = 0.07 // rad/frame
+/* MEASURED analytically, not by zero-crossings: for `a = sin(theta + n*s)`,
+   cos(s) = (a0 + a2) / (2*a1) from three consecutive frames at full float
+   precision over 724 particles. Upper bound of the uniform distribution reads
+   0.0653 / 0.0611 / 0.0623 from three independent estimators → 0.062 (median
+   period ~3.4s). This supersedes the earlier 0.07 / 0.075 zero-crossing fits. */
+const TWINKLE_STEP_MAX = 0.062 // rad/frame
 
 function createParticles(width, height, preset) {
   const count = Math.round((width * height) / preset.areaPerParticle)
@@ -134,7 +146,7 @@ function createParticles(width, height, preset) {
       y: Math.random() * height,
       phase: Math.random() * Math.PI * 2,
       step: Math.random() * TWINKLE_STEP_MAX,
-      ...preset.velocity(),
+      ...preset.velocity(width, height),
     }
   }
   return particles
@@ -159,12 +171,19 @@ export function useParticleField(ref, kind = 'stars') {
     let frame = 0
     let running = false
 
-    /* The original sizes the backing store to the CSS box (no devicePixelRatio
-       scaling — the hero canvas is exactly 1280x1222 at a 1280px viewport). */
+    /* The original sizes the backing store to the LAYOUT box (no
+       devicePixelRatio scaling — the hero canvas is exactly 1280x1222 at a
+       1280px viewport).
+
+       MEASURED: this must be the layout box, not getBoundingClientRect().
+       `.security-rbac__dots` carries `transform: scale(0.5)`, so the client
+       rect reads 64x182 while the original's backing store is 128x363. Using
+       the rect gave a quarter of the dots (21 instead of 84), drawn at 1x so
+       2x too large on screen and crossing a 64px box so 2x too fast. */
     const size = () => {
       const rect = canvas.getBoundingClientRect()
-      const w = Math.round(rect.width)
-      const h = Math.round(rect.height)
+      const w = Math.round(canvas.offsetWidth || rect.width)
+      const h = Math.round(canvas.offsetHeight || rect.height)
       if (!w || !h) return false
       if (w === width && h === height) return true
       width = w
@@ -259,7 +278,7 @@ const LERP = 0.075
  * slope read 0.0398 px/px instead of the measured 0.0383.) The radix stack
  * does not need it — there the transforms live on `.radix-logo`'s children.
  */
-export function useScrollLinked(ref, compute, apply, { measureParent = false } = {}) {
+export function useScrollLinked(ref, compute, apply, { measureParent = false, lerp = LERP } = {}) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -269,14 +288,20 @@ export function useScrollLinked(ref, compute, apply, { measureParent = false } =
     let running = false
     const state = {}
 
+    /* `apply(el, damped, instant)` — MEASURED: not every scrubbed channel is
+       damped. On a 480px scroll jump the radix blender's opacity was already
+       at its final value on the FIRST rAF and held there for 90 frames
+       (computed transition-duration 0s), while the translateY on the same
+       element took 67 frames to settle. So the writer gets both the damped
+       state and the instantaneous target and picks per channel. */
     const tick = () => {
       const target = compute(probe.getBoundingClientRect(), window.innerHeight)
       for (const key of Object.keys(target)) {
         const want = target[key]
         if (state[key] == null) state[key] = want
-        else state[key] += (want - state[key]) * LERP
+        else state[key] += (want - state[key]) * lerp
       }
-      apply(el, state)
+      apply(el, state, target)
       frame = requestAnimationFrame(tick)
     }
 
@@ -292,7 +317,8 @@ export function useScrollLinked(ref, compute, apply, { measureParent = false } =
 
     if (prefersReducedMotion()) {
       /* settle straight to the in-view resting value, no motion */
-      apply(el, compute(probe.getBoundingClientRect(), window.innerHeight))
+      const settled = compute(probe.getBoundingClientRect(), window.innerHeight)
+      apply(el, settled, settled)
       return
     }
 
@@ -341,6 +367,32 @@ export function useArmedTimeline(ref, run) {
     const off = observeOnce(el, () => { dispose = run(el) })
     return () => {
       off()
+      if (typeof dispose === 'function') dispose()
+    }
+  }, [ref, run])
+}
+
+/* ---------------------------------------------------------------------------
+   Timelines that are NOT intersection-gated.
+
+   MEASURED: parked at the dashboard (scrollY 407) with the RBAC block at
+   document y ~4800 and `.complete-user-progress` at ~5150 — both far below the
+   fold — the original was already writing progress-row heights every 500ms
+   from t=391ms, the RBAC card's translateX every frame, the 6050ms opacity
+   clock and the button-shape opacities. At scrollY 0 on load it ALREADY has
+   inline `transform: translateX(53px)` on the RBAC card and `height:
+   3.33333px` on a progress row. So those two run from page load.
+
+   Only those two. The dashboard / leaked / password / MFA cascades really are
+   `{threshold: 0}`-armed and one-shot — keep them on useArmedTimeline.
+   --------------------------------------------------------------------------- */
+export function useMountTimeline(ref, run) {
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (prefersReducedMotion()) return
+    const dispose = run(el)
+    return () => {
       if (typeof dispose === 'function') dispose()
     }
   }, [ref, run])

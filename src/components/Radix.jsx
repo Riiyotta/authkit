@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { BetweenLines, GlowingButton, INERT_HREF, SectionHeader } from './primitives.jsx'
 import { useParticleField, useScrollLinked } from '../hooks/motion.js'
-import { applyRadix, radixProgress } from '../hooks/sequences.js'
+import { RADIX_LERP, applyRadix, radixProgress } from '../hooks/sequences.js'
 
 /* CLONE_SPEC §2.5 — radix.
 
@@ -25,7 +25,7 @@ export default function Radix() {
   const canvasRef = useRef(null)
   const logoRef = useRef(null)
   useParticleField(canvasRef, 'stars')
-  useScrollLinked(logoRef, radixProgress, applyRadix)
+  useScrollLinked(logoRef, radixProgress, applyRadix, { lerp: RADIX_LERP })
 
   return (
     <div className="radix">
